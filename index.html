@@ -722,9 +722,15 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
+      nav {
+        padding: 16px 24px;
+        position: static;
+        backdrop-filter: none;
+      }
       .nav-links { display: none; }
       section { padding: 60px 24px; }
+
+      .hero { padding-top: 60px; }
       .mission-wrap, .services-grid, .how-grid, .story-wrap {
         grid-template-columns: 1fr;
         gap: 40px;
