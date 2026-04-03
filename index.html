@@ -558,17 +558,18 @@
     }
 
     .founder-avatar {
-      width: 80px; height: 80px;
+      width: 120px; height: 120px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--ember), var(--accent));
       margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--white);
+      overflow: hidden;
+      border: 3px solid var(--ember);
+      box-shadow: 0 0 24px var(--ember-glow);
+    }
+
+    .founder-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .founder-name {
@@ -889,7 +890,7 @@
       <div class="story-aside">
         <p class="section-label">Our Story</p>
         <div class="founder-card">
-          <div class="founder-avatar">AR</div>
+          <div class="founder-avatar"><img src="amber.jpg" alt="Amber Rice, CEO of Ember Bots" /></div>
           <div class="founder-name">Amber Rice</div>
           <div class="founder-title">CEO & Co-Founder</div>
         </div>
