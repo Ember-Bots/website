@@ -549,6 +549,12 @@
       top: 120px;
     }
 
+    .founder-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .founder-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -727,6 +733,15 @@
       .story-aside {
         position: static !important;
       }
+
+      .founder-cards {
+        flex-direction: row;
+        gap: 16px;
+      }
+
+      .founder-card {
+        padding: 24px 16px;
+      }
       .hero-stat-row { gap: 32px; }
       footer { flex-direction: column; gap: 20px; text-align: center; }
     }
@@ -893,10 +908,17 @@
     <div class="story-wrap">
       <div class="story-aside">
         <p class="section-label">Our Story</p>
-        <div class="founder-card">
-          <div class="founder-avatar"><img src="amber.jpg" alt="Amber Rice, CEO of Ember Bots" /></div>
-          <div class="founder-name">Amber Rice</div>
-          <div class="founder-title">CEO & Co-Founder</div>
+        <div class="founder-cards">
+          <div class="founder-card">
+            <div class="founder-avatar"><img src="amber.jpg" alt="Amber Rice, CEO of Ember Bots" /></div>
+            <div class="founder-name">Amber Rice</div>
+            <div class="founder-title">CEO & Co-Founder</div>
+          </div>
+          <div class="founder-card">
+            <div class="founder-avatar"><img src="steve.jpg" alt="Steve Ward, CRO of Ember Bots" /></div>
+            <div class="founder-name">Steve Ward</div>
+            <div class="founder-title">CRO & Co-Founder</div>
+          </div>
         </div>
       </div>
       <div class="story-content">
