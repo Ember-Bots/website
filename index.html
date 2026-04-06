@@ -1036,7 +1036,7 @@
       <h2>Ready to automate?</h2>
       <p class="section-sub">Tell us about your business. We'll identify the highest-impact opportunities and show you exactly what's possible.</p>
       <div class="contact-card">
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojppjgz" method="POST">
+        <form class="contact-form" id="contactForm">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
@@ -1082,16 +1082,23 @@
       btn.textContent = 'Sending...';
       btn.disabled = true;
       try {
-        const resp = await fetch(form.action, {
+        const resp = await fetch('https://crm.emberbots.ai/api/leads/public', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: form.name.value,
+            email: form.email.value,
+            phone: form.phone.value || undefined,
+            company: form.business.value || undefined,
+            message: form.message.value || undefined,
+          }),
         });
-        if (resp.ok) {
+        const data = await resp.json();
+        if (data.ok) {
           form.style.display = 'none';
           document.getElementById('formSuccess').classList.add('show');
         } else {
-          btn.textContent = 'Something went wrong — try again';
+          btn.textContent = data.error || 'Something went wrong — try again';
           btn.disabled = false;
         }
       } catch {
