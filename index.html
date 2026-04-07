@@ -349,6 +349,55 @@
       gap: 24px;
     }
 
+    .systems-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .lifecycle-stage {
+      margin-bottom: 48px;
+    }
+
+    .lifecycle-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .lifecycle-label-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .lifecycle-label-line {
+      height: 1px;
+      flex: 1;
+      background: var(--border);
+    }
+
+    .system-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ember);
+      background: var(--ember-dim);
+      border: 1px solid rgba(255,107,53,0.2);
+      border-radius: 100px;
+      padding: 3px 10px;
+      margin-bottom: 16px;
+    }
+
     .system-card {
       background: var(--bg2);
       border: 1px solid var(--border);
@@ -875,6 +924,10 @@
         grid-template-columns: 1fr;
       }
 
+      .systems-grid-3 {
+        grid-template-columns: 1fr;
+      }
+
       .story-aside {
         position: static !important;
       }
@@ -965,32 +1018,67 @@
     <div class="systems-intro">
       <p class="section-label">Workflow Systems</p>
       <h2>Workflow systems we deploy.</h2>
-      <p class="section-sub">Each system is tailored to fit your business, but built from proven workflow patterns that solve common SMB bottlenecks.</p>
+      <p class="section-sub">Seven systems covering the full customer lifecycle — from getting found to getting paid. Each is deployed from a proven template and configured to fit your business.</p>
     </div>
-    <div class="systems-grid">
-      <div class="system-card">
-        <div class="system-icon">📞</div>
-        <h3>AI Front Desk</h3>
-        <p>Capture inbound calls, answer common questions, log leads, and route the right follow-up — so no inquiry goes unanswered.</p>
+
+    <div class="lifecycle-stage">
+      <div class="lifecycle-label">
+        <span class="lifecycle-label-text">Acquire &amp; Convert</span>
+        <span class="lifecycle-label-line"></span>
       </div>
-      <div class="system-card">
-        <div class="system-icon">🎯</div>
-        <h3>Lead Capture Engine</h3>
-        <p>Turn website inquiries, phone calls, and contact forms into organized leads with clear ownership and defined next steps.</p>
-      </div>
-      <div class="system-card">
-        <div class="system-icon">🔁</div>
-        <h3>Follow-Up Assistant</h3>
-        <p>Keep leads from going cold with automated follow-up sequences, reminders, and team alerts that run on your schedule.</p>
-      </div>
-      <div class="system-card">
-        <div class="system-icon">⚙️</div>
-        <h3>Ops Back Office</h3>
-        <p>Reduce repetitive admin work around intake, task routing, status tracking, and internal operational workflows that drain your team.</p>
+      <div class="systems-grid">
+        <div class="system-card">
+          <span class="system-badge">New</span>
+          <div class="system-icon">⭐</div>
+          <h3>Reputation &amp; Review Engine</h3>
+          <p>Monitor incoming Google and Yelp reviews, auto-draft responses, alert your team to negative feedback, and trigger review request sequences after every completed job.</p>
+        </div>
+        <div class="system-card">
+          <div class="system-icon">📞</div>
+          <h3>AI Front Desk</h3>
+          <p>Capture inbound calls, answer common questions, log leads, and route the right follow-up — so no inquiry goes unanswered.</p>
+        </div>
+        <div class="system-card">
+          <div class="system-icon">🎯</div>
+          <h3>Lead Capture Engine</h3>
+          <p>Turn website inquiries, phone calls, and contact forms into organized leads with clear ownership and defined next steps.</p>
+        </div>
+        <div class="system-card">
+          <span class="system-badge">New</span>
+          <div class="system-icon">📅</div>
+          <h3>Appointment Booking System</h3>
+          <p>Auto-schedule consultations from lead submissions, send confirmation and reminder sequences via email and SMS, and handle no-show rescheduling — without any manual coordination.</p>
+        </div>
       </div>
     </div>
+
+    <div class="lifecycle-stage">
+      <div class="lifecycle-label">
+        <span class="lifecycle-label-text">Operate &amp; Retain</span>
+        <span class="lifecycle-label-line"></span>
+      </div>
+      <div class="systems-grid-3">
+        <div class="system-card">
+          <div class="system-icon">🔁</div>
+          <h3>Follow-Up Assistant</h3>
+          <p>Keep leads from going cold with automated follow-up sequences, reminders, and team alerts that run on your schedule.</p>
+        </div>
+        <div class="system-card">
+          <div class="system-icon">⚙️</div>
+          <h3>Ops Back Office</h3>
+          <p>Reduce repetitive admin work around intake, task routing, status tracking, and internal operational workflows that drain your team.</p>
+        </div>
+        <div class="system-card">
+          <span class="system-badge">New</span>
+          <div class="system-icon">💳</div>
+          <h3>Payment &amp; Invoice Automation</h3>
+          <p>Auto-generate and send invoices on job close, fire a tiered payment reminder sequence for outstanding balances, sync all payments to QuickBooks, and flag overdue accounts for human follow-up.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="systems-footer">
-      Each system is tailored to fit your business, but built from proven workflow patterns that solve common SMB bottlenecks. We don't reinvent for every client — we deploy and configure what already works.
+      Each system is deployed from a proven workflow template and configured to your business — your team, your tools, your escalation rules. We don't reinvent for every client. Additional systems including SMS Rapid Response, Email Nurture, and Customer Reactivation are also available.
     </div>
   </section>
 
