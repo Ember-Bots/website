@@ -856,7 +856,34 @@
       margin: 2px 2px;
     }
 
-    /* ─── TOC ─── */
+/* ─── SYSTEM 4: YELLOW THEME ─── */
+
+.system-number.s4 {
+  color: var(--yellow);
+  background: var(--yellow-dim);
+  border-color: rgba(245,200,66,0.2);
+}
+
+.quick-ref.s4 { border-left-color: var(--yellow); }
+
+.quick-ref.s4 .quick-ref-title { color: var(--yellow); }
+
+.s4 .workflow-step-num {
+  background: var(--yellow-dim);
+  border-color: rgba(245,200,66,0.25);
+  color: var(--yellow);
+}
+
+.upsell-card.s4 {
+  background: var(--yellow-dim);
+  border-color: rgba(245,200,66,0.2);
+}
+
+.s4 .upsell-title { color: var(--yellow); }
+
+.badge-4 { background: rgba(245,200,66,0.12); color: var(--yellow); }
+
+        /* ─── TOC ─── */
     .toc {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -988,6 +1015,20 @@
       </div>
 
       <div class="nav-section">
+        <div class="nav-section-label">System 4</div>
+        <a href="#sys4" class="nav-link">Ad &amp; Lead Gen <span class="sidebar-system-badge badge-4">S4</span></a>
+        <a href="#sys4-overview" class="nav-link nav-link-sub">Overview</a>
+        <a href="#sys4-connectors" class="nav-link nav-link-sub">Connectors</a>
+        <a href="#sys4-triggers" class="nav-link nav-link-sub">Triggers</a>
+        <a href="#sys4-workflow" class="nav-link nav-link-sub">Workflow Logic</a>
+        <a href="#sys4-config" class="nav-link nav-link-sub">Configuration</a>
+        <a href="#sys4-std" class="nav-link nav-link-sub">Standardized vs. Configured</a>
+        <a href="#sys4-deliverables" class="nav-link nav-link-sub">Deliverables</a>
+        <a href="#sys4-monitoring" class="nav-link nav-link-sub">Monitoring</a>
+        <a href="#sys4-upsell" class="nav-link nav-link-sub">Natural Upsell</a>
+      </div>
+
+      <div class="nav-section">
         <div class="nav-section-label">Rollout</div>
         <a href="#sequencing" class="nav-link">Implementation Sequencing</a>
       </div>
@@ -1001,7 +1042,7 @@
     <div class="doc-header">
       <div class="doc-eyebrow">Internal Ops &amp; AI Agent Reference</div>
       <h1>Workflow Systems<br/>Implementation Brief</h1>
-      <p class="doc-header-desc">Detailed specifications for three new EmberBots workflow systems — Appointment Booking, Reputation &amp; Review Engine, and Payment &amp; Invoice Automation. Written for engineers and Cinder/Computer agent use.</p>
+      <p class="doc-header-desc">Detailed specifications for four new EmberBots workflow systems — Appointment Booking, Reputation &amp; Review Engine, Payment &amp; Invoice Automation, and Ad &amp; Lead Gen Manager. Written for engineers and Cinder/Computer agent use.</p>
       <div class="doc-meta-row">
         <div class="doc-meta-pill">
           <span class="label">Version</span>
@@ -1019,7 +1060,7 @@
         </div>
         <div class="doc-meta-pill">
           <span class="label">Systems</span>
-          <span class="value">3 New · 7 Total</span>
+          <span class="value">4 New · 8 Total</span>
         </div>
       </div>
     </div>
@@ -1034,7 +1075,8 @@
           <li class="toc-item"><a href="#sys1"><span class="toc-num">01</span> Appointment Booking System</a></li>
           <li class="toc-item"><a href="#sys2"><span class="toc-num">02</span> Reputation &amp; Review Engine</a></li>
           <li class="toc-item"><a href="#sys3"><span class="toc-num">03</span> Payment &amp; Invoice Automation</a></li>
-          <li class="toc-item"><a href="#sequencing"><span class="toc-num">04</span> Implementation Sequencing — 30/60/90 Day Rollout</a></li>
+          <li class="toc-item"><a href="#sys4"><span class="toc-num">04</span> Ad &amp; Lead Gen Manager</a></li>
+          <li class="toc-item"><a href="#sequencing"><span class="toc-num">05</span> Implementation Sequencing — 30/60/90 Day Rollout</a></li>
         </ul>
       </div>
 
@@ -1838,7 +1880,569 @@
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
+
+      <!-- SYSTEM 4: AD & LEAD GEN MANAGER -->
+<div id="sys4" class="system-section">
+  <div class="system-header">
+    <div class="system-number s4">System 04</div>
+    <h2>Ad &amp; Lead Gen Manager</h2>
+  </div>
+
+  <div class="quick-ref s4">
+    <div class="quick-ref-title">Quick Reference</div>
+    <ul class="quick-ref-items">
+      <li class="quick-ref-item"><span class="quick-ref-item-label">Trigger</span><span class="quick-ref-item-value">Scheduled weekly pull of Google Ads performance data + real-time cost-per-lead threshold breach detected during daily monitoring run; monthly ROI summary on first Monday of month</span></li>
+      <li class="quick-ref-item"><span class="quick-ref-item-label">Core action</span><span class="quick-ref-item-value">Pull campaign/ad group/keyword performance from Google Ads API, join against lead volume data from Lead Capture Engine, calculate cost-per-lead per campaign, deliver digest via Gmail, flag or auto-pause underperforming campaigns</span></li>
+      <li class="quick-ref-item"><span class="quick-ref-item-label">Branching</span><span class="quick-ref-item-value">CPL exceeds <code>CPL_ALERT_THRESHOLD</code> → immediate Gmail alert to owner; campaign crosses <code>AUTOPAUSE_CPL_THRESHOLD</code> with fewer than <code>AUTOPAUSE_MIN_LEADS</code> leads → campaign paused via Google Ads API with owner notification; organic visibility anomalies from Google Search Console → correlated against review volume changes and flagged in digest</span></li>
+      <li class="quick-ref-item"><span class="quick-ref-item-label">Output feeds into</span><span class="quick-ref-item-value">Lead Capture Engine — campaign source, ad group, and keyword attribution tags appended to incoming leads; Reputation &amp; Review Engine — organic visibility trend data surfaced alongside review volume context</span></li>
+      <li class="quick-ref-item"><span class="quick-ref-item-label">Client touchpoint</span><span class="quick-ref-item-value">Owner receives weekly cost-per-lead digest every Monday, immediate alerts when CPL spikes, monthly ROI summary on first Monday; all data pulls, calculations, and campaign pauses run autonomously</span></li>
+    </ul>
+  </div>
+
+  <h3 id="sys4-overview">System Overview</h3>
+  <h4>What Operational Problem It Solves</h4>
+  <p>SMB owners running Google Ads face a fundamental visibility problem: they see what they spend but not what they get. Google Ads reports clicks and impressions. What it does not report is whether any of those clicks turned into a phone call, a form fill, a booked appointment, or a paying customer. Without closing that loop, ad spend is managed on vanity metrics — cost-per-click, impressions, CTR — that have no reliable relationship to actual business outcomes. Meanwhile, underperforming campaigns and ad groups bleed budget for weeks because nobody has the time to audit them. This system closes the loop between Google Ads spend and real lead outcomes tracked by EmberBots' Lead Capture Engine, gives the owner a plain-language weekly read on whether their ad dollars are working, and automatically removes or pauses campaigns that are burning budget without producing leads.</p>
+  <h4>Why It Matters for SMBs</h4>
+  <p>For most SMB owners, Google Ads is either their largest or second-largest marketing cost — and the one they understand least. Industry average cost-per-lead for local home service businesses on Google Ads ranges from $30–$120 depending on vertical and market. Without attribution, a business can easily be paying $200+ per lead on specific campaigns while other campaigns deliver at $40, with no visibility into which is which. Identifying and pausing the worst performers alone typically recovers 20–40% of ad spend. For a client spending $2,000/month on Google Ads, that is $400–$800/month recovered — which more than justifies the EmberBots system cost. The weekly digest also gives the owner something they have never had before: a plain-English summary of what their advertising actually produced, without logging into Google Ads.</p>
+  <h4>How It Connects to EmberBots' Existing Systems</h4>
+  <p><strong>Feeds into:</strong> Lead Capture Engine — when a lead arrives, this system ensures the lead record is tagged with <code>ad_campaign_id</code>, <code>ad_group_id</code>, <code>keyword</code>, and <code>gclid</code> (Google Click Identifier) from the URL parameters of the landing page; these tags are stored on the lead payload and used to calculate cost-per-lead at the campaign and ad group level.<br/>
+  <strong>Feeds from:</strong> Lead Capture Engine — lead volume data (count of leads by <code>ad_campaign_id</code> and <code>ad_group_id</code> per time window) is pulled from Lead Capture Engine's state store to calculate CPL per campaign; without this feed, only impression/click data is available.<br/>
+  <strong>Feeds into:</strong> Reputation &amp; Review Engine — organic keyword visibility data from Google Search Console (impressions, clicks, average position for branded and non-branded terms) is included in the monthly ROI summary with a correlation note when review volume has changed significantly, surfacing the relationship between review activity and organic visibility.<br/>
+  <strong>Connected to:</strong> AI Front Desk — if the AI Front Desk uses a tracked phone number (via call tracking integration), inbound call attribution can be tied back to the originating Google Ads campaign by matching <code>gclid</code> or UTM parameters; this is an optional enhancement noted in the Configuration Variables.</p>
+
+  <h3 id="sys4-connectors">Required Connectors</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Connector</th><th>Primary / Optional</th><th>Role in This System</th></tr></thead>
+      <tbody>
+        <tr><td>Google Ads</td><td>Primary</td><td>Pull campaign performance data: spend, clicks, impressions, conversions; read campaign and ad group status; pause/enable campaigns and ad groups via mutate API; read keyword performance by ad group</td></tr>
+        <tr><td>Google Analytics</td><td>Primary</td><td>Pull session and goal/conversion data by source/medium/campaign to supplement lead volume where GA4 conversion events are configured; validate that ad traffic is landing on correct pages; pull bounce rate by campaign as a lead quality proxy</td></tr>
+        <tr><td>Google Search Console</td><td>Primary</td><td>Pull organic search impressions, clicks, CTR, and average position by query and page; track branded keyword visibility trend; surface organic performance in monthly ROI summary; flag significant ranking changes</td></tr>
+        <tr><td>Gmail</td><td>Primary</td><td>Deliver weekly cost-per-lead digest to <code>owner_email</code>; send real-time CPL alert emails; deliver monthly ROI summary; send campaign auto-pause notifications</td></tr>
+        <tr><td>Twilio / Sendblue (SMS)</td><td>Optional</td><td>Send immediate SMS alert to <code>owner_phone</code> when CPL exceeds <code>CPL_SMS_ALERT_THRESHOLD</code> (separate, higher threshold from email alert); send auto-pause notification via SMS if <code>SMS_ALERTS_ENABLED = true</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="sys4-triggers">Trigger Events</h3>
+  <h4>Real-Time Triggers</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Trigger</th><th>Source</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>New lead payload with <code>gclid</code> or UTM source <code>google</code> / <code>cpc</code></td><td>Lead Capture Engine</td><td>On every new lead captured, system checks for <code>gclid</code>, <code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_content</code>, <code>utm_term</code> fields; if present, writes attribution record to <code>ad_attribution_log</code></td></tr>
+        <tr><td>Daily CPL monitoring run</td><td>Internal scheduler</td><td>Runs once daily at <code>DAILY_MONITOR_TIME</code> (config); pulls last 7-day rolling spend and lead count per campaign; checks all active campaigns against <code>CPL_ALERT_THRESHOLD</code> and <code>AUTOPAUSE_CPL_THRESHOLD</code>; checks all active campaigns against <code>AUTOPAUSE_ZERO_LEADS_DAYS</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Scheduled Triggers</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Schedule</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Daily at <code>DAILY_MONITOR_TIME</code> (config, default <code>08:00</code>)</td><td>Pull Google Ads spend and performance data for last 7 days; pull lead count by campaign from Lead Capture Engine; calculate rolling CPL per campaign; check alert and auto-pause thresholds</td></tr>
+        <tr><td>Weekly Monday at <code>DIGEST_TIME</code> (config, default <code>07:30</code>)</td><td>Generate and deliver weekly cost-per-lead digest to <code>owner_email</code> covering the prior 7 days</td></tr>
+        <tr><td>First Monday of month at <code>DIGEST_TIME</code></td><td>Generate and deliver monthly ROI summary to <code>owner_email</code> covering the prior full calendar month</td></tr>
+        <tr><td>Hourly (when <code>REALTIME_SPEND_WATCH = true</code>)</td><td>Optional: pull <code>metrics.cost_micros</code> for all enabled campaigns and alert if single-day spend exceeds <code>DAILY_BUDGET_ALERT_THRESHOLD</code> (config)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="sys4-workflow">Workflow Logic</h3>
+
+  <div class="branch-label">Branch A — Weekly Performance Digest</div>
+  <div class="workflow-steps s4">
+    <div class="workflow-step">
+      <div class="workflow-step-num">01</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Google Ads Campaign Performance</div>
+        <p>Issue Google Ads API v18 <code>GoogleAdsService.SearchStream</code> request using GAQL query against resource <code>customers/{GOOGLE_ADS_CUSTOMER_ID}/googleAds:searchStream</code>:</p>
+        <pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-muted);overflow-x:auto;margin:12px 0;line-height:1.6;">SELECT
+  campaign.id,
+  campaign.name,
+  campaign.status,
+  campaign.advertising_channel_type,
+  ad_group.id,
+  ad_group.name,
+  ad_group.status,
+  metrics.cost_micros,
+  metrics.clicks,
+  metrics.impressions,
+  metrics.conversions,
+  metrics.ctr,
+  metrics.average_cpc,
+  segments.date
+FROM ad_group
+WHERE segments.date DURING LAST_7_DAYS
+  AND campaign.status != 'REMOVED'
+  AND ad_group.status != 'REMOVED'</pre>
+        <p>Convert <code>metrics.cost_micros</code> to dollars: <code>cost_dollars = metrics.cost_micros / 1_000_000</code>. Aggregate by <code>campaign.id</code>: sum <code>cost_dollars</code>, sum <code>metrics.clicks</code>, sum <code>metrics.impressions</code>, sum <code>metrics.conversions</code>. Store result set as <code>campaign_perf[]</code> in working memory; each record: <code>{ campaign_id, campaign_name, campaign_status, total_spend, total_clicks, total_impressions, total_conversions, ctr, avg_cpc }</code>.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">02</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Keyword Performance</div>
+        <p>Issue second GAQL query for top keywords by spend (top 50, ordered by <code>metrics.cost_micros DESC</code>):</p>
+        <pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-muted);overflow-x:auto;margin:12px 0;line-height:1.6;">SELECT
+  campaign.id,
+  campaign.name,
+  ad_group.id,
+  ad_group.name,
+  ad_group_criterion.keyword.text,
+  ad_group_criterion.keyword.match_type,
+  metrics.cost_micros,
+  metrics.clicks,
+  metrics.impressions,
+  metrics.conversions
+FROM keyword_view
+WHERE segments.date DURING LAST_7_DAYS
+  AND campaign.status != 'REMOVED'
+  AND ad_group_criterion.status != 'REMOVED'
+ORDER BY metrics.cost_micros DESC
+LIMIT 50</pre>
+        <p>Store as <code>keyword_perf[]</code>: <code>{ campaign_id, ad_group_id, keyword_text, match_type, cost_dollars, clicks, impressions, conversions }</code>.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">03</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Lead Volume from Lead Capture Engine</div>
+        <p>Query Lead Capture Engine state store for leads captured in last 7 days where <code>utm_source = "google"</code> AND (<code>utm_medium = "cpc"</code> OR <code>gclid IS NOT NULL</code>). Group by <code>utm_campaign</code> (maps to <code>campaign.name</code>) and <code>utm_content</code> (maps to <code>ad_group.name</code>). For leads with <code>gclid</code> but no UTM params: attempt campaign match via <code>ad_attribution_log</code> where <code>gclid</code> was recorded at lead capture time. Result: <code>lead_counts_by_campaign[]</code> — <code>{ campaign_id_or_name, ad_group_id_or_name, lead_count, lead_ids[] }</code>.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Zero Attributed Leads</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If Lead Capture Engine returns zero attributed leads for all campaigns: check whether any leads came in with <code>utm_source = "google"</code> but missing <code>gclid</code> — if so, log attribution gap: <code>{ event: "attribution_gap_detected", missing_gclid_count, week_ending }</code></span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>Flag digest with note: "Some Google leads may be missing UTM parameters — review landing page URL configuration"</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">04</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Calculate Cost-Per-Lead per Campaign</div>
+        <p>For each entry in <code>campaign_perf[]</code>: match to <code>lead_counts_by_campaign[]</code> by <code>campaign.id</code> or <code>campaign.name</code>. Calculate <code>cpl = total_spend / lead_count</code> (where <code>lead_count &gt; 0</code>). If <code>lead_count = 0</code>: set <code>cpl = null</code>, flag <code>zero_leads = true</code>. Store: <code>{ campaign_id, campaign_name, total_spend, lead_count, cpl, zero_leads }</code>.</p>
+        <p>Compute aggregate totals: <code>total_ad_spend</code>, <code>total_attributed_leads</code>, <code>blended_cpl = total_ad_spend / total_attributed_leads</code>. Compute top keyword CPL: for keywords in <code>keyword_perf[]</code>, cross-reference lead attribution records in <code>ad_attribution_log</code> where <code>utm_term</code> or keyword text matches; calculate <code>keyword_cpl</code> where attributable.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">05</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Google Analytics Session Data (supplement)</div>
+        <p>GA4 Data API request: <code>POST https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport</code>. Dimensions: <code>sessionDefaultChannelGrouping</code>, <code>sessionCampaignName</code>, <code>sessionSource</code>, <code>sessionMedium</code>. Metrics: <code>sessions</code>, <code>conversions</code>, <code>bounceRate</code>, <code>averageSessionDuration</code>. DateRange: last 7 days. DimensionFilter: <code>sessionMedium = "cpc"</code> AND <code>sessionSource = "google"</code>.</p>
+        <p>Join to <code>campaign_perf[]</code> on <code>campaign.name</code> vs. <code>sessionCampaignName</code> (case-insensitive). Append <code>ga_sessions</code>, <code>ga_bounce_rate</code>, <code>ga_avg_session_duration</code> to each campaign record.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Bounce Rate Flag</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>ga_bounce_rate &gt; BOUNCE_RATE_ALERT_THRESHOLD</code> (config, default <code>0.75</code>) for a campaign: flag <code>high_bounce = true</code> on that campaign record</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">06</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Google Search Console Organic Data</div>
+        <p>Request: <code>POST https://searchconsole.googleapis.com/webmasters/v3/sites/{SITE_URL}/searchAnalytics/query</code>. Body: <code>{ "startDate": "[7_days_ago]", "endDate": "[yesterday]", "dimensions": ["query", "page"], "rowLimit": 25 }</code>. Extract top 10 queries by clicks; record <code>{ query, clicks, impressions, ctr, position }</code>.</p>
+        <p>Compare to prior 7-day baseline stored in <code>search_console_baseline</code> state store. Flag any query where <code>position</code> has changed by more than <code>GSC_POSITION_CHANGE_ALERT</code> (config, default 5 positions) as a notable organic shift. Store organic summary: <code>{ branded_impressions, branded_clicks, non_branded_impressions, non_branded_clicks, top_queries[] }</code>.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">07</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Check Alert and Auto-Pause Thresholds</div>
+        <p>For each campaign record with <code>cpl IS NOT NULL</code>: if <code>cpl &gt; CPL_ALERT_THRESHOLD</code> (config) AND <code>total_spend &gt;= MIN_SPEND_FOR_ALERT</code> (config, default $50): set <code>alert_flag = true</code>.</p>
+        <p>For each campaign record with <code>zero_leads = true</code>: if campaign has been running for more than <code>AUTOPAUSE_ZERO_LEADS_DAYS</code> (config) with spend &gt; <code>AUTOPAUSE_MIN_SPEND</code> (config): set <code>autopause_candidate = true</code>. For each campaign record where <code>cpl &gt; AUTOPAUSE_CPL_THRESHOLD</code> (config) AND <code>lead_count &lt; AUTOPAUSE_MIN_LEADS</code> (config): set <code>autopause_candidate = true</code>.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Branch Routing</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If any <code>alert_flag = true</code> records exist: trigger Branch B immediately (do not wait for digest)</span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>If any <code>autopause_candidate = true</code> records exist AND <code>AUTOPAUSE_ENABLED = true</code> (config): trigger Branch C immediately</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">08</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Compose and Send Weekly Digest</div>
+        <p>Compose email using <code>EMAIL_TEMPLATE_WEEKLY_DIGEST</code>. Subject: <code>[BUSINESS_NAME] Ad Performance — Week of [week_start_date]</code>.</p>
+        <p><strong>Section 1 — Summary:</strong> Total spend this week: <code>$[total_ad_spend]</code> | Total attributed leads: <code>[total_attributed_leads]</code> | Blended CPL: <code>$[blended_cpl]</code> | vs. prior week: +/-X% (calculated from <code>digest_history</code> state store).</p>
+        <p><strong>Section 2 — Campaign Breakdown:</strong> Table with columns: Campaign Name | Spend | Leads | CPL | Status | 7-Day Trend; rows sorted by spend descending; CPL colored as <code>GOOD</code> (≤ <code>CPL_TARGET</code>), <code>WARNING</code> (≤ <code>CPL_ALERT_THRESHOLD</code>), or <code>HIGH</code> (&gt; <code>CPL_ALERT_THRESHOLD</code>) based on config thresholds.</p>
+        <p><strong>Section 3 — Top Keywords by Leads:</strong> Top 5 keywords ranked by <code>lead_count</code> with CPL per keyword where attributable.</p>
+        <p><strong>Section 4 — Organic Snapshot:</strong> Branded search impressions and clicks this week vs. last week; top 3 non-branded queries by clicks; any significant position changes flagged.</p>
+        <p><strong>Section 5 — Flags:</strong> Any campaigns paused this week (with reason), any attribution gaps detected, any campaigns with <code>high_bounce = true</code>. Footer includes links to Google Ads dashboard and GA4 report (static config URLs).</p>
+        <p>Send via Gmail API from <code>sender_email</code> to <code>owner_email</code>. Log: <code>{ event: "weekly_digest_sent", week_ending, total_spend, total_leads, blended_cpl, campaigns_flagged, campaigns_paused, timestamp }</code>. Write this week's summary to <code>digest_history</code> state store for week-over-week comparison.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch-label">Branch B — Real-Time Cost-Per-Lead Alert</div>
+  <div class="callout callout-note"><strong>Trigger:</strong> Step 7 of Branch A sets <code>alert_flag = true</code> on one or more campaigns, OR daily monitoring run detects CPL breach mid-week.</div>
+  <div class="workflow-steps s4">
+    <div class="workflow-step">
+      <div class="workflow-step-num">01</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Evaluate Alert Severity</div>
+        <p>For each <code>alert_flag = true</code> campaign: calculate <code>cpl_overage_pct = ((cpl - CPL_ALERT_THRESHOLD) / CPL_ALERT_THRESHOLD) * 100</code>.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Severity Classification</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>cpl_overage_pct &gt;= 50</code> (CPL is 1.5× the threshold): <code>alert_severity = "critical"</code></span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>cpl_overage_pct &gt;= 20</code>: <code>alert_severity = "warning"</code></span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>Otherwise: <code>alert_severity = "info"</code></span></div>
+        </div>
+        <p>Check <code>alert_suppression</code> state: if an alert for this <code>campaign_id</code> was sent within <code>ALERT_SUPPRESSION_HOURS</code> (config, default 48h), skip email for that campaign to prevent alert fatigue; log suppression.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">02</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Send Email Alert</div>
+        <p>Compose using <code>EMAIL_TEMPLATE_CPL_ALERT</code>.</p>
+        <p><strong>Subject (critical):</strong> <code>[BUSINESS_NAME] ALERT: High cost-per-lead on [campaign_name] — $[cpl] vs. $[CPL_ALERT_THRESHOLD] target</code></p>
+        <p><strong>Subject (warning):</strong> <code>[BUSINESS_NAME] Ad Alert: [campaign_name] CPL above target ($[cpl])</code></p>
+        <p><strong>Body:</strong> Campaign name | Current CPL | CPL target | Spend this period | Leads this period | Days running above threshold | Recommendation (auto-populated based on severity: "Review ad copy and audience targeting" / "Consider pausing this campaign"). Includes direct deep-link to campaign in Google Ads UI: <code>https://ads.google.com/aw/campaigns?campaignId={campaign_id}</code>.</p>
+        <p>Send via Gmail API from <code>sender_email</code> to <code>owner_email</code>.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">03</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Send SMS Alert (if configured)</div>
+        <div class="decision-block">
+          <div class="decision-label">Decision — SMS Conditions</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>SMS_ALERTS_ENABLED = true</code> AND <code>alert_severity = "critical"</code> AND <code>cpl &gt;= CPL_SMS_ALERT_THRESHOLD</code> (config, default: 2× <code>CPL_ALERT_THRESHOLD</code>): send via Twilio/Sendblue to <code>owner_phone</code></span></div>
+        </div>
+        <p>SMS body: <code>"EmberBots Alert: [campaign_name] CPL is $[cpl] (target $[CPL_ALERT_THRESHOLD]). Check your email for details."</code> Max 160 characters; truncate <code>campaign_name</code> to 30 chars if necessary.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">04</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Log Alert</div>
+        <p>Write to <code>alert_log</code>: <code>{ event: "cpl_alert_sent", campaign_id, campaign_name, cpl, threshold: CPL_ALERT_THRESHOLD, severity, alert_sent_at, channels: ["email", "sms"] }</code>. Write <code>campaign_id</code> and <code>alert_sent_at</code> to <code>alert_suppression</code> state to enforce suppression window.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch-label">Branch C — Underperforming Campaign Auto-Pause</div>
+  <div class="callout callout-note"><strong>Trigger:</strong> Step 7 of Branch A sets <code>autopause_candidate = true</code> on one or more campaigns AND <code>AUTOPAUSE_ENABLED = true</code>.</div>
+  <div class="workflow-steps s4">
+    <div class="workflow-step">
+      <div class="workflow-step-num">01</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Validate Auto-Pause Conditions</div>
+        <p>For each <code>autopause_candidate = true</code> campaign, re-verify the condition is still met at time of execution (in case a lead came in since Step 7): re-query Lead Capture Engine for leads attributed to <code>campaign_id</code> in the last <code>AUTOPAUSE_LOOKBACK_DAYS</code> (config, default 7); re-pull current spend via Google Ads API for the same window. Recalculate CPL.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Condition Still Met?</div>
+          <div class="decision-option"><span class="arrow">→</span><span>Condition no longer met → remove <code>autopause_candidate</code> flag, log: <code>{ event: "autopause_condition_cleared", campaign_id }</code></span></div>
+          <div class="decision-option"><span class="arrow">→</span><span><code>AUTOPAUSE_SCOPE = "campaign"</code> (config): pause at the <code>campaign</code> level</span></div>
+          <div class="decision-option"><span class="arrow">→</span><span><code>AUTOPAUSE_SCOPE = "ad_group"</code> (config): pause at the <code>ad_group</code> level only (safer — leaves other ad groups in the campaign running)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">02</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Execute Pause via Google Ads API</div>
+        <p>Google Ads API v18 mutate request. For <strong>campaign-level pause</strong>:</p>
+        <pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-muted);overflow-x:auto;margin:12px 0;line-height:1.6;">POST customers/{GOOGLE_ADS_CUSTOMER_ID}/campaigns:mutate
+Body: {
+  "operations": [{
+    "update": {
+      "resourceName": "customers/{GOOGLE_ADS_CUSTOMER_ID}/campaigns/{campaign_id}",
+      "status": "PAUSED"
+    },
+    "updateMask": "status"
+  }]
+}</pre>
+        <p>For <strong>ad group-level pause</strong>:</p>
+        <pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-muted);overflow-x:auto;margin:12px 0;line-height:1.6;">POST customers/{GOOGLE_ADS_CUSTOMER_ID}/adGroups:mutate
+Body: {
+  "operations": [{
+    "update": {
+      "resourceName": "customers/{GOOGLE_ADS_CUSTOMER_ID}/adGroups/{ad_group_id}",
+      "status": "PAUSED"
+    },
+    "updateMask": "status"
+  }]
+}</pre>
+        <div class="decision-block">
+          <div class="decision-label">Decision — API Response</div>
+          <div class="decision-option"><span class="arrow">→</span><span>On API success (HTTP 200 with no <code>partialFailureError</code>): record <code>pause_confirmed = true</code></span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>On API failure: do NOT retry automatically; send alert to <code>owner_email</code> + Ember system admin: "Auto-pause failed for [campaign_name] — manual pause required"; log error; do NOT proceed to Step 3</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">03</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Notify Owner</div>
+        <p>Compose using <code>EMAIL_TEMPLATE_AUTOPAUSE_NOTIFICATION</code>. Subject: <code>[BUSINESS_NAME] — Campaign paused automatically: [campaign_name]</code>.</p>
+        <p><strong>Body includes:</strong> Reason for pause (zero leads in <code>[AUTOPAUSE_ZERO_LEADS_DAYS]</code> days / CPL of <code>$[cpl]</code> exceeded auto-pause threshold of <code>$[AUTOPAUSE_CPL_THRESHOLD]</code> with only <code>[lead_count]</code> lead(s)); spend consumed before pause: <code>$[total_spend]</code>; pause scope (campaign-level or ad group-level). Two CTAs: "Resume this campaign" (deep-link to Google Ads) | "Keep paused — I'll review it" (no action required). Note: "This campaign will NOT be re-enabled automatically. You must resume it manually or contact your EmberBots account manager."</p>
+        <p>Send via Gmail to <code>owner_email</code>. If <code>SMS_ALERTS_ENABLED = true</code>: send SMS to <code>owner_phone</code>: <code>"EmberBots paused your ad campaign '[campaign_name]' — $[total_spend] spent, [lead_count] lead(s). Check email for details."</code></p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">04</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Log Auto-Pause Event</div>
+        <p>Write to <code>autopause_log</code>: <code>{ event: "campaign_auto_paused", campaign_id, campaign_name, ad_group_id (if applicable), pause_scope, reason, spend_at_pause, lead_count_at_pause, cpl_at_pause, pause_timestamp, paused_by: "system" }</code>. Update <code>campaign_perf[]</code> record: set <code>campaign_status = "PAUSED_BY_SYSTEM"</code>. Include pause event in next weekly digest under "Flags" section.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch-label">Branch D — Monthly ROI Summary</div>
+  <div class="callout callout-note"><strong>Trigger:</strong> First Monday of month at <code>DIGEST_TIME</code>.</div>
+  <div class="workflow-steps s4">
+    <div class="workflow-step">
+      <div class="workflow-step-num">01</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Full Prior Month Google Ads Data</div>
+        <p>GAQL query with <code>segments.date DURING LAST_MONTH</code>. Includes all fields from Branch A Step 1 query, plus: <code>campaign.advertising_channel_type</code>, <code>campaign.bidding_strategy_type</code>, <code>metrics.search_impression_share</code>, <code>metrics.search_top_impression_share</code>.</p>
+        <p>Aggregate totals: <code>monthly_total_spend</code>, <code>monthly_total_clicks</code>, <code>monthly_total_impressions</code>. Compute month-over-month delta vs. <code>monthly_history</code> state store entry for prior month.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">02</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Monthly Lead Attribution</div>
+        <p>Query Lead Capture Engine state store for all leads in prior calendar month where <code>utm_source = "google"</code> AND (<code>utm_medium = "cpc"</code> OR <code>gclid IS NOT NULL</code>). Compute: <code>monthly_total_attributed_leads</code>, CPL per campaign for the month, CPL per ad group for the month.</p>
+        <p>Identify top 3 campaigns by lead count. Identify bottom 3 campaigns by CPL efficiency (highest CPL with meaningful spend, defined as spend &gt; <code>MIN_SPEND_FOR_REPORT</code>, config default $100).</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">03</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Monthly Google Analytics Data</div>
+        <p>GA4 Data API with <code>dateRange</code> = prior full calendar month. Pull: sessions, conversions, bounce rate by campaign; goal/event completions tagged as <code>LEAD_EVENT_NAME</code> (config, e.g., <code>"generate_lead"</code>, <code>"form_submit"</code>, <code>"phone_call"</code>).</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Attribution Cross-Validation</div>
+          <div class="decision-option"><span class="arrow">→</span><span>Compare GA4 goal completions against Lead Capture Engine lead count; if &gt;20% difference: log delta as <code>attribution_discrepancy</code> and include discrepancy note in report</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">04</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Pull Monthly Search Console Data</div>
+        <p>Query for prior calendar month. Compute: total organic impressions, total organic clicks, average CTR, average position. Separate branded vs. non-branded queries (branded = queries containing <code>BRAND_KEYWORDS[]</code> config array, e.g., <code>["[business name]", "[owner name]"]</code>). Compare to prior month baseline; compute month-over-month delta for branded and non-branded impressions.</p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — Review Correlation</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>INCLUDE_REVIEW_CORRELATION = true</code> (config): pull review count added this month from Reputation &amp; Review Engine state store</span></div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>google_review_count_delta &gt; 5</code> AND <code>branded_impressions_delta &gt; 0</code>: include correlation note — "Branded search visibility increased [X]% this month — consistent with [N] new Google reviews added"</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">05</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Calculate ROI Summary Figures</div>
+        <p><code>monthly_cpl_blended = monthly_total_spend / monthly_total_attributed_leads</code></p>
+        <p><code>estimated_revenue_from_ad_leads = monthly_total_attributed_leads × AVG_JOB_VALUE</code> (config, required field; client provides this value)</p>
+        <p><code>estimated_roas = estimated_revenue_from_ad_leads / monthly_total_spend</code></p>
+        <p><code>estimated_monthly_profit_from_ads = estimated_revenue_from_ad_leads - monthly_total_spend</code></p>
+        <div class="decision-block">
+          <div class="decision-label">Decision — ROAS Threshold</div>
+          <div class="decision-option"><span class="arrow">→</span><span>If <code>estimated_roas &lt; ROAS_ALERT_THRESHOLD</code> (config, default <code>2.0</code>): set <code>roas_below_threshold = true</code></span></div>
+        </div>
+        <p>Compare <code>monthly_cpl_blended</code> to prior 3-month CPL average from <code>monthly_history</code>; flag improving or worsening trend.</p>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="workflow-step-num">06</div>
+      <div class="workflow-step-body">
+        <div class="workflow-step-title">Compose and Send Monthly ROI Summary</div>
+        <p>Compose using <code>EMAIL_TEMPLATE_MONTHLY_ROI</code>. Subject: <code>[BUSINESS_NAME] Monthly Ad ROI Summary — [Month Year]</code>.</p>
+        <p><strong>Section 1 — Headline Numbers:</strong> Total ad spend | Total attributed leads | Blended CPL | Estimated ROAS | Estimated revenue from ad leads.</p>
+        <p><strong>Section 2 — Campaign Performance Table:</strong> Campaign name | Month spend | Leads | CPL | MoM CPL change | Status (Active / Paused / Paused-by-System).</p>
+        <p><strong>Section 3 — Top Performing Keywords:</strong> Top 5 keywords by leads this month; CPL per keyword where attributable; match type.</p>
+        <p><strong>Section 4 — Organic Search Summary:</strong> Branded impressions | Non-branded impressions | Total organic clicks | Avg position | MoM deltas; review correlation note if applicable.</p>
+        <p><strong>Section 5 — Budget Efficiency:</strong> Spend on campaigns that produced 0 leads (waste estimate); spend on campaigns below CPL target (efficient spend); spend on campaigns above CPL target (at-risk spend).</p>
+        <p><strong>Section 6 — Recommendations</strong> (auto-generated from rule engine): if any campaign has been paused for full month → "Consider reviewing or removing [campaign_name] — paused all month with no leads"; if <code>roas_below_threshold = true</code> → "Overall ROAS is [X] — below target of [ROAS_ALERT_THRESHOLD]x. Consider reducing budget on highest-CPL campaigns or reviewing ad copy"; if top keyword CPL &lt; 50% of blended CPL → "Keyword '[keyword_text]' is delivering leads at $[cpl] — [X]% below your average. Consider increasing bids or budget allocation to this keyword."</p>
+        <p><strong>Section 7 — YTD Trend</strong> (if <code>YTD_REPORTING = true</code> config): monthly spend and CPL for each month since system start, displayed as table. Footer includes links to Google Ads, GA4, and Search Console dashboards.</p>
+        <p>Send via Gmail to <code>owner_email</code>. Write monthly summary to <code>monthly_history</code> state store: <code>{ month, total_spend, total_leads, blended_cpl, estimated_roas, campaigns_paused_count }</code>. Log: <code>{ event: "monthly_roi_summary_sent", month, total_spend, total_leads, blended_cpl, timestamp }</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 id="sys4-config">Configuration Variables</h3>
+  <h4>Workflow Logic Variables (affect branching and timing)</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Variable</th><th>Type</th><th>Description</th><th>Default</th></tr></thead>
+      <tbody>
+        <tr><td><code>CPL_TARGET</code></td><td>decimal</td><td>Owner's target cost-per-lead; used for "GOOD / WARNING / HIGH" classification in digest</td><td>required</td></tr>
+        <tr><td><code>CPL_ALERT_THRESHOLD</code></td><td>decimal</td><td>CPL at which email alert fires; triggers Branch B</td><td>required</td></tr>
+        <tr><td><code>CPL_SMS_ALERT_THRESHOLD</code></td><td>decimal</td><td>CPL at which SMS alert fires (should be ≥ <code>CPL_ALERT_THRESHOLD</code>)</td><td><code>2 × CPL_ALERT_THRESHOLD</code></td></tr>
+        <tr><td><code>AUTOPAUSE_ENABLED</code></td><td>boolean</td><td>Whether system can pause campaigns/ad groups automatically</td><td><code>false</code></td></tr>
+        <tr><td><code>AUTOPAUSE_SCOPE</code></td><td>enum</td><td><code>"campaign"</code> or <code>"ad_group"</code> — scope of auto-pause action</td><td><code>"ad_group"</code></td></tr>
+        <tr><td><code>AUTOPAUSE_CPL_THRESHOLD</code></td><td>decimal</td><td>CPL above which auto-pause is considered (must be set higher than <code>CPL_ALERT_THRESHOLD</code>)</td><td><code>3 × CPL_TARGET</code></td></tr>
+        <tr><td><code>AUTOPAUSE_MIN_LEADS</code></td><td>integer</td><td>If lead count is below this AND CPL above <code>AUTOPAUSE_CPL_THRESHOLD</code>, campaign is auto-pause candidate</td><td><code>3</code></td></tr>
+        <tr><td><code>AUTOPAUSE_ZERO_LEADS_DAYS</code></td><td>integer</td><td>Days a campaign can run with zero leads before becoming auto-pause candidate</td><td><code>7</code></td></tr>
+        <tr><td><code>AUTOPAUSE_MIN_SPEND</code></td><td>decimal</td><td>Minimum spend (dollars) before auto-pause is considered; prevents pausing $2 test campaigns</td><td><code>50</code></td></tr>
+        <tr><td><code>AUTOPAUSE_LOOKBACK_DAYS</code></td><td>integer</td><td>Rolling window (days) for auto-pause evaluation</td><td><code>7</code></td></tr>
+        <tr><td><code>ALERT_SUPPRESSION_HOURS</code></td><td>integer</td><td>Hours before repeat alert fires for same campaign</td><td><code>48</code></td></tr>
+        <tr><td><code>MIN_SPEND_FOR_ALERT</code></td><td>decimal</td><td>Minimum campaign spend before CPL alert fires</td><td><code>50</code></td></tr>
+        <tr><td><code>MIN_SPEND_FOR_REPORT</code></td><td>decimal</td><td>Minimum monthly campaign spend to be included in bottom-3 efficiency ranking</td><td><code>100</code></td></tr>
+        <tr><td><code>BOUNCE_RATE_ALERT_THRESHOLD</code></td><td>decimal</td><td>GA4 bounce rate (0.0–1.0) above which <code>high_bounce</code> flag is set on campaign</td><td><code>0.75</code></td></tr>
+        <tr><td><code>GSC_POSITION_CHANGE_ALERT</code></td><td>integer</td><td>Position change (in ranking positions) that triggers organic shift flag</td><td><code>5</code></td></tr>
+        <tr><td><code>ROAS_ALERT_THRESHOLD</code></td><td>decimal</td><td>Return on ad spend below which monthly summary flags ROAS warning</td><td><code>2.0</code></td></tr>
+        <tr><td><code>DAILY_MONITOR_TIME</code></td><td>time (HH:MM)</td><td>Time of day for daily CPL monitoring run</td><td><code>"08:00"</code></td></tr>
+        <tr><td><code>DIGEST_TIME</code></td><td>time (HH:MM)</td><td>Time of day for weekly and monthly digest delivery</td><td><code>"07:30"</code></td></tr>
+        <tr><td><code>BUSINESS_TIMEZONE</code></td><td>IANA timezone string</td><td>e.g., <code>"America/Denver"</code></td><td>required</td></tr>
+        <tr><td><code>REALTIME_SPEND_WATCH</code></td><td>boolean</td><td>Enable hourly spend monitoring</td><td><code>false</code></td></tr>
+        <tr><td><code>DAILY_BUDGET_ALERT_THRESHOLD</code></td><td>decimal</td><td>Single-day spend (dollars) above which immediate alert fires (requires <code>REALTIME_SPEND_WATCH = true</code>)</td><td>—</td></tr>
+        <tr><td><code>SMS_ALERTS_ENABLED</code></td><td>boolean</td><td>Enable SMS alerts for CPL breaches and auto-pauses</td><td><code>false</code></td></tr>
+        <tr><td><code>INCLUDE_REVIEW_CORRELATION</code></td><td>boolean</td><td>Include review volume correlation in monthly organic section</td><td><code>true</code></td></tr>
+        <tr><td><code>YTD_REPORTING</code></td><td>boolean</td><td>Include year-to-date spend and CPL trend table in monthly summary</td><td><code>true</code></td></tr>
+        <tr><td><code>AVG_JOB_VALUE</code></td><td>decimal</td><td>Average revenue per closed job; used to calculate estimated ROAS and monthly ROI</td><td>required</td></tr>
+        <tr><td><code>LEAD_EVENT_NAME</code></td><td>string</td><td>GA4 event name used as conversion (e.g., <code>"generate_lead"</code>, <code>"form_submit"</code>)</td><td><code>"generate_lead"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Output Content Variables</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Variable</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>BUSINESS_NAME</code></td><td>string</td><td>Used in all subject lines and message bodies</td></tr>
+        <tr><td><code>owner_email</code></td><td>string</td><td>Recipient for all digests, alerts, and summaries</td></tr>
+        <tr><td><code>owner_phone</code></td><td>string</td><td>Recipient for SMS alerts (requires <code>SMS_ALERTS_ENABLED = true</code>)</td></tr>
+        <tr><td><code>sender_email</code></td><td>string</td><td>Gmail <code>From</code> address for all outbound email</td></tr>
+        <tr><td><code>GOOGLE_ADS_CUSTOMER_ID</code></td><td>string</td><td>10-digit Google Ads customer ID (no hyphens), e.g., <code>"1234567890"</code></td></tr>
+        <tr><td><code>GA4_PROPERTY_ID</code></td><td>string</td><td>Google Analytics 4 property ID, e.g., <code>"properties/123456789"</code></td></tr>
+        <tr><td><code>SITE_URL</code></td><td>string</td><td>Site URL registered in Google Search Console; URL-encoded, e.g., <code>"sc-domain:example.com"</code></td></tr>
+        <tr><td><code>BRAND_KEYWORDS</code></td><td>array of strings</td><td>Branded search terms to separate from non-branded in Search Console reporting; e.g., <code>["acme plumbing", "acme hvac"]</code></td></tr>
+        <tr><td><code>EMAIL_TEMPLATE_WEEKLY_DIGEST</code></td><td>string (template)</td><td>Weekly CPL digest email body; supports <code>{{total_spend}}</code>, <code>{{total_leads}}</code>, <code>{{blended_cpl}}</code>, <code>{{campaign_table}}</code>, <code>{{organic_snapshot}}</code>, <code>{{flags}}</code></td></tr>
+        <tr><td><code>EMAIL_TEMPLATE_CPL_ALERT</code></td><td>string (template)</td><td>CPL alert email body; supports <code>{{campaign_name}}</code>, <code>{{cpl}}</code>, <code>{{CPL_ALERT_THRESHOLD}}</code>, <code>{{spend}}</code>, <code>{{lead_count}}</code>, <code>{{campaign_url}}</code></td></tr>
+        <tr><td><code>EMAIL_TEMPLATE_AUTOPAUSE_NOTIFICATION</code></td><td>string (template)</td><td>Auto-pause notification email body; supports <code>{{campaign_name}}</code>, <code>{{reason}}</code>, <code>{{total_spend}}</code>, <code>{{lead_count}}</code>, <code>{{cpl}}</code>, <code>{{scope}}</code></td></tr>
+        <tr><td><code>EMAIL_TEMPLATE_MONTHLY_ROI</code></td><td>string (template)</td><td>Monthly ROI summary email body; supports <code>{{month}}</code>, <code>{{total_spend}}</code>, <code>{{total_leads}}</code>, <code>{{blended_cpl}}</code>, <code>{{estimated_roas}}</code>, <code>{{campaign_table}}</code>, <code>{{organic_summary}}</code>, <code>{{recommendations}}</code></td></tr>
+        <tr><td><code>GOOGLE_ADS_DASHBOARD_URL</code></td><td>string (URL)</td><td>Static deep-link to client's Google Ads campaign view; included in digest footer</td></tr>
+        <tr><td><code>GA4_DASHBOARD_URL</code></td><td>string (URL)</td><td>Static deep-link to client's GA4 reports; included in digest footer</td></tr>
+        <tr><td><code>SEARCH_CONSOLE_DASHBOARD_URL</code></td><td>string (URL)</td><td>Static deep-link to client's Search Console; included in monthly summary</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="sys4-std">Standardized vs. Configured</h3>
+  <div class="split-grid">
+    <div class="split-card">
+      <div class="split-card-title std">Standardized — Same for Every Client</div>
+      <ul class="split-list">
+        <li>Google Ads API v18 GAQL query structure for campaign, ad group, and keyword performance pulls</li>
+        <li><code>metrics.cost_micros</code> to dollars conversion (<code>/ 1_000_000</code>)</li>
+        <li>Lead attribution join logic: matching UTM parameters and <code>gclid</code> from Lead Capture Engine state store to Google Ads campaign and ad group IDs</li>
+        <li>CPL calculation formula: <code>total_spend / lead_count</code> with null guard for zero-lead campaigns</li>
+        <li>Alert severity classification logic (info / warning / critical based on CPL overage %)</li>
+        <li>Alert suppression window enforcement via <code>alert_suppression</code> state</li>
+        <li>Auto-pause eligibility evaluation: zero-lead days check, CPL-above-threshold-with-low-lead-count check, minimum spend guard</li>
+        <li>Google Ads mutate API call structure for campaign and ad group status updates</li>
+        <li>GA4 Data API query structure and session/conversion pull</li>
+        <li>Google Search Console query structure and branded/non-branded separation</li>
+        <li>Week-over-week and month-over-month delta calculations from state store history</li>
+        <li>ROI estimation formula: <code>monthly_total_attributed_leads × AVG_JOB_VALUE</code></li>
+        <li>Monthly recommendations rule engine (3 canned rule types: paused campaigns, ROAS below threshold, high-performing keyword)</li>
+        <li>Auto-pause irreversibility guarantee: system never re-enables a paused campaign; only the owner can re-enable</li>
+        <li>Error handling: API retry logic (3 attempts, exponential backoff) for all Google API calls; dead-letter queue for failed digest delivery with retry at next hourly interval</li>
+        <li>State store schema: <code>campaign_perf[]</code>, <code>digest_history</code>, <code>monthly_history</code>, <code>alert_log</code>, <code>alert_suppression</code>, <code>autopause_log</code>, <code>ad_attribution_log</code>, <code>search_console_baseline</code></li>
+        <li>Logging schema: all events written to <code>ad_events</code> log with <code>client_id</code>, <code>event_type</code>, <code>timestamp</code>, and relevant payload</li>
+      </ul>
+    </div>
+    <div class="split-card">
+      <div class="split-card-title cfg">Configured Per Client</div>
+      <ul class="split-list">
+        <li>All variables in the Configuration Variables tables above</li>
+        <li>Google Ads OAuth credentials and customer ID</li>
+        <li>GA4 OAuth credentials and property ID</li>
+        <li>Google Search Console OAuth credentials and site URL</li>
+        <li>Gmail OAuth credentials and sender identity</li>
+        <li>Twilio phone number and account SID (if SMS enabled)</li>
+        <li>CPL target and alert thresholds (set at onboarding, updated quarterly or on request)</li>
+        <li>Auto-pause feature flag and scope (off by default; must be explicitly enabled by owner after understanding the behavior)</li>
+        <li><code>AVG_JOB_VALUE</code> — owner-provided; EmberBots does not assume this value</li>
+        <li><code>BRAND_KEYWORDS</code> array</li>
+        <li>All email templates and subject lines</li>
+        <li>UTM parameter convention used in landing page URLs (must be verified at onboarding)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="sys4-deliverables">Client Deliverables</h3>
+  <div class="deliverable-grid">
+    <div class="deliverable-card">
+      <div class="deliverable-card-title">What the Client Gets</div>
+      <ul class="deliverable-list">
+        <li><span class="di"></span>Weekly cost-per-lead digest — delivered every Monday morning; plain-English breakdown of what each campaign spent and how many leads it produced, with a clear CPL per campaign and week-over-week comparison</li>
+        <li><span class="di"></span>Real-time CPL alert emails — triggered within hours of a threshold breach; includes direct link to the flagged campaign in Google Ads and a plain-language explanation of the issue</li>
+        <li><span class="di"></span>Auto-pause notifications — immediate email (and optional SMS) when a campaign is paused by the system, with full context: reason, spend consumed, leads produced, and instructions to resume if desired</li>
+        <li><span class="di"></span>Monthly ROI summary — delivered on the first Monday of each month; includes estimated ROAS, estimated revenue from ad leads, budget efficiency breakdown (waste vs. efficient spend), and 3 automated recommendations</li>
+        <li><span class="di"></span>Organic search snapshot — included in weekly digest and monthly summary; shows whether Google organic visibility is improving alongside paid activity, with review volume correlation where applicable</li>
+      </ul>
+    </div>
+    <div class="deliverable-card">
+      <div class="deliverable-card-title">What Runs Without Their Involvement</div>
+      <ul class="deliverable-list">
+        <li><span class="di"></span>Daily Google Ads performance data pull and CPL calculation</li>
+        <li><span class="di"></span>Lead attribution join from Lead Capture Engine records</li>
+        <li><span class="di"></span>GA4 session and conversion data pull</li>
+        <li><span class="di"></span>Google Search Console organic data pull and baseline comparison</li>
+        <li><span class="di"></span>Alert threshold evaluation and alert suppression enforcement</li>
+        <li><span class="di"></span>Auto-pause execution (when enabled) — campaign paused in Google Ads without owner action required at time of pause</li>
+        <li><span class="di"></span>All state store writes: digest history, alert log, autopause log, attribution records</li>
+        <li><span class="di"></span>Weekly digest generation and delivery</li>
+        <li><span class="di"></span>Monthly ROI summary generation and delivery</li>
+        <li><span class="di"></span>All logging</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="sys4-monitoring">Monitoring &amp; Reporting</h3>
+  <h4>Metrics Tracked</h4>
+  <p>
+    <span class="metric-tag">weekly_total_ad_spend</span>
+    <span class="metric-tag">weekly_total_attributed_leads</span>
+    <span class="metric-tag">weekly_blended_cpl</span>
+    <span class="metric-tag">cpl_by_campaign</span>
+    <span class="metric-tag">cpl_by_ad_group</span>
+    <span class="metric-tag">cpl_by_keyword</span>
+    <span class="metric-tag">campaigns_above_cpl_alert_threshold</span>
+    <span class="metric-tag">campaigns_zero_leads</span>
+    <span class="metric-tag">campaigns_auto_paused_this_period</span>
+    <span class="metric-tag">total_spend_on_zero_lead_campaigns</span>
+    <span class="metric-tag">attribution_gap_count</span>
+    <span class="metric-tag">weekly_organic_branded_impressions</span>
+    <span class="metric-tag">weekly_organic_non_branded_impressions</span>
+    <span class="metric-tag">monthly_estimated_roas</span>
+    <span class="metric-tag">monthly_estimated_revenue_from_ads</span>
+    <span class="metric-tag">ga4_bounce_rate_by_campaign</span>
+    <span class="metric-tag">digest_delivery_success</span>
+  </p>
+  <h4>Alert Conditions</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Condition</th><th>Alert Type</th><th>Recipient</th></tr></thead>
+      <tbody>
+        <tr><td><code>cpl &gt; CPL_ALERT_THRESHOLD</code> AND <code>total_spend &gt;= MIN_SPEND_FOR_ALERT</code></td><td>Email (Branch B); SMS if <code>alert_severity = "critical"</code> AND <code>SMS_ALERTS_ENABLED = true</code></td><td><code>owner_email</code>, <code>owner_phone</code></td></tr>
+        <tr><td>Campaign auto-paused by system</td><td>Email + optional SMS (Branch C)</td><td><code>owner_email</code>, <code>owner_phone</code></td></tr>
+        <tr><td>Auto-pause API call fails</td><td>Email alert</td><td><code>owner_email</code> + Ember system admin</td></tr>
+        <tr><td><code>ga4_bounce_rate &gt; BOUNCE_RATE_ALERT_THRESHOLD</code> on any campaign</td><td>Flagged in weekly digest (not a standalone alert)</td><td><code>owner_email</code> (via digest)</td></tr>
+        <tr><td>Attribution gap detected: leads with <code>utm_source = "google"</code> missing UTM/gclid params</td><td>Flagged in weekly digest under "Flags" section</td><td><code>owner_email</code> (via digest)</td></tr>
+        <tr><td><code>estimated_roas &lt; ROAS_ALERT_THRESHOLD</code> in monthly summary</td><td>Flagged in monthly ROI summary recommendations section</td><td><code>owner_email</code> (via monthly summary)</td></tr>
+        <tr><td>Any Google API authentication error (Ads, Analytics, Search Console)</td><td>Immediate email</td><td><code>owner_email</code> + Ember system admin</td></tr>
+        <tr><td>Weekly digest delivery failure</td><td>Retry at next hourly interval; if 3 consecutive failures, alert to Ember system admin</td><td>Ember system admin</td></tr>
+        <tr><td><code>REALTIME_SPEND_WATCH = true</code> AND single-day spend &gt; <code>DAILY_BUDGET_ALERT_THRESHOLD</code></td><td>Immediate email</td><td><code>owner_email</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="sys4-upsell">Natural Upsell</h3>
+  <div class="upsell-card s4">
+    <div class="upsell-title">What the client asks for next</div>
+    <ul class="upsell-items">
+      <li class="upsell-item"><strong>Immediate → Lead Capture Engine attribution hardening.</strong> At onboarding, this system will almost always surface <code>attribution_gap_count &gt; 0</code> within the first week: leads arriving from Google without proper UTM parameters or <code>gclid</code>. The fix requires updating landing page URLs and confirming UTM conventions in the Lead Capture Engine. This is a natural, quick-win engagement that keeps the owner involved in the early rollout and demonstrates the system's value before the first weekly digest arrives.</li>
+      <li class="upsell-item"><strong>Within 30 days → Follow-Up Assistant.</strong> Once the owner sees which campaigns produce the most leads, they immediately ask what happens to those leads after capture. If Follow-Up Assistant is not already deployed, the weekly digest's lead volume data makes the ROI case concrete: "You got 18 leads from Google this week. Here's what happened to each of them." Clients who see their CPL drop with good campaign management quickly want to ensure those leads are being worked just as systematically as they're being generated.</li>
+      <li class="upsell-item"><strong>Within 60 days → Full EmberBots Stack performance consolidation.</strong> By Month 2, the client has weekly data from Ad &amp; Lead Gen Manager, Appointment Booking, Reputation &amp; Review Engine, and Payment &amp; Invoice Automation. The natural ask is a unified weekly performance report covering the full funnel: ad spend → leads captured → appointments booked → jobs closed → revenue collected → reviews earned. This consolidated digest is a high-retention artifact and the strongest demonstration of the full EmberBots stack value. It requires no new systems — only a reporting consolidation pass across existing state stores.</li>
+    </ul>
+  </div>
+</div>
+
+            <!-- ══════════════════════════════════════
            IMPLEMENTATION SEQUENCING
       ══════════════════════════════════════ -->
       <div id="sequencing" class="system-section">
@@ -1885,8 +2489,9 @@
           <ul class="phase-list">
             <li><span class="week">Week 9</span><span>Deploy Payment &amp; Invoice Automation. Connect Stripe or Square. Configure QuickBooks credentials and company ID. Set invoice due days and reminder schedule to match client's existing billing expectations.</span></li>
             <li><span class="week">Week 10</span><span>Enable <code>TRIGGER_REVIEW_ON_PAYMENT</code> if client prefers payment confirmation as the review trigger vs. job close. Verify dual-trigger suppression is working (no duplicate review requests).</span></li>
-            <li><span class="week">Week 11</span><span>Full 7-system stack operational. Confirm all handoff payloads between systems are clean. Run first monthly report across all systems: bookings, show rate, review delta, AR aging, collection rate.</span></li>
-            <li><span class="week">Week 12</span><span>Present 90-day results to client. Open conversation about additional systems: SMS Rapid Response, Email Nurture, Customer Reactivation based on which bottleneck remains most visible.</span></li>
+            <li><span class="week">Week 10–11</span><span>Deploy Ad &amp; Lead Gen Manager (if client runs Google Ads). Connect Google Ads, Analytics, and Search Console APIs. Set <code>CPL_TARGET</code> and <code>CPL_ALERT_THRESHOLD</code> based on client's historical CPL. Run first weekly digest as a dry run before enabling auto-pause. Verify UTM attribution tagging is flowing from Lead Capture Engine.</span></li>
+            <li><span class="week">Week 11–12</span><span>Full 8-system stack operational. Confirm all handoff payloads between systems are clean. Enable <code>AUTOPAUSE_ENABLED</code> after owner reviews first two weekly digests and confirms thresholds. Run first monthly ROI summary covering all systems: ad spend, CPL, bookings, show rate, review delta, AR aging, collection rate.</span></li>
+            <li><span class="week">Week 12</span><span>Present 90-day results to client. Open conversation about additional systems or optimization: SMS Rapid Response, Email Nurture, Customer Reactivation based on which bottleneck remains most visible. For Ad &amp; Lead Gen clients, discuss budget reallocation based on CPL data.</span></li>
           </ul>
         </div>
       </div>
