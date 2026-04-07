@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ember Bots — AI Automation for Small Business</title>
-  <meta name="description" content="Ember Bots builds custom AI agents and automation systems that help small businesses work smarter, move faster, and grow without adding headcount." />
+  <title>Ember Bots — Workflow Systems for Small Business</title>
+  <meta name="description" content="Ember Bots helps small businesses automate lead capture, follow-up, scheduling, customer communication, and back-office tasks with proven workflow systems tailored to how your business operates." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -165,12 +165,12 @@
 
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.03em;
       color: var(--white);
-      max-width: 800px;
+      max-width: 820px;
       margin-bottom: 28px;
       position: relative;
     }
@@ -181,12 +181,12 @@
     }
 
     .hero-sub {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 560px;
+      max-width: 620px;
       margin-bottom: 48px;
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.75;
       position: relative;
     }
 
@@ -195,6 +195,8 @@
       gap: 16px;
       align-items: center;
       position: relative;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .btn-primary {
@@ -232,32 +234,6 @@
       background: rgba(255,255,255,0.04);
     }
 
-    .hero-stat-row {
-      display: flex;
-      gap: 60px;
-      margin-top: 80px;
-      position: relative;
-    }
-
-    .hero-stat {
-      text-align: center;
-    }
-
-    .hero-stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
     /* ─── SECTIONS ─── */
     section {
       padding: 100px 60px;
@@ -277,7 +253,7 @@
 
     h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2rem, 4vw, 2.75rem);
       font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.02em;
@@ -288,86 +264,102 @@
     .section-sub {
       font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 600px;
+      max-width: 640px;
       line-height: 1.75;
     }
 
-    /* ─── MISSION ─── */
-    .mission-wrap {
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── PAIN SECTION ─── */
+    .pain-bg {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pain-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 60px;
+    }
+
+    .pain-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: center;
+      align-items: start;
+      margin-top: 40px;
     }
 
-    .mission-text p {
+    .pain-body {
       color: var(--text-muted);
       font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
+      line-height: 1.85;
     }
 
-    .mission-text p:last-child { margin-bottom: 0; }
+    .pain-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-    .mission-callout {
+    .pain-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--ember);
       border-radius: 12px;
-      padding: 40px;
-      position: relative;
-    }
-
-    .mission-callout::before {
-      content: '"';
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 6rem;
-      color: var(--ember);
-      opacity: 0.2;
-      position: absolute;
-      top: -10px; left: 24px;
-      line-height: 1;
-    }
-
-    .mission-callout blockquote {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--white);
+      padding: 20px 24px;
+      font-size: 0.95rem;
+      color: var(--text);
       line-height: 1.5;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .mission-callout cite {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-style: normal;
-      font-weight: 500;
+    .pain-bullet:hover {
+      border-color: rgba(255,107,53,0.25);
+      background: var(--bg3);
     }
 
-    /* ─── WHAT WE DO ─── */
-    .services-intro {
-      margin-bottom: 60px;
+    .pain-bullet-icon {
+      width: 8px;
+      height: 8px;
+      background: var(--ember);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ember);
+      flex-shrink: 0;
+      margin-top: 6px;
     }
 
-    .services-grid {
+    /* ─── SYSTEMS SECTION ─── */
+    .systems-intro {
+      margin-bottom: 56px;
+    }
+
+    .systems-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
-    .service-card {
+    .system-card {
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px;
+      border-radius: 20px;
+      padding: 40px;
       transition: border-color 0.3s, background 0.3s, transform 0.3s;
       position: relative;
       overflow: hidden;
     }
 
-    .service-card::before {
+    .system-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -377,40 +369,53 @@
       transition: opacity 0.3s;
     }
 
-    .service-card:hover {
+    .system-card:hover {
       border-color: rgba(255,107,53,0.3);
       background: var(--bg3);
       transform: translateY(-4px);
     }
 
-    .service-card:hover::before { opacity: 1; }
+    .system-card:hover::before { opacity: 1; }
 
-    .service-icon {
-      width: 48px; height: 48px;
+    .system-icon {
+      width: 52px; height: 52px;
       background: var(--ember-dim);
-      border-radius: 12px;
+      border: 1px solid rgba(255,107,53,0.2);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
-    .service-card h3 {
+    .system-card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: var(--white);
       margin-bottom: 12px;
     }
 
-    .service-card p {
+    .system-card p {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.75;
     }
 
-    /* ─── HOW WE HELP ─── */
+    .systems-footer {
+      margin-top: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--ember);
+      border-radius: 12px;
+      padding: 24px 32px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ─── HOW IT WORKS ─── */
     .how-bg {
       background: var(--bg2);
       border-top: 1px solid var(--border);
@@ -536,7 +541,95 @@
       text-align: center;
     }
 
-    /* ─── STORY ─── */
+    /* ─── BEST FIT ─── */
+    .fit-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .fit-body {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+
+    .fit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .fit-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .fit-tag:hover {
+      border-color: rgba(255,107,53,0.4);
+      color: var(--ember);
+    }
+
+    .fit-callout {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .fit-callout-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .fit-signals {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .fit-signal {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .fit-signal-icon {
+      width: 20px;
+      height: 20px;
+      background: var(--ember-dim);
+      border: 1px solid rgba(255,107,53,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .fit-signal-icon svg {
+      width: 10px;
+      height: 10px;
+      fill: var(--ember);
+    }
+
+    /* ─── STORY / WHY ─── */
     .story-wrap {
       display: grid;
       grid-template-columns: 1fr 1.5fr;
@@ -603,7 +696,7 @@
 
     .story-content p:last-child { margin-bottom: 0; }
 
-    /* ─── CONTACT ─── */
+    /* ─── CONTACT / CTA ─── */
     .contact-bg {
       background: var(--bg2);
       border-top: 1px solid var(--border);
@@ -620,7 +713,7 @@
     .contact-inner .section-sub { margin: 0 auto 48px; }
 
     .contact-card {
-      max-width: 520px;
+      max-width: 540px;
       margin: 0 auto;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -628,54 +721,7 @@
       padding: 48px;
     }
 
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-    }
-
-    .contact-item:last-child { border-bottom: none; }
-
-    .contact-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--ember-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .contact-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .contact-value {
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .contact-value a {
-      color: var(--ember);
-      text-decoration: none;
-    }
-
-    .contact-value a:hover { text-decoration: underline; }
-
-    /* ─── CONTACT FORM ─── */
     .contact-form {
-      max-width: 520px;
-      margin: 32px auto 0;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -699,16 +745,17 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
+      text-align: left;
     }
 
     .contact-form input,
     .contact-form textarea {
-      background: var(--surface);
+      background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 12px 16px;
       color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s;
@@ -740,12 +787,13 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, box-shadow 0.2s;
       margin-top: 8px;
     }
 
     .contact-form button:hover {
-      background: #e85a2a;
+      background: #ff8557;
+      box-shadow: 0 0 24px var(--ember-glow);
     }
 
     .form-success {
@@ -756,9 +804,7 @@
       font-size: 1.1rem;
     }
 
-    .form-success.show {
-      display: block;
-    }
+    .form-success.show { display: block; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -801,13 +847,6 @@
 
     .footer-links a:hover { color: var(--white); }
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-    }
-
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav {
@@ -818,10 +857,22 @@
       .nav-links { display: none; }
       section { padding: 60px 24px; }
 
-      .hero { padding-top: 60px; }
-      .mission-wrap, .services-grid, .how-grid, .story-wrap {
+      .hero { padding: 60px 24px 60px; min-height: auto; }
+
+      .pain-inner,
+      .how-inner,
+      .contact-inner { padding: 60px 24px; }
+
+      .pain-layout,
+      .how-grid,
+      .fit-layout,
+      .story-wrap {
         grid-template-columns: 1fr;
         gap: 40px;
+      }
+
+      .systems-grid {
+        grid-template-columns: 1fr;
       }
 
       .story-aside {
@@ -836,7 +887,7 @@
       .founder-card {
         padding: 24px 16px;
       }
-      .hero-stat-row { gap: 32px; }
+
       footer { flex-direction: column; gap: 20px; text-align: center; }
       .contact-form .form-row { flex-direction: column; }
       .contact-card { padding: 32px 24px; }
@@ -852,11 +903,11 @@
       <img src="logo.png" alt="Ember Bots" style="height:56px;width:auto;" />
     </a>
     <ul class="nav-links">
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#services">What We Do</a></li>
-      <li><a href="#how">How We Help</a></li>
+      <li><a href="#systems">Solutions</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#fit">Best Fit</a></li>
       <li><a href="#story">Our Story</a></li>
-      <li><a href="#contact" class="nav-cta">Request a Consult</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Workflow Audit</a></li>
     </ul>
   </nav>
 
@@ -864,146 +915,199 @@
   <div class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
-    <p class="hero-eyebrow">AI Automation for Small Business</p>
-    <h1>Your business deserves<br/><span class="highlight">intelligent automation.</span></h1>
-    <p class="hero-sub">Ember Bots builds custom AI agents and automation systems that help small businesses operate smarter, serve customers faster, and grow without adding headcount.</p>
+    <p class="hero-eyebrow">Workflow Systems for Small Business</p>
+    <h1>AI workflows for the admin work<br/><span class="highlight">slowing your business down.</span></h1>
+    <p class="hero-sub">Ember Bots helps small businesses automate lead capture, follow-up, scheduling, customer communication, and repetitive back-office tasks with proven workflow systems tailored to how your business operates.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Request a Consult</a>
-      <a href="tel:+19452289968" class="btn-primary">Call Us Now</a>
+      <a href="#systems" class="btn-primary">See our workflow systems</a>
+      <a href="#contact" class="btn-ghost">Book a workflow audit</a>
     </div>
-    <div class="hero-stat-row">
-      <div class="hero-stat">
-        <div class="hero-stat-num">Hours</div>
-        <div class="hero-stat-label">Saved Per Week</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">Custom</div>
-        <div class="hero-stat-label">Built For Your Business</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">Always On</div>
-        <div class="hero-stat-label">24/7 Automation</div>
+  </div>
+
+  <!-- PAIN SECTION -->
+  <div class="pain-bg" id="pain">
+    <div class="pain-inner">
+      <p class="section-label">The Problem</p>
+      <h2>Where small businesses lose time and momentum.</h2>
+      <div class="pain-layout">
+        <div class="pain-body">
+          <p>Most small businesses are not losing because they lack hustle. They're losing time to slow follow-up, manual admin, scattered systems, and work that should not require owner attention.</p>
+          <p style="margin-top: 20px;">Ember Bots is built to remove that drag — with workflow systems that handle routine operational work faster and more consistently.</p>
+        </div>
+        <ul class="pain-bullets">
+          <li class="pain-bullet">
+            <span class="pain-bullet-icon"></span>
+            Leads sit too long before someone responds
+          </li>
+          <li class="pain-bullet">
+            <span class="pain-bullet-icon"></span>
+            Missed calls turn into missed revenue
+          </li>
+          <li class="pain-bullet">
+            <span class="pain-bullet-icon"></span>
+            Scheduling and follow-up happen manually
+          </li>
+          <li class="pain-bullet">
+            <span class="pain-bullet-icon"></span>
+            Teams re-enter the same information in multiple places
+          </li>
+          <li class="pain-bullet">
+            <span class="pain-bullet-icon"></span>
+            Reporting and admin work steal time from sales and service
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- MISSION -->
-  <section id="mission">
-    <div class="mission-wrap">
-      <div class="mission-text">
-        <p class="section-label">Mission & Vision</p>
-        <h2>Automation that works as hard as you do.</h2>
-        <p>Most small businesses run on too many manual processes, fragmented tools, and not enough hours in the day. Ember Bots was built to change that.</p>
-        <p>We believe every business — regardless of size — deserves access to the same intelligent automation that enterprise companies use to outpace the competition. Our mission is to bring enterprise grade agentic and automation solutions to small businesses that need it the most.</p>
-        <p>Our vision: a world where small business owners spend their time on the work that matters, and the rest is handled.</p>
+  <!-- WORKFLOW SYSTEMS -->
+  <section id="systems">
+    <div class="systems-intro">
+      <p class="section-label">Workflow Systems</p>
+      <h2>Workflow systems we deploy.</h2>
+      <p class="section-sub">Each system is tailored to fit your business, but built from proven workflow patterns that solve common SMB bottlenecks.</p>
+    </div>
+    <div class="systems-grid">
+      <div class="system-card">
+        <div class="system-icon">📞</div>
+        <h3>AI Front Desk</h3>
+        <p>Capture inbound calls, answer common questions, log leads, and route the right follow-up — so no inquiry goes unanswered.</p>
       </div>
-      <div class="mission-callout">
-        <blockquote>Small businesses are the backbone of the economy. They shouldn't be the last ones to benefit from the AI revolution.</blockquote>
-        <cite>Amber Rice & Steve Ward — Co-Founders, Ember Bots</cite>
+      <div class="system-card">
+        <div class="system-icon">🎯</div>
+        <h3>Lead Capture Engine</h3>
+        <p>Turn website inquiries, phone calls, and contact forms into organized leads with clear ownership and defined next steps.</p>
+      </div>
+      <div class="system-card">
+        <div class="system-icon">🔁</div>
+        <h3>Follow-Up Assistant</h3>
+        <p>Keep leads from going cold with automated follow-up sequences, reminders, and team alerts that run on your schedule.</p>
+      </div>
+      <div class="system-card">
+        <div class="system-icon">⚙️</div>
+        <h3>Ops Back Office</h3>
+        <p>Reduce repetitive admin work around intake, task routing, status tracking, and internal operational workflows that drain your team.</p>
+      </div>
+    </div>
+    <div class="systems-footer">
+      Each system is tailored to fit your business, but built from proven workflow patterns that solve common SMB bottlenecks. We don't reinvent for every client — we deploy and configure what already works.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-bg">
+    <div class="how-inner" id="how">
+      <p class="section-label">The Process</p>
+      <h2>How Ember Bots works.</h2>
+      <div class="how-grid">
+        <ul class="how-list">
+          <li class="how-item">
+            <div class="how-num">01</div>
+            <div class="how-item-text">
+              <h4>Audit the bottlenecks</h4>
+              <p>Identify where lead handling, communication, scheduling, and admin work are slowing the business down.</p>
+            </div>
+          </li>
+          <li class="how-item">
+            <div class="how-num">02</div>
+            <div class="how-item-text">
+              <h4>Deploy the right workflow system</h4>
+              <p>Implement a proven workflow structure based on the operational problem — not built from scratch every time.</p>
+            </div>
+          </li>
+          <li class="how-item">
+            <div class="how-num">03</div>
+            <div class="how-item-text">
+              <h4>Tailor it to your business</h4>
+              <p>Map the system to your team, tools, business hours, escalation rules, and customer flow.</p>
+            </div>
+          </li>
+          <li class="how-item">
+            <div class="how-num">04</div>
+            <div class="how-item-text">
+              <h4>Manage and improve it</h4>
+              <p>Monitor performance, refine workflows, and help you get more value from the system over time.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="how-visual">
+          <div class="flow-node"><span class="dot dot-gray"></span>Inbound lead arrives — call, form, or inquiry</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><span class="dot dot-ember"></span>AI Front Desk captures and classifies</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><span class="dot dot-purple"></span>Lead Capture Engine logs and assigns</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><span class="dot dot-purple"></span>Follow-Up Assistant initiates outreach</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><span class="dot dot-green"></span>Ops Back Office handles intake and routing</div>
+          <div class="flow-result">⚡ Your team focuses on the work that needs them.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEST FIT -->
+  <section id="fit">
+    <p class="section-label">Who It's For</p>
+    <h2>Best fit for businesses with repeatable operational drag.</h2>
+    <div class="fit-layout">
+      <div>
+        <p class="fit-body">Ember Bots works best with service-based SMBs that deal with steady lead flow, customer communication, scheduling demands, and repetitive administrative work — businesses that want faster response and tighter operations without adding more overhead.</p>
+        <div class="fit-tags">
+          <span class="fit-tag">Home Services</span>
+          <span class="fit-tag">Professional Services</span>
+          <span class="fit-tag">Local Service Businesses</span>
+          <span class="fit-tag">Small Teams with Inbound Leads</span>
+          <span class="fit-tag">Businesses Losing Leads to Slow Follow-Up</span>
+        </div>
+      </div>
+      <div class="fit-callout">
+        <p class="fit-callout-title">You're a strong fit if your team is dealing with:</p>
+        <ul class="fit-signals">
+          <li class="fit-signal">
+            <span class="fit-signal-icon">
+              <svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg>
+            </span>
+            Leads or calls going unresponded for hours
+          </li>
+          <li class="fit-signal">
+            <span class="fit-signal-icon">
+              <svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg>
+            </span>
+            Scheduling and follow-up managed manually
+          </li>
+          <li class="fit-signal">
+            <span class="fit-signal-icon">
+              <svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg>
+            </span>
+            The same information entered in multiple places
+          </li>
+          <li class="fit-signal">
+            <span class="fit-signal-icon">
+              <svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg>
+            </span>
+            Admin work eating into sales and service time
+          </li>
+          <li class="fit-signal">
+            <span class="fit-signal-icon">
+              <svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg>
+            </span>
+            Growth stalling because the team is too stretched on operations
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- WHAT WE DO -->
-  <section id="services">
-    <div class="services-intro">
-      <p class="section-label">What We Do</p>
-      <h2>AI systems built for<br/>the way you actually work.</h2>
-      <p class="section-sub">We don't sell software licenses. We build custom automation solutions tailored to your specific business — and we stay with you as they evolve.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🤖</div>
-        <h3>Custom AI Agents</h3>
-        <p>Intelligent agents that handle real business tasks — customer inquiries, scheduling, data entry, reporting, and more. Always on, never tired.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">⚡</div>
-        <h3>Workflow Automation</h3>
-        <p>Connect your tools, eliminate the manual steps between them, and let your processes run themselves. From simple triggers to complex multi-step workflows.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📊</div>
-        <h3>Business Intelligence</h3>
-        <p>Turn the data your business already generates into clear, actionable insights — delivered automatically to the right people at the right time.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">💬</div>
-        <h3>Customer Communication</h3>
-        <p>Automate the follow-ups, reminders, and responses that keep your customers happy — without adding to your team's workload.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔗</div>
-        <h3>Systems Integration</h3>
-        <p>Most small businesses run 5–10 different tools that don't talk to each other. We build the bridges so your stack finally works as one.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🛠️</div>
-        <h3>Ongoing Optimization</h3>
-        <p>Automation isn't set-and-forget. We monitor, tune, and evolve your systems as your business grows and your needs change.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW WE HELP -->
-  <div class="how-bg">
-    <div class="how-inner" id="how">
-      <p class="section-label">How We Help</p>
-      <h2>From chaos to clarity —<br/>here's how it works.</h2>
-      <div class="how-grid">
-        <ul class="how-list">
-          <li class="how-item">
-            <div class="how-num">01</div>
-            <div class="how-item-text">
-              <h4>We learn your business</h4>
-              <p>Every engagement starts with a discovery session. We map your current workflows, find the friction points, and identify where automation will have the highest impact.</p>
-            </div>
-          </li>
-          <li class="how-item">
-            <div class="how-num">02</div>
-            <div class="how-item-text">
-              <h4>We build the solution</h4>
-              <p>Custom-built for your tools, your processes, and your team. No templates, no one-size-fits-all. We build exactly what you need.</p>
-            </div>
-          </li>
-          <li class="how-item">
-            <div class="how-num">03</div>
-            <div class="how-item-text">
-              <h4>We deploy and train</h4>
-              <p>We get your automation live and walk your team through everything they need to know. Simple, practical, and built to stick.</p>
-            </div>
-          </li>
-          <li class="how-item">
-            <div class="how-num">04</div>
-            <div class="how-item-text">
-              <h4>We stay in the picture</h4>
-              <p>Automation is a journey, not a one-time project. We offer ongoing support packages so your systems keep improving as your business evolves.</p>
-            </div>
-          </li>
-        </ul>
-        <div class="how-visual">
-          <div class="flow-node"><span class="dot dot-gray"></span>Manual task: respond to inquiry</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-ember"></span>AI agent intercepts & classifies</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-purple"></span>Drafts personalized response</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-purple"></span>Updates CRM automatically</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-green"></span>Schedules follow-up if no reply</div>
-          <div class="flow-result">⚡ You get notified of outcomes only.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- OUR STORY -->
+  <!-- WHY EMBER BOTS EXISTS -->
   <section id="story">
     <div class="story-wrap">
       <div class="story-aside">
-        <p class="section-label">Our Story</p>
+        <p class="section-label">Why Ember Bots Exists</p>
         <div class="founder-cards">
           <div class="founder-card">
             <div class="founder-avatar"><img src="amber.jpg" alt="Amber Rice, CEO of Ember Bots" /></div>
@@ -1018,23 +1122,21 @@
         </div>
       </div>
       <div class="story-content">
-        <h2>Built by people who've been in the weeds.</h2>
-        <p>Ember Bots was born from a simple observation: the gap between what technology can do and what most small businesses actually have access to is enormous — and it's costing them.</p>
-        <p>Amber Rice and Steve Ward founded Ember Bots with a shared conviction — that the AI tools transforming enterprise companies shouldn't be out of reach for the small businesses that need them most. Between them, they bring deep experience in business operations, revenue growth, and customer relationships to every engagement.</p>
-        <p>They've seen firsthand how much time and energy gets consumed by tasks that don't require human judgment — the follow-up emails, the data entry, the scheduling, the report generation. Tasks that eat hours every week and quietly compound into competitive disadvantage.</p>
-        <p>The tools to fix this exist. Large companies have teams of engineers deploying them. Small businesses don't. That's the gap Ember Bots was built to close.</p>
-        <p>We bring enterprise-grade AI automation to small businesses — without the enterprise price tag or the enterprise complexity. We handle the technical heavy lifting so you can focus on growing the business you built.</p>
-        <p>We're based in Dallas, TX and work with businesses across industries. If you're ready to stop doing the work that shouldn't require you, let's talk.</p>
+        <h2>Built by people who understand operational drag.</h2>
+        <p>Ember Bots was founded by Amber Rice and Steve Ward — two operators who spent years watching small businesses bleed time and revenue to the same set of solvable problems.</p>
+        <p>Between them, they bring deep experience in business operations, revenue growth, and customer relationships. They've seen firsthand how much time gets consumed by tasks that don't require human judgment — the follow-up emails, the data entry, the scheduling, the report generation. Work that compounds quietly into competitive disadvantage.</p>
+        <p>The tools to fix this already exist. Large companies have teams of engineers deploying them. Small businesses don't. That's the gap Ember Bots was built to close — not with bespoke custom builds for every client, but with proven workflow systems that handle the most common operational bottlenecks faster and more consistently than manual processes ever could.</p>
+        <p>We're based in Dallas, TX and work with service-based SMBs who are serious about removing operational drag and building a business that doesn't require the owner to be the last line of defense on every routine task.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- FINAL CTA / CONTACT -->
   <div class="contact-bg" id="contact">
     <div class="contact-inner">
-      <p class="section-label">Get In Touch</p>
-      <h2>Ready to automate?</h2>
-      <p class="section-sub">Tell us about your business. We'll identify the highest-impact opportunities and show you exactly what's possible.</p>
+      <p class="section-label">Get Started</p>
+      <h2>Find the workflows slowing your business down.</h2>
+      <p class="section-sub">If your team is spending too much time on lead handling, scheduling, follow-up, or repetitive admin work, we can help you identify the best workflow system to deploy first.</p>
       <div class="contact-card">
         <form class="contact-form" id="contactForm">
           <div class="form-row">
@@ -1058,10 +1160,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking to automate..." required></textarea>
+            <label for="message">What's slowing you down?</label>
+            <textarea id="message" name="message" placeholder="Tell us where your team is spending the most time on manual or repetitive work..."></textarea>
           </div>
-          <button type="submit">Send Message</button>
+          <button type="submit">Book a Workflow Audit</button>
         </form>
         <div class="form-success" id="formSuccess">
           ✓ Thanks for reaching out. We'll be in touch within 24 hours.
@@ -1069,7 +1171,7 @@
       </div>
       <div style="display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:0.9rem;">✉️ <a href="mailto:info@emberbots.ai" style="color:var(--ember);text-decoration:none;">info@emberbots.ai</a></div>
-        <div style="display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:0.9rem;">📞 <a href="tel:+19452289968" id="phone-cta" style="color:var(--ember);text-decoration:none;">(945) 228-9968</a></div>
+        <div style="display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:0.9rem;">📞 <a href="tel:+19452289968" style="color:var(--ember);text-decoration:none;">(945) 228-9968</a></div>
         <div style="color:var(--text-muted);font-size:0.9rem;">📍 Dallas, TX</div>
       </div>
     </div>
@@ -1117,9 +1219,9 @@
     </a>
     <p class="footer-copy">© 2026 Ember Bots LLC. All rights reserved.</p>
     <ul class="footer-links">
-      <li><a href="#mission">Mission</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#story">Story</a></li>
+      <li><a href="#systems">Solutions</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#story">Our Story</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </footer>
