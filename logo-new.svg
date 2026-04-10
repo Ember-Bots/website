@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 120" fill="none">
+  <!-- 🔥 FLAME ICON -->
+  <g transform="translate(10, 10)">
+    <path d="M40,80
+      C45,60 50,40 60,30
+      C70,40 75,60 80,80
+      C75,90 65,95 60,95
+      C55,95 45,90 40,80Z"
+      fill="#ff6b35" />
+  </g>
+
+  <!-- TEXT "Ember Bots" -->
+  <text x="100" y="75" font-family="sans-serif" font-weight="700" font-size="50" fill="#e8eaf6">Ember</text>
+  <text x="240" y="75" font-family="sans-serif" font-weight="700" font-size="50" fill="#ff6b35">Bots</text>
+</svg>
