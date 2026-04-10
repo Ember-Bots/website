@@ -918,7 +918,13 @@
     .footer-links a:hover { color: var(--white); }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      .nav-links a { font-size: 0.8rem; white-space: nowrap; }
+    }
+
+    @media (max-width: 932px) {
       nav {
         padding: 16px 24px;
         position: static;
