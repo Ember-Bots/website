@@ -26,10 +26,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* Made background colors slightly transparent so canvas shows through */
       --bg: #050508;
-      --bg2: #0c0d14;
-      --bg3: #12131f;
-      --surface: #1a1b2e;
+      --bg2: rgba(12, 13, 20, 0.85);
+      --bg3: rgba(18, 19, 31, 0.85);
+      --surface: rgba(26, 27, 46, 0.85);
       --border: rgba(255,255,255,0.07);
       --text: #e8eaf6;
       --text-muted: #8b8fa8;
