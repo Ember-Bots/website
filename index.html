@@ -925,12 +925,15 @@
     }
 
     @media (max-width: 932px) {
+      nav { padding: 16px 24px; }
+      .nav-links li:not(:last-child) { display: none; }
+    }
+
+    @media (max-width: 768px) {
       nav {
-        padding: 16px 24px;
         position: static;
         backdrop-filter: none;
       }
-      .nav-links { display: none; }
       section { padding: 60px 24px; }
 
       .hero { padding: 60px 24px 60px; min-height: auto; }
