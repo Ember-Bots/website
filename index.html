@@ -13,11 +13,11 @@
     /* NEW: HERO PARTICLE CANVAS */
     /* ------------------------------------------------------------- */
     .hero-canvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       pointer-events: none;
       touch-action: none;
@@ -970,6 +970,9 @@
 </head>
 <body>
 
+  <!-- BACKGROUND CANVAS -->
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
@@ -986,7 +989,6 @@
 
   <!-- HERO -->
   <div class="hero" id="hero-section">
-    <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <p class="hero-eyebrow">AI Automation for Small Business</p>
@@ -1439,15 +1441,9 @@
     drawParticles();
     window.addEventListener('resize', () => { resize(); createParticles(); });
 
-    // Pause canvas when not visible to save CPU
-    const heroContainer = document.getElementById('hero-section'); 
-    if (heroContainer && window.IntersectionObserver) {
-      const heroObs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) { if (!animId) drawParticles(); }
-        else { cancelAnimationFrame(animId); animId = null; }
-      }, { threshold: 0.05 });
-      heroObs.observe(heroContainer);
-    }
+    // Since the canvas is now a fixed background, we don't want to pause it 
+    // based on the hero section visibility anymore. It will just run continuously 
+    // when the browser tab is active (requestAnimationFrame handles tab-inactivity pausing).
   </script>
 </body>
 </html>
