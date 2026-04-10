@@ -9,6 +9,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ------------------------------------------------------------- */
+    /* NEW: HERO PARTICLE CANVAS */
+    /* ------------------------------------------------------------- */
+    .hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      touch-action: none;
+    }
+    
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -118,6 +132,12 @@
       padding: 120px 40px 80px;
       position: relative;
       overflow: hidden;
+    }
+
+    /* Ensure content sits above canvas */
+    .hero > *:not(.hero-canvas):not(.hero-bg):not(.hero-grid) {
+      position: relative;
+      z-index: 10;
     }
 
     .hero-bg {
@@ -965,7 +985,8 @@
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
+  <div class="hero" id="hero-section">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <p class="hero-eyebrow">AI Automation for Small Business</p>
@@ -1345,5 +1366,88 @@
     </ul>
   </footer>
 
+  <script>
+    // ============================================================
+    // HERO PARTICLE CANVAS (From Revio Vision Deck)
+    // ============================================================
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth * devicePixelRatio;
+      canvas.height = canvas.offsetHeight * devicePixelRatio;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.min(80, Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 12000));
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.offsetWidth,
+          y: Math.random() * canvas.offsetHeight,
+          r: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          alpha: Math.random() * 0.5 + 0.1,
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const w = canvas.offsetWidth, h = canvas.offsetHeight;
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        // Using Ember orange rgb(255, 107, 53)
+        ctx.fillStyle = `rgba(255, 107, 53, ${p.alpha})`; 
+        ctx.fill();
+      });
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255, 107, 53, ${0.08 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      animId = requestAnimationFrame(drawParticles);
+    }
+
+    resize();
+    createParticles();
+    drawParticles();
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+
+    // Pause canvas when not visible to save CPU
+    const heroContainer = document.getElementById('hero-section'); 
+    if (heroContainer && window.IntersectionObserver) {
+      const heroObs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) { if (!animId) drawParticles(); }
+        else { cancelAnimationFrame(animId); animId = null; }
+      }, { threshold: 0.05 });
+      heroObs.observe(heroContainer);
+    }
+  </script>
 </body>
 </html>
