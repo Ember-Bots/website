@@ -29,6 +29,6 @@
     <!-- Thicker weight for 'Ember' -->
     <tspan font-weight="800" font-size="52" letter-spacing="-0.5">Ember</tspan>
     <!-- Thinner weight for 'Bots' with explicit spacing (reset to 16) -->
-    <tspan font-weight="300" font-size="52" dx="16" letter-spacing="0.5">Bots</tspan>
+    <tspan font-weight="300" font-size="52" dx="8" letter-spacing="0.5">Bots</tspan>
   </text>
 </svg>
