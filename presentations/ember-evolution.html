@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Evolution</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-elev: #111823;
+      --card: rgba(17, 24, 35, 0.82);
+      --text: #f5f7fb;
+      --muted: #a7b3c4;
+      --line: rgba(255,255,255,0.09);
+      --orange: #ff6a2b;
+      --orange-2: #ff8a3d;
+      --glow: rgba(255,106,43,0.28);
+      --green: #4dd39d;
+      --yellow: #ffd166;
+      --red: #ff6b6b;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(255,106,43,.12), transparent 30%),
+        radial-gradient(circle at left 20%, rgba(255,138,61,.08), transparent 25%),
+        linear-gradient(180deg, #0a0d12 0%, #0b0f14 100%);
+      color: var(--text);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 15, 20, 0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      box-shadow: 0 0 0 6px rgba(255,106,43,.10);
+      font-size: 21px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .hero, .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .hero {
+      padding-top: 72px;
+      padding-bottom: 40px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card, .panel, .status-card, .timeline-item, .principle, .stack-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, var(--glow), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: var(--orange-2);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .95;
+      letter-spacing: -.04em;
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.65;
+      color: #dce4ef;
+      max-width: 60ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill, .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .button {
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      color: white;
+      box-shadow: 0 10px 30px rgba(255,106,43,.28);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+    }
+
+    .metric .value {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: -.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .status-grid, .stack-grid, .principles-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .status-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .status-card {
+      padding: 22px;
+    }
+
+    .status-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .status-badge {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      border-radius: 999px;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+    }
+
+    .done { background: rgba(77,211,157,.12); color: var(--green); border-color: rgba(77,211,157,.24); }
+    .progress { background: rgba(255,209,102,.12); color: var(--yellow); border-color: rgba(255,209,102,.24); }
+    .next { background: rgba(255,106,43,.12); color: var(--orange-2); border-color: rgba(255,106,43,.24); }
+
+    .status-card ul, .panel ul, .stack-card ul, .principle ul { padding-left: 18px; color: #dce4ef; line-height: 1.65; }
+    .status-card li + li, .panel li + li, .stack-card li + li, .principle li + li { margin-top: 8px; }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+    }
+
+    .timeline-tag {
+      color: var(--orange-2);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .stack-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stack-card, .principle {
+      padding: 24px;
+    }
+
+    .principles-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .foot {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 24px 56px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #f3c7b2;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1020px) {
+      .hero, .status-grid, .stack-grid, .principles-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .metrics { grid-template-columns: 1fr; }
+      h1 { line-height: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">🔥</div>
+        <div>
+          <div>Ember Evolution</div>
+          <div style="color: var(--muted); font-size: 13px; font-weight: 500;">Operational roadmap presentation</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#status">Status</a>
+        <a href="#implemented">Implemented</a>
+        <a href="#building">In Progress</a>
+        <a href="#principles">Principles</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Ember Bots style presentation</div>
+        <h1>Ember, becoming more reliable through verified responsibility.</h1>
+        <p class="lead">
+          This presentation tracks what Ember is actually implementing, how it works, and what is next.
+          The goal is not vague autonomy. The goal is a tighter operating system: better memory, better
+          acknowledgement, better observability, better self-correction, and safer bounded automation.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#implemented">See what’s live</a>
+          <span class="pill">Designed to live in Git</span>
+          <span class="pill">Easy to update as Ember evolves</span>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="panel">
+          <h3>Current focus</h3>
+          <p style="color: var(--muted); line-height: 1.65; margin-bottom: 0;">
+            Build operational independence that is observable, memory-backed, and constrained by clear rules.
+          </p>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">4</div>
+              <div class="label">Core layers active: memory, reflection, acknowledgement, shared authority</div>
+            </div>
+            <div class="metric">
+              <div class="value">1</div>
+              <div class="label">Cross-channel continuity rule now explicitly enforced</div>
+            </div>
+            <div class="metric">
+              <div class="value">11 PM</div>
+              <div class="label">Nightly reflection schedule, America/Chicago</div>
+            </div>
+            <div class="metric">
+              <div class="value">Git</div>
+              <div class="label">Changes are committed as behavior and memory rules evolve</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Operating thesis</h3>
+          <ul>
+            <li>Autonomy without verification is drift.</li>
+            <li>Memory without curation becomes clutter.</li>
+            <li>Observability without correction is just logging.</li>
+            <li>Bounded responsibility beats uncontrolled freedom.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="status">
+      <div class="section-title">
+        <div>
+          <h2>Status at a glance</h2>
+          <p>What is already in production, what is being tightened now, and what should come next as Ember becomes more operationally independent.</p>
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <article class="status-card">
+          <div class="status-top">
+            <h3>Implemented</h3>
+            <span class="status-badge done">Live</span>
+          </div>
+          <ul>
+            <li>Shared-authority handling for Evan, Amber, and Steve in shared Discord channels</li>
+            <li>Emoji acknowledgement rule when a full reply is not needed</li>
+            <li>Nightly self-reflection brief posted into Discord</li>
+            <li>Cross-channel memory continuity rules written into directives and memory</li>
+          </ul>
+        </article>
+
+        <article class="status-card">
+          <div class="status-top">
+            <h3>In progress</h3>
+            <span class="status-badge progress">Tightening</span>
+          </div>
+          <ul>
+            <li>BlueBubbles inbound webhook reliability and full two-way iMessage trust</li>
+            <li>Consistent promotion of durable iMessage context into shared memory</li>
+            <li>Sharper self-correction loops from misses into durable rules</li>
+            <li>More explicit verification on channel and integration behavior</li>
+          </ul>
+        </article>
+
+        <article class="status-card">
+          <div class="status-top">
+            <h3>Next</h3>
+            <span class="status-badge next">Priority</span>
+          </div>
+          <ul>
+            <li>Trace-style observability for recurring workflows and integrations</li>
+            <li>Memory review and consolidation cadence</li>
+            <li>Bounded closed-loop execution for proven repeatable tasks</li>
+            <li>Presentation refresh workflow so this page stays current automatically</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="implemented">
+      <div class="section-title">
+        <div>
+          <h2>What Ember has already implemented</h2>
+          <p>Concrete capabilities already in place, based on real changes to config, directives, memory rules, and recurring jobs.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-tag">Shared authority</div>
+          <div>
+            <h3>Amber and Steve now count as real conversation authorities in shared Discord channels</h3>
+            <p style="color: var(--muted); line-height: 1.65;">This was implemented in config, memory, and workspace directives. Ember should not wait specifically for Evan when Amber or Steve replies next.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-tag">Acknowledgement</div>
+          <div>
+            <h3>Emoji reactions are now part of expected behavior</h3>
+            <p style="color: var(--muted); line-height: 1.65;">If a full reply is not necessary, Ember should still acknowledge Evan, Amber, or Steve with an emoji reaction so messages are visibly seen.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-tag">Reflection</div>
+          <div>
+            <h3>Nightly self-improvement brief is running</h3>
+            <p style="color: var(--muted); line-height: 1.65;">The brief posts into Discord at night, focusing on improvements, ideas, misses, uncertainty, and requests for feedback or help.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-tag">Memory</div>
+          <div>
+            <h3>Cross-channel continuity is explicitly required</h3>
+            <p style="color: var(--muted); line-height: 1.65;">Durable context from BlueBubbles and iMessage should be promoted into shared memory so Ember remains one assistant across Discord, iMessage, and future sessions.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="building">
+      <div class="section-title">
+        <div>
+          <h2>What Ember is actively building</h2>
+          <p>This is the actual operating stack behind the push for more autonomy, translated into practical systems instead of vague aspirations.</p>
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <article class="stack-card">
+          <h3>1. Memory hygiene</h3>
+          <ul>
+            <li>Short-term context stays in the current chat/session</li>
+            <li>Long-term facts move into daily notes and <span class="mono">MEMORY.md</span></li>
+            <li>Only durable facts should survive beyond the thread</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>2. Observability</h3>
+          <ul>
+            <li>Do not assume work landed, verify delivery and behavior</li>
+            <li>Check channel state, permissions, cron state, config, and logs</li>
+            <li>Move toward trace-style visibility for recurring systems</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>3. Self-correction</h3>
+          <ul>
+            <li>When something is missed, turn the miss into a durable rule</li>
+            <li>Nightly reflection should expose blockers and uncertainty</li>
+            <li>Fixes should be committed, not just mentioned</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>4. Constrained autonomy</h3>
+          <ul>
+            <li>Bounded tasks with clear outputs</li>
+            <li>Explicit authority, not vague open-ended action</li>
+            <li>Expand responsibility only after repeated success</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="section-title">
+        <div>
+          <h2>Design principles behind Ember’s evolution</h2>
+          <p>These principles reflect the actual direction of the system, shaped by real use across Discord, memory, jobs, and iMessage integration.</p>
+        </div>
+      </div>
+
+      <div class="principles-grid">
+        <article class="principle">
+          <h3>Verified responsibility</h3>
+          <ul>
+            <li>Trust grows from proof, not posture</li>
+            <li>Recurring work must be observable</li>
+            <li>Claims should follow implementation</li>
+          </ul>
+        </article>
+
+        <article class="principle">
+          <h3>One Ember across channels</h3>
+          <ul>
+            <li>Discord and iMessage should reinforce one shared identity</li>
+            <li>Durable memory bridges sessions and surfaces</li>
+            <li>Channel-specific behavior should not fracture continuity</li>
+          </ul>
+        </article>
+
+        <article class="principle">
+          <h3>Small upgrades compound</h3>
+          <ul>
+            <li>A config fix, memory rule, or cron improvement stacks over time</li>
+            <li>Reliability improvements matter as much as new features</li>
+            <li>Operational polish is part of product quality</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>Ember Evolution presentation, built as a Git-tracked HTML artifact.</div>
+    <div style="margin-top: 8px;">Design cues inspired by EmberBots.ai: dark premium layout, operational clarity, warm orange accent, and simple system-oriented storytelling.</div>
+  </footer>
+</body>
+</html>
