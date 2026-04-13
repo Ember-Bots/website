@@ -242,7 +242,7 @@
       margin-bottom: 0;
     }
 
-    .status-grid, .stack-grid, .principles-grid {
+    .status-grid, .stack-grid, .principles-grid, .cron-grid {
       display: grid;
       gap: 18px;
     }
@@ -312,6 +312,10 @@
       grid-template-columns: repeat(3, 1fr);
     }
 
+    .cron-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .foot {
       max-width: var(--max);
       margin: 0 auto;
@@ -327,7 +331,7 @@
     }
 
     @media (max-width: 1020px) {
-      .hero, .status-grid, .stack-grid, .principles-grid { grid-template-columns: 1fr; }
+      .hero, .status-grid, .stack-grid, .principles-grid, .cron-grid { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; }
     }
 
@@ -353,6 +357,7 @@
         <a href="#implemented">Implemented</a>
         <a href="#building">In Progress</a>
         <a href="#principles">Principles</a>
+        <a href="#crons">Crons</a>
       </nav>
     </div>
   </header>
@@ -585,6 +590,57 @@
             <li>A config fix, memory rule, or cron improvement stacks over time</li>
             <li>Reliability improvements matter as much as new features</li>
             <li>Operational polish is part of product quality</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="crons">
+      <div class="section-title">
+        <div>
+          <h2>Recurring cron inventory</h2>
+          <p>Live recurring jobs currently configured for Ember, with their cadence and operational purpose. This inventory reflects the active recurring cron stack at the time of update.</p>
+        </div>
+      </div>
+
+      <div class="cron-grid">
+        <article class="stack-card">
+          <h3>15-minute project progress updates</h3>
+          <p style="color: var(--muted); line-height: 1.65;">Runs every 15 minutes.</p>
+          <ul>
+            <li>Checks for active long-running project work in the tracked session</li>
+            <li>Sends a brief progress update only when meaningful change happened</li>
+            <li>Prevents long silent stretches during active execution</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>Overnight CRM build continuation</h3>
+          <p style="color: var(--muted); line-height: 1.65;">Runs every 30 minutes.</p>
+          <ul>
+            <li>Continues Ember CRM work without waiting for a fresh prompt</li>
+            <li>Prioritizes Railway-first deploy/runtime reliability and verified production freshness</li>
+            <li>Posts progress only on meaningful change, blockers, or needed live testing</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>Nightly Ember reflection</h3>
+          <p style="color: var(--muted); line-height: 1.65;">Runs daily at 11:00 PM America/Chicago.</p>
+          <ul>
+            <li>Reviews work, interactions, outcomes, and cross-channel continuity</li>
+            <li>Posts a brief into Discord with improvements, ideas, and requests for feedback/help</li>
+            <li>Writes only durable takeaways into memory to keep Ember continuous across channels</li>
+          </ul>
+        </article>
+
+        <article class="stack-card">
+          <h3>Memory Dreaming Promotion</h3>
+          <p style="color: var(--muted); line-height: 1.65;">Runs daily at 11:00 PM America/Chicago.</p>
+          <ul>
+            <li>Promotes weighted short-term memory recalls into long-term memory</li>
+            <li>Strengthens durable memory through native OpenClaw memory-core dreaming</li>
+            <li>Supports long-term continuity without requiring manual promotion every time</li>
           </ul>
         </article>
       </div>
