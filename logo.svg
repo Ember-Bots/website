@@ -28,7 +28,7 @@
 
   <!-- TYPOGRAPHY -->
   <text 
-    x="95" 
+    x="100" 
     y="78" 
     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
     fill="#FFFFFF"
