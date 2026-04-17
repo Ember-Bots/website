@@ -45,7 +45,8 @@
       --violet-dim: rgba(122,60,255,0.16);
       --blue: #2563ff;
       --blue-dim: rgba(37,99,255,0.14);
-      --cyan: #38bdf8;
+      --section-accent: #ff8a1f;
+      --section-accent-soft: rgba(255,138,31,0.18);
       --accent: #7a3cff;
       --accent-dim: rgba(122,60,255,0.14);
       --indigo: #18213f;
@@ -184,7 +185,7 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--cyan);
+      color: var(--section-accent);
       margin-bottom: 24px;
       position: relative;
       display: flex;
@@ -196,7 +197,7 @@
       content: '';
       width: 40px;
       height: 1px;
-      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      background: linear-gradient(90deg, var(--section-accent), var(--gold));
       opacity: 0.5;
     }
 
@@ -240,20 +241,20 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--ember-red) 0%, var(--ember) 42%, var(--violet) 78%, var(--blue) 100%);
+      background: linear-gradient(135deg, var(--gold) 0%, #ff9f2f 24%, var(--ember) 62%, #ff5a1f 100%);
       color: var(--white);
       padding: 16px 36px;
       border-radius: 8px;
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 12px 28px rgba(20,24,46,0.34), 0 0 24px rgba(255,106,0,0.18), 0 0 34px rgba(122,60,255,0.12);
+      box-shadow: 0 12px 28px rgba(20,24,46,0.30), 0 0 24px rgba(255,106,0,0.20), 0 0 34px rgba(255,184,77,0.16);
       transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
       letter-spacing: 0.01em;
     }
 
     .btn-primary:hover {
-      box-shadow: 0 16px 36px rgba(16,20,42,0.44), 0 0 32px rgba(255,106,0,0.22), 0 0 44px rgba(37,99,255,0.14);
+      box-shadow: 0 16px 36px rgba(16,20,42,0.38), 0 0 32px rgba(255,106,0,0.24), 0 0 44px rgba(255,184,77,0.18);
       transform: translateY(-2px);
       filter: saturate(1.05);
     }
@@ -288,7 +289,7 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--cyan);
+      color: var(--violet);
       margin-bottom: 16px;
     }
 
