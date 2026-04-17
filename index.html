@@ -913,7 +913,7 @@
     }
 
     .contact-form button {
-      background: var(--ember);
+      background: linear-gradient(135deg, var(--ember-red) 0%, var(--ember) 52%, var(--gold) 100%);
       color: #fff;
       border: none;
       border-radius: 10px;
@@ -922,13 +922,15 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 28px rgba(188,37,53,0.16), 0 0 24px rgba(240,90,40,0.12);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
       margin-top: 8px;
     }
 
     .contact-form button:hover {
-      background: #ff8557;
-      box-shadow: 0 0 24px var(--ember-glow);
+      box-shadow: 0 16px 36px rgba(188,37,53,0.22), 0 0 32px rgba(255,184,77,0.14);
+      transform: translateY(-2px);
+      filter: saturate(1.05);
     }
 
     .form-success {
