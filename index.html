@@ -569,46 +569,95 @@
     }
 
     .flow-node {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 20px;
+      background: rgba(8, 9, 16, 0.72);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 16px 18px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 0.875rem;
+      gap: 16px;
+      font-size: 0.9rem;
       color: var(--text);
+      position: relative;
+      overflow: hidden;
     }
 
-    .flow-node .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
+    .flow-node::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--flow-accent, var(--border));
+      opacity: 0.95;
+    }
+
+    .flow-step {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--flow-accent, var(--text-muted));
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .dot-ember { background: var(--ember); box-shadow: 0 0 8px var(--ember); }
-    .dot-purple { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-    .dot-green { background: #00d4aa; box-shadow: 0 0 8px #00d4aa; }
-    .dot-gray { background: var(--text-muted); }
+    .flow-node.flow-gray { --flow-accent: rgba(255,255,255,0.45); }
+    .flow-node.flow-ember { --flow-accent: var(--ember); }
+    .flow-node.flow-purple { --flow-accent: var(--accent); }
+    .flow-node.flow-green { --flow-accent: #00d4aa; }
 
     .flow-arrow {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin: 4px 0;
+      position: relative;
+      height: 20px;
+      margin: 2px 0 10px;
+    }
+
+    .flow-arrow::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05));
+      transform: translateX(-50%);
     }
 
     .flow-result {
-      background: var(--ember-dim);
-      border: 1px solid rgba(255,107,53,0.25);
-      border-radius: 10px;
-      padding: 14px 20px;
-      margin-top: 8px;
-      font-size: 0.875rem;
+      background: linear-gradient(180deg, rgba(255,107,53,0.12), rgba(255,107,53,0.06));
+      border: 1px solid rgba(255,107,53,0.18);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-top: 14px;
+      text-align: left;
+    }
+
+    .flow-result-label {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--ember);
+      margin-bottom: 8px;
+    }
+
+    .flow-result-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--white);
       font-weight: 600;
-      text-align: center;
     }
 
     /* ─── BEST FIT ─── */
@@ -1181,16 +1230,19 @@
           </li>
         </ul>
         <div class="how-visual">
-          <div class="flow-node"><span class="dot dot-gray"></span>Inbound lead or customer message arrives</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-ember"></span>Lead Response Automation captures and classifies</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-purple"></span>Customer Message Routing sends it to the right person</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-purple"></span>Follow-Up Automation and task workflows keep it moving</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-node"><span class="dot dot-green"></span>Back Office Admin Automation handles the repetitive admin</div>
-          <div class="flow-result">⚡ Your team focuses on conversations, service, and decisions.</div>
+          <div class="flow-node flow-gray"><span class="flow-step">01</span>Inbound lead or customer message arrives</div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node flow-ember"><span class="flow-step">02</span>Lead Response Automation captures and classifies</div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node flow-purple"><span class="flow-step">03</span>Customer Message Routing sends it to the right person</div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node flow-purple"><span class="flow-step">04</span>Follow-Up Automation and task workflows keep it moving</div>
+          <div class="flow-arrow"></div>
+          <div class="flow-node flow-green"><span class="flow-step">05</span>Back Office Admin Automation handles the repetitive admin</div>
+          <div class="flow-result">
+            <div class="flow-result-label">Outcome</div>
+            <div class="flow-result-text">Your team focuses on conversations, service, and decisions.</div>
+          </div>
         </div>
       </div>
     </div>
