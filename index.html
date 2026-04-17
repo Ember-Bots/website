@@ -595,20 +595,26 @@
     }
 
     .flow-step {
-      width: 30px;
-      height: 30px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.03);
       color: var(--flow-accent, var(--text-muted));
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+    }
+
+    .flow-step svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .flow-node.flow-gray { --flow-accent: rgba(255,255,255,0.45); }
@@ -1230,15 +1236,15 @@
           </li>
         </ul>
         <div class="how-visual">
-          <div class="flow-node flow-gray"><span class="flow-step">01</span>Inbound lead or customer message arrives</div>
+          <div class="flow-node flow-gray"><span class="flow-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>Inbound lead or customer message arrives</div>
           <div class="flow-arrow"></div>
-          <div class="flow-node flow-ember"><span class="flow-step">02</span>Lead Response Automation captures and classifies</div>
+          <div class="flow-node flow-ember"><span class="flow-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"></path><path d="M12 4v16"></path></svg></span>Lead Response Automation captures and classifies</div>
           <div class="flow-arrow"></div>
-          <div class="flow-node flow-purple"><span class="flow-step">03</span>Customer Message Routing sends it to the right person</div>
+          <div class="flow-node flow-purple"><span class="flow-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>Customer Message Routing sends it to the right person</div>
           <div class="flow-arrow"></div>
-          <div class="flow-node flow-purple"><span class="flow-step">04</span>Follow-Up Automation and task workflows keep it moving</div>
+          <div class="flow-node flow-purple"><span class="flow-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10"></path><path d="M7 12h10"></path><path d="M7 16h6"></path></svg></span>Follow-Up Automation and task workflows keep it moving</div>
           <div class="flow-arrow"></div>
-          <div class="flow-node flow-green"><span class="flow-step">05</span>Back Office Admin Automation handles the repetitive admin</div>
+          <div class="flow-node flow-green"><span class="flow-step"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect><path d="M9 10h6"></path><path d="M9 14h4"></path></svg></span>Back Office Admin Automation handles the repetitive admin</div>
           <div class="flow-result">
             <div class="flow-result-label">Outcome</div>
             <div class="flow-result-text">Your team focuses on conversations, service, and decisions.</div>
