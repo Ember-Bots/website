@@ -73,25 +73,37 @@ git push
 ```
 
 ### Site sections
-1. **Hero** — headline, subheadline, CTA buttons, 3 stat callouts
-2. **Mission & Vision** — company mission, Amber + Steve quote callout
-3. **What We Do** — 6 service cards (AI Agents, Workflow Automation, BI, Customer Comms, Integration, Optimization)
-4. **How We Help** — 4-step process + automation flow diagram
-5. **Our Story** — Amber Rice (CEO) + Steve Ward (CRO) founder cards + narrative copy
-6. **Contact** — hello@emberbots.ai, Dallas TX (no physical address published)
+1. **Hero** — preserved hero wording, updated subheadline, CTA buttons
+2. **Problem** — operational drag/pain framing for small teams
+3. **Automation Systems** — current homepage offer stack focused on non-conflicting automation services
+4. **How Ember Bots Works** — 4-step process + premium flow visual
+5. **Best Fit** — who the service is for and operational pain signals
+6. **Our Story** — Amber Rice + Steve Ward founder cards + narrative copy
+7. **Contact** — contact form CTA, email, phone, Dallas TX
 
-### Design system (CSS variables)
+### Current homepage positioning constraints
+- Keep the hero wording exactly:
+  - `AI AUTOMATION FOR SMALL BUSINESS`
+  - `Your business deserves intelligent automation.`
+- Keep Ember Bots positioned away from quoting, invoicing, billing, and payment language unless Evan explicitly changes direction, to avoid overlap with Rev.io.
+- Current approved offer stack includes lead response, message routing, scheduling/reminders, onboarding, task orchestration, follow-up automation, back-office admin automation, and executive daily briefing.
+
+### Design system (current CSS variables)
 ```css
---bg: #050508           /* main background */
---ember: #ff6b35        /* primary accent — ember orange */
---ember-dim: rgba(255,107,53,0.12)
---ember-glow: rgba(255,107,53,0.25)
---accent: #6c63ff       /* secondary accent — purple */
---text: #e8eaf6         /* body text */
---text-muted: #8b8fa8   /* secondary text */
---surface: #1a1b2e      /* card backgrounds */
+--bg: #0a0b10           /* obsidian background */
+--bg2: rgba(18, 14, 26, 0.88)
+--bg3: rgba(24, 18, 36, 0.9)
+--surface: rgba(28, 21, 42, 0.88)
+--border: rgba(84, 72, 120, 0.28)
+--text: #ece8f6
+--text-muted: #9a92b3
+--ember-red: #bc2535
+--ember: #f05a28
+--gold: #ffb84d
+--accent: #6d4dff
+--indigo: #2d3250
 ```
-To change the accent color globally, update `--ember` and the two `--ember-dim` / `--ember-glow` values.
+Current visual direction is premium, dark, restrained, and "controlled fire" rather than playful, neon, or generic AI-site styling.
 
 ---
 
@@ -131,7 +143,7 @@ To change the accent color globally, update `--ember` and the two `--ember-dim` 
 - [ ] Update contact email on website once email is live
 - [ ] Get proper transparent PNG logo (current version was green-screen keyed)
 - [ ] Add contact form (Phase 1.5 — basic form or Formspree embed, no backend needed)
-- [ ] Phase 2: Stripe payment integration + QR code generation
+- [ ] Phase 2: additional live-site polish and conversion improvements once positioning is settled
 
 ---
 

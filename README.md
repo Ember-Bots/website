@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ember Bots Website
 
-## Getting Started
+Static marketing site for **https://emberbots.ai**.
 
-First, run the development server:
+## Stack
+- Pure HTML/CSS/JS
+- Single-page site in `index.html`
+- GitHub Pages deployment from `main`
+- No build step
+
+## Local preview
+Run a simple static server from the repo root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+python3 -m http.server 4173
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://127.0.0.1:4173/index.html
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
+GitHub Pages auto-deploys from `main`.
 
-## Learn More
+```bash
+git add .
+git commit -m "Describe the change"
+git push origin main
+```
 
-To learn more about Next.js, take a look at the following resources:
+The live site usually updates within about 1 minute.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Live verification
+Quick check for key homepage changes:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+curl -L -A 'Mozilla/5.0' -s https://emberbots.ai | grep -n "Your business deserves\|Lead Response Automation\|Executive Daily Briefing"
+```
 
-## Deploy on Vercel
+## Rollback
+If a design/content change needs to be reverted fast:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git log --oneline -10
+git revert <commit>
+git push origin main
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Prefer reverting the specific bad commit instead of force-pushing history.
+
+## Important files
+- `index.html` — main site markup, styling, and client-side behavior
+- `CNAME` — custom domain binding for GitHub Pages
+- `amber.jpg`, `steve.jpg`, `logo.svg`, `logo.png` — site assets
+- `docs/workflow-systems-brief.md` — older messaging/reference material
+- `CONTEXT.md` — repo-specific handoff and operating context
+
+## Current positioning notes
+The homepage is currently positioned around non-conflicting Ember Bots automation offers:
+- Lead Response Automation
+- Customer Message Routing
+- Scheduling and Reminder Automation
+- Client Onboarding Automation
+- Internal Task Orchestration
+- Follow-Up Automation
+- Back Office Admin Automation
+- Executive Daily Briefing
+
+Avoid drifting into quote, invoice, billing, or payment positioning on the main Ember Bots site unless Evan explicitly changes direction, to avoid overlap with Rev.io.
+
+## Current design direction
+The live design uses an "ember forge" palette:
+- obsidian / plum backgrounds
+- ember red, orange, solar gold, and purple accents
+- premium, restrained glow and gradient treatment
+- hero wording preserved as:
+  - `AI AUTOMATION FOR SMALL BUSINESS`
+  - `Your business deserves intelligent automation.`
