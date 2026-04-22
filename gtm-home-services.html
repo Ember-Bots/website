@@ -178,6 +178,7 @@
       <li><a href="#prospecting">Prospecting</a></li>
       <li><a href="#outbound">Outbound</a></li>
       <li><a href="#budget">Budget</a></li>
+      <li><a href="#readiness">Readiness</a></li>
       <li><a href="#plan">Phases</a></li>
     </ul>
   </nav>
@@ -626,6 +627,115 @@
       </div>
     </section>
 
+    <section class="section" id="readiness">
+      <div class="section-shell">
+        <div class="section-head">
+          <p class="section-label">Execution Readiness</p>
+          <h2>Once CRM can hold the data, the real constraint becomes whether we have the connections and operating infrastructure to run a closed-loop GTM system.</h2>
+          <p>The critical shift is from "we can track leads" to "we can systematically ingest, score, contact, follow up, convert, and measure them." The missing pieces are mostly around source access, outbound infrastructure, reply capture, and operational automation.</p>
+        </div>
+        <div class="section-body">
+          <div class="grid-4">
+            <div class="kpi">
+              <div class="kpi-value">Must-have</div>
+              <div class="kpi-label">Reliable outbound email plus reply capture is the most important non-CRM dependency.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-value">Need next</div>
+              <div class="kpi-label">Lead-source connections so the system can build and refresh target accounts without manual rework.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-value">Loop</div>
+              <div class="kpi-label">Ingest → score → act → convert → measure is the real GTM engine, not just richer records.</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-value">Phase 1</div>
+              <div class="kpi-label">Start with the smallest working loop, then add enrichment, scale, and more channels later.</div>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:22px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Capability area</th>
+                  <th>What is needed</th>
+                  <th>Why it matters</th>
+                  <th>Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lead-source ingestion</td>
+                  <td>Google Maps / local search inputs, Yelp, directories, company sites, forms, and inbox capture</td>
+                  <td>Without a dependable inflow, CRM becomes a manual spreadsheet with better UI</td>
+                  <td><span class="tag good">Immediate</span></td>
+                </tr>
+                <tr>
+                  <td>Outbound email system</td>
+                  <td>Dedicated outbound mailbox, sending domain, SPF, DKIM, DMARC, and tracking-safe sending posture</td>
+                  <td>Email is the cleanest first scalable outreach channel and the easiest to systematize</td>
+                  <td><span class="tag good">Immediate</span></td>
+                </tr>
+                <tr>
+                  <td>Reply capture</td>
+                  <td>Inbound mailbox monitoring and CRM sync for replies, bounces, and thread state</td>
+                  <td>The loop is broken if outcomes live in inboxes instead of back in CRM</td>
+                  <td><span class="tag good">Immediate</span></td>
+                </tr>
+                <tr>
+                  <td>Task automation</td>
+                  <td>Schedulers for rescoring, stale-lead resurfacing, follow-up reminders, and active queue generation</td>
+                  <td>Prevents pipeline decay and turns GTM into a repeatable operating system</td>
+                  <td><span class="tag warn">High</span></td>
+                </tr>
+                <tr>
+                  <td>Enrichment</td>
+                  <td>Contact discovery, company/context enrichment, and platform-confidence improvement</td>
+                  <td>Improves targeting quality and reduces wasted human touches</td>
+                  <td><span class="tag warn">High</span></td>
+                </tr>
+                <tr>
+                  <td>Additional contact channels</td>
+                  <td>Optional SMS, iMessage, or VoIP/calling stack if direct outreach expands beyond email + human calls</td>
+                  <td>Useful later, but not the first dependency for a working GTM loop</td>
+                  <td><span class="tag warn">Later</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid-2" style="margin-top:22px;">
+            <div class="panel">
+              <h3>Accounts, tools, and connections still needed</h3>
+              <ul>
+                <li>Access path for the actual lead sources we decide to use</li>
+                <li>One or more outbound email accounts dedicated to GTM</li>
+                <li>Domain and DNS access for deliverability setup</li>
+                <li>A reply-monitoring path that writes email outcomes back into CRM</li>
+                <li>An enrichment tool or service for owner/contact discovery</li>
+                <li>A scheduler / automation runner for recurring prospecting and follow-up tasks</li>
+                <li>A template store for outreach, mini-audits, offers, and meeting briefs</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>What can stay optional at first</h3>
+              <ul>
+                <li>Paid media accounts beyond light testing</li>
+                <li>Complex multi-channel attribution tooling</li>
+                <li>VoIP or dialer systems for high-volume calling</li>
+                <li>Broad SEO/content machinery</li>
+                <li>Heavy enterprise sales tooling</li>
+                <li>Large-scale enrichment spend before the first outreach loop proves itself</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout"><strong>Recommendation:</strong> the fastest path to a real automated GTM engine is to pair the CRM work with a dedicated outbound email system, reply capture back into CRM, a small set of lead-source ingestion paths, and recurring task automation. That gives Ember a true closed loop before we add broader channels or scale spend.</div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="plan">
       <div class="section-shell">
         <div class="section-head">
@@ -645,12 +755,19 @@
             <div class="timeline-item">
               <div class="timeline-phase">Phase 1B</div>
               <div class="timeline-copy">
+                <h3>Connect the operating infrastructure</h3>
+                <p>Stand up the outbound email system, deliverability setup, reply capture, and recurring automation so GTM can run as a loop instead of a manual campaign.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-phase">Phase 1C</div>
+              <div class="timeline-copy">
                 <h3>Run tailored outbound</h3>
                 <p>Work the top accounts with personalized outreach, human calls, and controlled follow-up while tracking what messages create meetings.</p>
               </div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-phase">Phase 1C</div>
+              <div class="timeline-phase">Phase 1D</div>
               <div class="timeline-copy">
                 <h3>Close and standardize</h3>
                 <p>Use the first accounts to refine onboarding, delivery templates, support boundaries, and true labor assumptions.</p>
