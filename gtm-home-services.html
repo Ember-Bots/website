@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots GTM Plan — Local Home Services</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1" />
+  <meta name="description" content="A local-first GTM plan for Ember Bots focused on HVAC, plumbing, electrical, and roofing companies within a 20-mile radius." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08090d;
+      --bg2: rgba(10, 14, 28, 0.88);
+      --bg3: rgba(16, 21, 40, 0.92);
+      --surface: rgba(18, 24, 44, 0.82);
+      --surface-strong: rgba(14, 19, 36, 0.94);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-glow: rgba(255,106,0,0.24);
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --white: #ffffff;
+      --green: #2fd17b;
+      --red: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 14% 12%, rgba(122,60,255,0.16) 0%, transparent 24%),
+        radial-gradient(circle at 84% 10%, rgba(37,99,255,0.14) 0%, transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 60px; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,10,18,0.84); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img { height: 56px; width: auto; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--ember) 0%, #ff8a1f 100%);
+      color: var(--white) !important; padding: 10px 22px; border-radius: 6px; font-weight: 600;
+    }
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 140px 40px 90px; position: relative;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 82% 62% at 50% 0%, rgba(255,106,0,0.10) 0%, transparent 68%),
+        radial-gradient(ellipse 56% 42% at 78% 18%, rgba(56,189,248,0.10) 0%, transparent 56%),
+        radial-gradient(ellipse 60% 44% at 84% 82%, rgba(122,60,255,0.12) 0%, transparent 62%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 980px; }
+    .hero-eyebrow {
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.6rem, 6vw, 4.8rem); font-weight: 700;
+      line-height: 1.05; letter-spacing: -0.03em; color: var(--white); margin-bottom: 24px;
+    }
+    h1 .highlight {
+      background: linear-gradient(135deg, #ff8a1f 0%, var(--violet) 55%, var(--blue) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.15rem; color: var(--text-muted); max-width: 760px; margin: 0 auto 40px; line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary, .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
+      padding: 16px 30px; border-radius: 8px; font-weight: 600;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, #ff9f2f 24%, var(--ember) 62%, #ff5a1f 100%);
+      color: var(--white); box-shadow: 0 12px 28px rgba(20,24,46,0.30), 0 0 24px rgba(255,106,0,0.20);
+    }
+    .btn-ghost { color: var(--text-muted); border: 1px solid var(--border); }
+    section { padding: 96px 60px; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--violet); margin-bottom: 14px;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 700;
+      line-height: 1.12; margin-bottom: 18px;
+    }
+    .section-sub { color: var(--text-muted); max-width: 760px; font-size: 1.05rem; line-height: 1.8; }
+    .grid-2, .grid-3, .grid-4 { display: grid; gap: 24px; margin-top: 42px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 30px;
+      box-shadow: 0 18px 44px rgba(8,8,14,0.18);
+    }
+    .card h3 {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; margin-bottom: 12px;
+    }
+    .card p, .card li { color: var(--text-muted); font-size: 0.96rem; line-height: 1.75; }
+    .card ul { padding-left: 18px; }
+    .metric {
+      background: linear-gradient(180deg, rgba(25,19,37,0.96), rgba(18,14,28,0.96));
+      border: 1px solid var(--border); border-radius: 18px; padding: 24px;
+    }
+    .metric-value {
+      font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 6px;
+    }
+    .metric-label { color: var(--text-muted); font-size: 0.9rem; }
+    .band {
+      background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .table {
+      width: 100%; border-collapse: collapse; margin-top: 28px; overflow: hidden; border-radius: 18px;
+      border: 1px solid var(--border); background: var(--bg2);
+    }
+    .table th, .table td { padding: 18px 16px; text-align: left; vertical-align: top; }
+    .table th {
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--white); background: rgba(255,255,255,0.03);
+    }
+    .table td { color: var(--text-muted); border-top: 1px solid var(--border); }
+    .good { color: var(--green); font-weight: 600; }
+    .warn { color: var(--gold); font-weight: 600; }
+    .risk { color: #ff8a8a; font-weight: 600; }
+    .timeline { display: grid; gap: 18px; margin-top: 34px; }
+    .timeline-item {
+      display: grid; grid-template-columns: 140px 1fr; gap: 22px; align-items: start;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 22px 24px;
+    }
+    .timeline-phase {
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ember);
+    }
+    .callout {
+      margin-top: 30px; background: linear-gradient(135deg, rgba(255,184,77,0.12), rgba(255,106,0,0.08));
+      border: 1px solid rgba(255,184,77,0.18); border-left: 3px solid var(--gold); border-radius: 16px; padding: 22px 24px;
+      color: var(--text-muted);
+    }
+    footer {
+      max-width: 1200px; margin: 0 auto; padding: 48px 60px 64px; display: flex; justify-content: space-between; gap: 20px;
+      color: var(--text-muted); font-size: 0.9rem;
+    }
+    @media (max-width: 980px) {
+      nav, section, footer { padding-left: 24px; padding-right: 24px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo.svg?v=6" alt="Ember Bots" /></a>
+    <ul class="nav-links">
+      <li><a href="#icp">ICP</a></li>
+      <li><a href="#offer">Offer</a></li>
+      <li><a href="#economics">Economics</a></li>
+      <li><a href="#channels">Channels</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#next-steps" class="nav-cta">Next Steps</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Ember Bots Go To Market Plan</p>
+      <h1>Win local home service accounts with a <span class="highlight">done-for-you automation offer</span>, not a generic platform pitch.</h1>
+      <p class="hero-sub">This plan repositions Ember Bots around local home services companies that use the most integration-accessible field-service platforms inside a 20-mile radius. The operating principle is simple: start where delivery is easiest, then sell measurable lead-response and follow-up outcomes that Ember can largely set up, monitor, and manage.</p>
+      <div class="hero-actions">
+        <a href="#offer" class="btn-primary">View the offer strategy</a>
+        <a href="#budget" class="btn-ghost">Jump to spend plan</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="thesis">
+    <p class="section-label">Strategic Reframe</p>
+    <h2>The business should lead with revenue outcomes, while the CRM remains our internal operating system.</h2>
+    <p class="section-sub">We should stop behaving like a software company waiting for product-market fit to magically appear. The near-term business is a local service engine: acquire qualified SMB accounts, deliver a tightly-scoped automation system with clear ROI, retain them on monthly management, and standardize fulfillment so Ember can own most of the delivery layer.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>What we sell</h3>
+        <p>Lead response, missed-call recovery, intake routing, quote follow-up, review generation, and appointment conversion for high-ticket local service businesses.</p>
+      </div>
+      <div class="card">
+        <h3>What humans own</h3>
+        <p>Prospect meetings, trust-building, in-person sales, and nuanced customer conversations where relationship quality matters.</p>
+      </div>
+      <div class="card">
+        <h3>What Ember owns</h3>
+        <p>Most list-building, content, SEO, ad copy, CRM workflows, quoting drafts, onboarding setup, monitoring, reporting, and support triage.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <section id="icp">
+      <p class="section-label">Initial ICP</p>
+      <h2>Start with the most integration-friendly platform wedge, then prioritize one trade at a time inside it.</h2>
+      <p class="section-sub">The first filter is platform accessibility. The second filter is trade economics. We want high-value jobs, urgent leads, real consequences when follow-up is slow, and enough margin to support a monthly managed service.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Jobber-first wedge</h3><p>Best initial target. Likely the most accessible platform for early integrations and standardized fulfillment. Focus first on Jobber-based HVAC and plumbing companies.</p></div>
+        <div class="card"><h3>Housecall Pro second</h3><p>Strong next wedge when API access is available on the client's plan. Useful expansion path after the first template is working.</p></div>
+        <div class="card"><h3>ServiceTitan later</h3><p>Strategically important, but likely more gated and slower for early delivery. Do not make this the initial dependency for the first wins.</p></div>
+      </div>
+      <div class="grid-4" style="margin-top:24px;">
+        <div class="card"><h3>HVAC</h3><p>Emergency demand, seasonal swings, call volume, booking urgency, and service agreements make HVAC highly automation-friendly.</p></div>
+        <div class="card"><h3>Plumbing</h3><p>Lead speed matters, customer anxiety is high, and missed calls often become lost revenue within minutes.</p></div>
+        <div class="card"><h3>Electrical</h3><p>Strong fit for estimate follow-up, scheduling, project qualification, and review generation after completed work.</p></div>
+        <div class="card"><h3>Roofing</h3><p>Longer sales cycle but large job values. Great fit for inspection requests, follow-up sequences, and estimate nurture.</p></div>
+      </div>
+      <div class="callout"><strong style="color:var(--white);">Recommendation:</strong> Start with Jobber-based HVAC or plumbing companies first. That gives us the best balance of economic value, operational pain, and implementation accessibility.</div>
+    </section>
+  </div>
+
+  <section id="platform-fit">
+    <p class="section-label">Platform Fit</p>
+    <h2>Make integration accessibility part of the GTM strategy, not just an implementation detail.</h2>
+    <p class="section-sub">Early delivery reliability matters more than theoretical total addressable market. We should prefer the platform wedge that lets Ember deploy, monitor, and support the offer with the least friction.</p>
+    <table class="table">
+      <thead>
+        <tr><th>Platform</th><th>Initial GTM priority</th><th>Why it matters</th><th>Operational implication</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white);">Jobber</strong></td>
+          <td class="good">Highest</td>
+          <td>Most likely best early balance of public access and developer friendliness</td>
+          <td>Use as the primary platform-centered wedge for initial outreach and delivery templates</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Housecall Pro</strong></td>
+          <td class="warn">Medium</td>
+          <td>Viable if the client plan supports API access</td>
+          <td>Good second wedge, but qualification should include plan/access confirmation</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">ServiceTitan</strong></td>
+          <td class="risk">Lower initially</td>
+          <td>Important market presence, but access and implementation friction appear higher</td>
+          <td>Do not anchor initial GTM on ServiceTitan until the integration path is better proven</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong style="color:var(--white);">Qualification rule:</strong> a prospect gets more valuable when the pain is real and the platform is accessible. Early on, a lower-friction implementation is often worth more than a larger theoretical deal.</div>
+
+  <section id="offer">
+    <p class="section-label">Flagship Offer</p>
+    <h2>Center the offer around what the client values most and what Ember can manage with low human overhead.</h2>
+    <p class="section-sub">The best initial offer is not “custom AI automation.” It is a managed lead-conversion system for local service companies on platforms we can actually support well. Every feature should trace back to booked jobs, recovered leads, higher close rate, or lower admin drag.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Core managed system</h3>
+        <ul>
+          <li>Missed-call text back</li>
+          <li>Web lead instant response</li>
+          <li>Lead qualification and routing</li>
+          <li>Estimate request capture and follow-up</li>
+          <li>Appointment reminder and no-show reduction</li>
+          <li>Review request automation after completed jobs</li>
+          <li>Owner-facing weekly performance summary</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Why this is the right wedge</h3>
+        <ul>
+          <li>Easy ROI story: more booked jobs and fewer lost leads</li>
+          <li>Operationally templatable across the ICP</li>
+          <li>Mostly text, workflow, routing, and reporting work Ember can own</li>
+          <li>Lower dependency on bespoke integrations in the first sale</li>
+          <li>Clear monthly management value after setup</li>
+        </ul>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr><th>Offer Tier</th><th>What is included</th><th>Setup Fee</th><th>Monthly Fee</th><th>Who it fits</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white);">Starter</strong></td>
+          <td>Missed-call text back, web lead instant response, CRM pipeline, weekly summary, basic review requests</td>
+          <td>$1,500</td>
+          <td>$750/mo</td>
+          <td>Single-location operators who need fast lead recovery with low complexity</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Growth</strong></td>
+          <td>Starter plus estimate follow-up, scheduling nudges, lead-source tracking, ad landing page support, tighter reporting</td>
+          <td>$2,500</td>
+          <td>$1,250/mo</td>
+          <td>Best default offer for HVAC, plumbing, and electrical companies</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Managed Growth</strong></td>
+          <td>Growth plus Google Ads management, local landing pages, SEO content support, monthly optimization review</td>
+          <td>$4,000</td>
+          <td>$2,000/mo + ad spend</td>
+          <td>Businesses with enough job value to support paid acquisition and ongoing optimization</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="band">
+    <section id="economics">
+      <p class="section-label">Unit Economics</p>
+      <h2>Price for margin, not just for what feels easy to say yes to.</h2>
+      <p class="section-sub">These estimates assume we standardize delivery and avoid custom-agency sprawl. The business works if onboarding is templated, support is mostly asynchronous, and Ember handles the majority of recurring system management.</p>
+      <div class="grid-4">
+        <div class="metric"><div class="metric-value">65 to 80%</div><div class="metric-label">Target gross margin on monthly management</div></div>
+        <div class="metric"><div class="metric-value">8 to 15 hrs</div><div class="metric-label">One-time Ember setup time for Starter or Growth</div></div>
+        <div class="metric"><div class="metric-value">1 to 3 hrs</div><div class="metric-label">Monthly support and optimization time target</div></div>
+        <div class="metric"><div class="metric-value">$300 to $700</div><div class="metric-label">Estimated direct monthly tool cost per managed client</div></div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr><th>Tier</th><th>Estimated direct monthly cost</th><th>Estimated recurring labor load</th><th>Estimated gross margin</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--white);">Starter</strong></td>
+            <td>$180 to $300</td>
+            <td>~1 hr/month</td>
+            <td class="good">60 to 76%</td>
+            <td>Best for low-complexity accounts and fastest sales motion</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Growth</strong></td>
+            <td>$250 to $450</td>
+            <td>~1.5 to 2 hrs/month</td>
+            <td class="good">64 to 80%</td>
+            <td>Best default tier and likely strongest margin-adjusted offer</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--white);">Managed Growth</strong></td>
+            <td>$400 to $700</td>
+            <td>~3 to 5 hrs/month</td>
+            <td class="warn">50 to 70%</td>
+            <td>Only works if ads and content are tightly templated and priced correctly</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong style="color:var(--white);">Pricing stance:</strong> Do not underprice setup. The setup fee pays for implementation, integration risk, platform-specific friction, and the first 30 days of tuning. The monthly retainer pays for monitoring, optimization, reporting, support, and retained operational leverage.</div>
+    </section>
+  </div>
+
+  <section id="channels">
+    <p class="section-label">GTM Engine</p>
+    <h2>Use outbound first, while organic and paid channels are built on top of a proven local offer.</h2>
+    <p class="section-sub">The sequence matters. The fastest path to learning is direct prospecting into a tightly scored local account list of integration-friendly companies. Organic and paid channels should amplify a message that is already proving itself in real conversations.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. Local outbound</h3>
+        <p>Build and score the first 150 to 300 companies inside the target radius. Lead with a concrete audit angle: missed-call recovery, slow form response, weak quote follow-up, or review leakage.</p>
+      </div>
+      <div class="card">
+        <h3>2. Local SEO</h3>
+        <p>Create service-and-city landing pages plus proof-driven content around lead response, booking speed, and call recovery, but treat SEO as a medium-term asset rather than the primary first-90-day lead source.</p>
+      </div>
+      <div class="card">
+        <h3>3. Paid Google</h3>
+        <p>Run small exact-match or tight phrase-match campaigns targeted to the 20-mile radius only after the outbound message and landing page are proving out. Keep one clear offer and aggressive negative-keyword control.</p>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr><th>Channel</th><th>What Ember can own</th><th>What humans own</th><th>Primary KPI</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Outbound</td>
+          <td>List building, scoring, scripts, mini-audit prep, CRM tracking, follow-up sequencing</td>
+          <td>Cold calls, in-person visits, meetings, closing</td>
+          <td>Meetings booked per 100 accounts</td>
+        </tr>
+        <tr>
+          <td>SEO / Content</td>
+          <td>Keyword clustering, page drafts, articles, local landing pages, publishing pipeline</td>
+          <td>Final review and occasional local proof capture</td>
+          <td>Qualified organic leads</td>
+        </tr>
+        <tr>
+          <td>Google Ads</td>
+          <td>Keyword sets, ad copy, landing page copy, tracking setup, reporting, optimizations</td>
+          <td>Budget approval and occasional sales-call quality feedback</td>
+          <td>Cost per qualified lead</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="band">
+    <section id="budget">
+      <p class="section-label">Budget</p>
+      <h2>Start with a disciplined local spend plan, not a broad demand-generation burn.</h2>
+      <p class="section-sub">The first goal is not scale. The first goal is a working acquisition loop with good data, controllable CAC, and a clear path to fulfillment margin on accounts we can reliably implement.</p>
+      <table class="table">
+        <thead>
+          <tr><th>Budget line</th><th>Monthly estimate</th><th>Purpose</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Ads spend</td>
+            <td>$1,500 to $3,000</td>
+            <td>High-intent local keyword capture</td>
+            <td>Start with one ICP and one offer before expanding</td>
+          </tr>
+          <tr>
+            <td>Landing pages / content tools</td>
+            <td>$150 to $300</td>
+            <td>Page publishing, SEO support, light creative tooling</td>
+            <td>Can stay lean if built mostly in-house</td>
+          </tr>
+          <tr>
+            <td>Data / prospecting tools</td>
+            <td>$100 to $300</td>
+            <td>List building and lead research</td>
+            <td>Could begin manually before adding more tooling</td>
+          </tr>
+          <tr>
+            <td>Call tracking / messaging / automation ops</td>
+            <td>$250 to $600</td>
+            <td>Internal delivery and demo environment</td>
+            <td>Partially offset once client base grows</td>
+          </tr>
+          <tr>
+            <td>Creative / social testing budget</td>
+            <td>$250 to $500</td>
+            <td>Light paid social experiments and retargeting later</td>
+            <td>Not priority in month one</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grid-3">
+        <div class="metric"><div class="metric-value">$2.0k to $4.7k</div><div class="metric-label">Recommended initial monthly GTM budget</div></div>
+        <div class="metric"><div class="metric-value">3 to 5</div><div class="metric-label">Target meetings per month from combined outbound + paid in phase one</div></div>
+        <div class="metric"><div class="metric-value">1 to 2</div><div class="metric-label">New accounts per month target at the start</div></div>
+      </div>
+      <div class="callout"><strong style="color:var(--white);">Why this pace works:</strong> 1 to 2 new accounts per month is enough to validate positioning, learn the ICP, keep fulfillment tight, and avoid selling faster than the delivery system can handle.</div>
+    </section>
+  </div>
+
+  <section id="implementation">
+    <p class="section-label">Delivery Model</p>
+    <h2>Design the service around autonomous operations from day one.</h2>
+    <p class="section-sub">Every new client should move through the same operating path so Ember can absorb the majority of the recurring load without turning each account into a custom consulting project. Platform compatibility is part of qualification, not an afterthought.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Standard onboarding flow</h3>
+        <ul>
+          <li>Account intake and baseline audit</li>
+          <li>Offer-specific template deployment</li>
+          <li>Messaging and call-routing setup</li>
+          <li>Lead-source and conversion tracking</li>
+          <li>First-week tuning and baseline report</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Standard monthly management</h3>
+        <ul>
+          <li>Workflow monitoring and exception review</li>
+          <li>Copy and follow-up optimization</li>
+          <li>Lead and appointment reporting</li>
+          <li>Client support triage and recommendations</li>
+          <li>Escalate only when a human conversation is actually needed</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <section id="next-steps">
+      <p class="section-label">90-Day Action Plan</p>
+      <h2>Sequence the work so sales learning happens before scale spend.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-phase">Days 1 to 14</div>
+          <div>
+            <p style="color:var(--white); font-weight:600; margin-bottom:8px;">Nail the wedge and build the first account list</p>
+            <p style="color:var(--text-muted);">Choose the first platform-first ICP, define the flagship Growth offer, build a broader local research universe and top priority list, create one mini-audit format, and create one website page plus one landing page tailored to the offer.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-phase">Days 15 to 30</div>
+          <div>
+            <p style="color:var(--white); font-weight:600; margin-bottom:8px;">Start outbound and launch the smallest paid test</p>
+            <p style="color:var(--text-muted);">Begin personalized outreach and local direct prospecting. Only launch a small Google Ads campaign if the landing page, offer, and tracking are already clean enough to measure.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-phase">Days 31 to 60</div>
+          <div>
+            <p style="color:var(--white); font-weight:600; margin-bottom:8px;">Close first accounts and harden delivery templates</p>
+            <p style="color:var(--text-muted);">Use the first one to three clients to standardize onboarding, estimate true labor load, tighten reporting, validate pricing against real support demands, and verify platform-specific implementation assumptions.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-phase">Days 61 to 90</div>
+          <div>
+            <p style="color:var(--white); font-weight:600; margin-bottom:8px;">Scale the channel mix carefully</p>
+            <p style="color:var(--text-muted);">Expand local SEO pages later, refine Google Ads if economics justify it, grow the account list, and only add another trade or platform when the first wedge is closing and fulfilling cleanly.</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout"><strong style="color:var(--white);">Bottom line:</strong> If we keep the offer narrow, price correctly, and treat Ember Bots as a local managed automation service first, we can build a business that learns from real clients instead of waiting on product perfection.</div>
+    </section>
+  </div>
+
+  <footer>
+    <div>Ember Bots GTM Presentation</div>
+    <div>Local home services, outcome-led offer, autonomous delivery model</div>
+  </footer>
+</body>
+</html>
