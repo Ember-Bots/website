@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — Explainer Presentation</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg2: rgba(10, 14, 28, 0.92);
+      --bg3: rgba(16, 21, 40, 0.96);
+      --surface: rgba(18, 24, 44, 0.84);
+      --surface-strong: rgba(14, 19, 36, 0.98);
+      --border: rgba(91, 105, 164, 0.28);
+      --border-strong: rgba(255, 184, 77, 0.32);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --white: #ffffff;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --success: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    .page {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 9, 13, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .hero, .section, .timeline, .cta-band {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18,24,44,0.92), rgba(12,16,30,0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: 32px;
+    }
+
+    .hero::before,
+    .section::before,
+    .timeline::before,
+    .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero {
+      padding: 42px 40px 38px;
+      margin-bottom: 26px;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(255,184,77,0.12));
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p,
+    .section-intro,
+    .body-copy {
+      color: var(--text-muted);
+    }
+
+    .hero-copy p {
+      max-width: 780px;
+      font-size: 1.08rem;
+    }
+
+    .hero-card,
+    .metric,
+    .panel,
+    .story-card,
+    .scene-card,
+    .script-block {
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(20,26,46,0.95), rgba(12,17,30,0.94));
+      border: 1px solid rgba(255,184,77,0.16);
+    }
+
+    .hero-card,
+    .panel,
+    .story-card,
+    .scene-card,
+    .script-block { padding: 22px; }
+
+    .hero-card ul,
+    .panel ul,
+    .story-card ul,
+    .scene-card ul { margin: 0; padding-left: 18px; color: var(--text-muted); }
+
+    .hero-card p,
+    .panel p,
+    .story-card p,
+    .scene-card p,
+    .script-block p { margin-bottom: 0; }
+
+    .meta-row,
+    .metrics-grid,
+    .three-up,
+    .two-up,
+    .scene-grid,
+    .script-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .meta-row { grid-template-columns: repeat(3, 1fr); margin-top: 18px; }
+    .metrics-grid { grid-template-columns: repeat(4, 1fr); }
+    .two-up { grid-template-columns: repeat(2, 1fr); }
+    .three-up { grid-template-columns: repeat(3, 1fr); }
+    .scene-grid { grid-template-columns: repeat(2, 1fr); }
+    .script-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .metric {
+      padding: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .metric .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .metric .value {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .section, .timeline, .cta-band {
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .section-intro {
+      max-width: 860px;
+      margin-bottom: 22px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(122,60,255,0.18);
+      color: #d8cbff;
+      border: 1px solid rgba(122,60,255,0.28);
+      margin-bottom: 12px;
+    }
+
+    .pill.gold {
+      background: rgba(255,184,77,0.14);
+      color: #ffe3af;
+      border-color: rgba(255,184,77,0.34);
+    }
+
+    .timeline-steps {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .timeline-step:first-child { border-top: 0; padding-top: 0; }
+
+    .time {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+    }
+
+    .script-block {
+      border-color: rgba(91, 105, 164, 0.26);
+      background: linear-gradient(180deg, rgba(19,24,43,0.96), rgba(11,15,29,0.98));
+    }
+
+    .cta-band {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--ember), var(--ember-2));
+      box-shadow: 0 10px 30px rgba(255,106,43,.28);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    .footer {
+      padding: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .meta-row,
+      .metrics-grid,
+      .two-up,
+      .three-up,
+      .scene-grid,
+      .script-grid,
+      .cta-band,
+      .timeline-step {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner { width: min(calc(100% - 32px), var(--max)); }
+      .page { width: min(calc(100% - 32px), var(--max)); }
+      .timeline-step { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="../favicon.svg" alt="Ember Bots mark" />
+        <span>Ember Bots</span>
+      </div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#script">Script</a>
+        <a href="#storyboard">Storyboard</a>
+        <a href="#prompts">Prompts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Explainer Presentation</div>
+          <h1>Explain <span class="gradient-text">EmberBots.ai</span> clearly, credibly, and in a way small businesses understand.</h1>
+          <p>This is a shareable HTML presentation version of the Ember Bots explainer package — built for home-services owners and cold website visitors, centered on the real problem of missed follow-up, lost leads, and recoverable revenue.</p>
+          <div class="meta-row">
+            <div class="metric">
+              <div class="label">Audience</div>
+              <div class="value">Home-services owners + cold website visitors</div>
+            </div>
+            <div class="metric">
+              <div class="label">Runtime</div>
+              <div class="value">75–90 second truth-safe explainer</div>
+            </div>
+            <div class="metric">
+              <div class="label">Goal</div>
+              <div class="value">Show how Ember Bots turns follow-up gaps into booked opportunities</div>
+            </div>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <div class="pill gold">Core Message</div>
+          <h3>What Ember Bots does</h3>
+          <ul>
+            <li>helps service businesses stop losing good leads</li>
+            <li>improves response speed and follow-up consistency</li>
+            <li>creates a clearer operating system for revenue capture</li>
+            <li>starts with a Missed Revenue Snapshot</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="pill">Why this matters</div>
+      <h2>The real problem is not always lead generation. It is what happens <span class="gradient-text">after the lead arrives</span>.</h2>
+      <p class="section-intro">Small service businesses often lose revenue through missed calls, slow web-lead response, inconsistent estimate follow-up, and low visibility into what is actually being worked. Ember Bots is positioned as the system that tightens that gap.</p>
+      <div class="metrics-grid">
+        <div class="metric"><div class="label">Pain 1</div><div class="value">Missed calls that never turn into conversations</div></div>
+        <div class="metric"><div class="label">Pain 2</div><div class="value">Forms that sit too long without response</div></div>
+        <div class="metric"><div class="label">Pain 3</div><div class="value">Estimates that go cold before booking</div></div>
+        <div class="metric"><div class="label">Pain 4</div><div class="value">Office chaos with weak visibility and inconsistent follow-up</div></div>
+      </div>
+    </section>
+
+    <section class="timeline" id="script">
+      <div class="pill gold">Voiceover Script</div>
+      <h2>Final narration structure for the 60–90 second explainer</h2>
+      <div class="timeline-steps">
+        <div class="timeline-step">
+          <div class="time">0:00–0:08</div>
+          <div class="script-block"><p>Most small businesses do not lose revenue because they lack demand. They lose revenue because good leads slip through the cracks.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:08–0:18</div>
+          <div class="script-block"><p>A missed call. A web form that sits too long. An estimate that never gets followed up. A customer who was ready to buy, but never heard back fast enough.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:18–0:28</div>
+          <div class="script-block"><p>That is where Ember Bots comes in. Ember Bots builds done-for-you growth systems for service businesses.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:28–0:40</div>
+          <div class="script-block"><p>We help companies respond faster, follow up more consistently, and turn more inbound opportunities into booked jobs.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:40–0:54</div>
+          <div class="script-block"><p>Instead of relying on memory, sticky notes, or overwhelmed staff, Ember Bots helps create a clearer system for lead response, missed-call recovery, estimate follow-up, customer communication, and pipeline visibility.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:54–1:07</div>
+          <div class="script-block"><p>For a small business, that means fewer missed opportunities, better conversion from the leads you are already paying for, less chaos in the office, and more confidence that your business is actually capturing the revenue it is generating.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:07–1:20</div>
+          <div class="script-block"><p>Our process starts with a Missed Revenue Snapshot. That gives business owners a clear view of where leads may be slowing down, where follow-up may be breaking, and what the first fix should be.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:20–1:34</div>
+          <div class="script-block"><p>If you are already getting calls, form fills, or estimate requests, but know some revenue is being lost in follow-up, Ember Bots is built to help fix that. Start with a Missed Revenue Snapshot at EmberBots.ai.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="storyboard">
+      <div class="pill">Storyboard</div>
+      <h2>Scene-by-scene presentation plan</h2>
+      <p class="section-intro">This presentation keeps the story concrete, avoids invented proof points, and translates the video structure into a format that is easy to share, review, and hand off.</p>
+      <div class="scene-grid">
+        <article class="scene-card">
+          <h3>Scene 1 — Hook</h3>
+          <p class="body-copy">Incoming calls, forms, and estimates appear promising, then drift or fade as the system leaks value.</p>
+          <ul>
+            <li>On-screen text: <strong>Good leads get lost</strong></li>
+            <li>Visual note: broken signal-flow lines on a premium dark background</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 2 — The Problem</h3>
+          <p class="body-copy">Show missed calls, delayed form response, and cold estimates as the core revenue leaks.</p>
+          <ul>
+            <li>On-screen text: <strong>Missed calls · Slow follow-up · Cold estimates</strong></li>
+            <li>Visual note: restrained warning accents, no melodrama</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 3 — Introduce Ember Bots</h3>
+          <p class="body-copy">Broken flow reorganizes into a clean system, with Ember Bots as the stabilizing operating layer.</p>
+          <ul>
+            <li>On-screen text: <strong>Ember Bots · Done-for-you growth systems</strong></li>
+            <li>Visual note: first confident brand reveal</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 4 — What Ember Bots Does</h3>
+          <p class="body-copy">Show modular workflow cards for missed-call recovery, lead response, estimate follow-up, communication, and pipeline visibility.</p>
+          <ul>
+            <li>On-screen text: <strong>Respond faster · Follow up better · Book more jobs</strong></li>
+            <li>Visual note: clean directional arrows and forward signal flow</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 5 — Operational Clarity</h3>
+          <p class="body-copy">Transform clutter, scattered tasks, and disconnected signals into a clean operating dashboard.</p>
+          <ul>
+            <li>On-screen text: <strong>Clearer follow-up system · Better visibility · Less manual chaos</strong></li>
+            <li>Visual note: satisfying cleanup effect</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 6 — Small Business Impact</h3>
+          <p class="body-copy">Show calmer workflow, more control, and healthier opportunity flow without fake metrics.</p>
+          <ul>
+            <li>On-screen text: <strong>Fewer missed opportunities · Better conversion · More confidence</strong></li>
+            <li>Visual note: momentum without fabricated percentages</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 7 — Missed Revenue Snapshot</h3>
+          <p class="body-copy">Present the diagnostic entry offer as a consultative way to identify leaks and the first fix.</p>
+          <ul>
+            <li>On-screen text: <strong>Missed Revenue Snapshot · Find the leaks · Identify the first fix</strong></li>
+            <li>Visual note: annotated report-style frame</li>
+          </ul>
+        </article>
+        <article class="scene-card">
+          <h3>Scene 8 — CTA</h3>
+          <p class="body-copy">Finish with a confident Ember Bots brand frame and direct next step.</p>
+          <ul>
+            <li>On-screen text: <strong>Start with a Missed Revenue Snapshot · EmberBots.ai</strong></li>
+            <li>Visual note: slow premium hold for the final frame</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="prompts">
+      <div class="pill gold">Render Guidance</div>
+      <h2>Scene prompt system and truth-safe guardrails</h2>
+      <div class="two-up">
+        <div class="panel">
+          <h3>Global style block</h3>
+          <p class="body-copy">Premium dark motion-graphics SaaS explainer. Ember orange, gold, violet, and electric blue accents. Sleek UI overlays, polished typography, abstract signal-flow animation, subtle grid and dashboard motifs, high contrast, modern and credible. No stock footage. No talking heads. No fake charts, customer logos, or testimonials.</p>
+        </div>
+        <div class="panel">
+          <h3>Guardrails</h3>
+          <ul>
+            <li>no fake case studies</li>
+            <li>no fake ROI percentages</li>
+            <li>no fake named customers</li>
+            <li>no fabricated before/after metrics</li>
+            <li>readability over flashy effects</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <div class="pill">Repo-ready asset</div>
+        <h2>This presentation is ready to live in the website repo as a shareable HTML artifact.</h2>
+        <p class="section-intro">Use it as a review page, publish it directly from GitHub Pages, or hand it to an editor as the source-of-truth explainer brief.</p>
+        <div class="button-row">
+          <a class="button" href="emberbots-explainer.html">Refresh presentation</a>
+          <a class="button secondary" href="lead-recovery-packages-one-pager.html">See related sales asset</a>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="pill gold">Recommended next step</div>
+        <h3>Publish path</h3>
+        <p class="body-copy">Commit this file in the `website` repo, push `main`, then verify the page after GitHub Pages rebuilds. If you want, I can do the commit next and hand you the exact live URL path.</p>
+      </div>
+    </section>
+
+    <div class="footer">Ember Bots · Shareable explainer presentation · website/presentations/emberbots-explainer.html</div>
+  </main>
+</body>
+</html>
