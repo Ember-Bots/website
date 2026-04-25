@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots Order Form & Master Services Agreement</title>
+  <meta name="description" content="Ember Bots customer order form and master services agreement presentation." />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --ink: #f7f7f5;
+      --muted: #a7adba;
+      --quiet: #737b8c;
+      --panel: rgba(18, 21, 28, 0.92);
+      --panel-2: rgba(12, 14, 19, 0.96);
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(212, 175, 55, 0.34);
+      --gold: #d4af37;
+      --gold-2: #f1c40f;
+      --ember: #ff6a00;
+      --red: #c93a2f;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --paper: #f7f4ed;
+      --paper-ink: #171717;
+      --paper-muted: #636363;
+      --paper-line: #d7d0c2;
+      --max: 1180px;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(180deg, #08090d 0%, #0d1018 46%, #08090d 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+      line-height: 1.58;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, rgba(212,175,55,.10), transparent 22%, transparent 78%, rgba(122,60,255,.08)),
+        linear-gradient(180deg, rgba(255,106,0,.06), transparent 32%);
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 9, 13, 0.84);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+      text-decoration: none;
+    }
+
+    .brand img { width: 152px; height: auto; display: block; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav a, .print-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      text-decoration: none;
+      background: rgba(255,255,255,.035);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .nav a:hover, .print-button:hover {
+      color: var(--ink);
+      border-color: var(--line-strong);
+      background: rgba(212,175,55,.08);
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: 76vh;
+      padding: 80px 22px 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(330px, .94fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 560px;
+      border-left: 1px solid var(--line-strong);
+      padding-left: 28px;
+    }
+
+    .eyebrow {
+      color: var(--gold-2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(46px, 6.4vw, 82px);
+      line-height: .96;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 720px;
+    }
+
+    .meta-tile {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .meta-tile strong { display: block; font-size: 18px; color: var(--ink); }
+    .meta-tile span { display: block; color: var(--quiet); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+
+    .sign-card {
+      align-self: center;
+      background: var(--paper);
+      color: var(--paper-ink);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      box-shadow: 0 28px 80px rgba(0,0,0,.42);
+      overflow: hidden;
+    }
+
+    .sign-card-header {
+      background: #111;
+      color: #fff;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .sign-card-header h2 { margin: 0; font-size: 20px; letter-spacing: 0; }
+    .draft-badge {
+      color: #111;
+      background: var(--gold-2);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sign-card-body { padding: 24px; }
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field {
+      border: 1px solid var(--paper-line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      min-height: 58px;
+      background: rgba(255,255,255,.58);
+    }
+    .field.full { grid-column: 1 / -1; }
+    .label { display: block; color: var(--paper-muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .blank { display: block; color: #2f2f2f; font-weight: 650; margin-top: 6px; }
+
+    .section {
+      border-top: 1px solid var(--line);
+      padding: 76px 22px;
+    }
+
+    .section-inner { max-width: var(--max); margin: 0 auto; }
+    .section-head {
+      display: grid;
+      grid-template-columns: .64fr 1fr;
+      gap: 32px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.02;
+      margin-bottom: 0;
+      letter-spacing: 0;
+    }
+
+    .section-head p { color: var(--muted); margin: 0; font-size: 16px; }
+
+    .document-shell {
+      background: var(--paper);
+      color: var(--paper-ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(0,0,0,.36);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .doc-toolbar {
+      background: #111;
+      color: #fff;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .doc-toolbar h3 { margin: 0; font-size: 17px; letter-spacing: .02em; }
+    .doc-toolbar span { color: #c9c9c9; font-size: 12px; }
+
+    .doc-body { padding: 30px; }
+
+    .doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .doc-block {
+      border: 1px solid var(--paper-line);
+      border-radius: 6px;
+      padding: 16px;
+      background: rgba(255,255,255,.54);
+    }
+    .doc-block.full { grid-column: 1 / -1; }
+    .doc-block h4 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #1d1d1d;
+    }
+    .doc-block p, .doc-block li { color: #303030; font-size: 14px; }
+    .doc-block p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #fffaf0;
+      border: 1px solid var(--paper-line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td { border-bottom: 1px solid var(--paper-line); padding: 11px 12px; text-align: left; vertical-align: top; }
+    th { color: #111; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; background: #ece2cd; }
+    td:last-child, th:last-child { text-align: right; }
+    tr:last-child td { border-bottom: 0; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .step {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: var(--panel);
+      min-height: 150px;
+    }
+    .step-num { color: var(--gold-2); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+    .step h3 { font-size: 17px; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 14px; margin: 0; }
+
+    .terms-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .terms-index {
+      position: sticky;
+      top: 88px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel-2);
+      padding: 16px;
+    }
+    .terms-index h3 { font-size: 14px; margin-bottom: 12px; color: var(--gold-2); text-transform: uppercase; letter-spacing: .12em; }
+    .terms-index a { display: block; color: var(--muted); text-decoration: none; padding: 6px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,.06); }
+    .terms-index a:hover { color: var(--ink); }
+
+    .terms-paper {
+      background: var(--paper);
+      color: var(--paper-ink);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.16);
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(0,0,0,.34);
+    }
+    .terms-title {
+      background: #111;
+      color: #fff;
+      padding: 22px 26px;
+      border-bottom: 4px solid var(--gold);
+    }
+    .terms-title h3 { margin: 0 0 5px; font-size: 22px; }
+    .terms-title p { margin: 0; color: #c9c9c9; font-size: 13px; }
+    .terms-content { padding: 28px; }
+    .term { padding: 20px 0; border-bottom: 1px solid var(--paper-line); }
+    .term:first-child { padding-top: 0; }
+    .term:last-child { border-bottom: 0; padding-bottom: 0; }
+    .term h4 { margin: 0 0 10px; font-size: 18px; }
+    .term p, .term li { color: #303030; font-size: 14px; }
+    .term ul { padding-left: 20px; margin: 0 0 14px; }
+
+    .callout-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: rgba(255,255,255,.035);
+    }
+    .callout strong { display: block; margin-bottom: 8px; color: var(--ink); }
+    .callout p { color: var(--muted); margin: 0; font-size: 14px; }
+
+    .signature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 8px; }
+    .signature-box { border: 1px solid var(--paper-line); border-radius: 6px; padding: 18px; min-height: 172px; background: #fffdf8; }
+    .sig-line { border-bottom: 1px solid #282828; height: 32px; margin: 14px 0 10px; }
+    .sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .small-line { border-bottom: 1px solid #282828; height: 24px; }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 34px 22px 44px;
+      color: var(--quiet);
+      font-size: 13px;
+    }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 920px) {
+      .hero, .section-head, .terms-layout { grid-template-columns: 1fr; }
+      .hero-main { min-height: auto; padding-left: 20px; }
+      .hero-meta, .timeline, .callout-band { grid-template-columns: 1fr; }
+      .terms-index { position: static; }
+      .field-grid, .doc-grid, .signature-grid { grid-template-columns: 1fr; }
+      .doc-block.full, .field.full { grid-column: auto; }
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      body { overflow-x: hidden; }
+      .topbar, .hero, .section { max-width: 100vw; overflow-x: hidden; }
+      .hero > *, .section-inner, .sign-card, .document-shell, .terms-paper { min-width: 0; max-width: 100%; }
+      .topbar-inner { padding: 14px 22px 0; }
+      .brand img { width: 136px; }
+      .nav {
+        width: calc(100vw - 44px);
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 12px;
+        scrollbar-width: none;
+      }
+      .nav::-webkit-scrollbar { display: none; }
+      .hero { padding-top: 72px; gap: 22px; }
+      .hero-main { padding-left: 16px; }
+      h1 {
+        font-size: 36px;
+        line-height: 1.08;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+      .hero-copy { font-size: 16px; }
+      .sign-card-header, .doc-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .draft-badge { font-size: 10px; max-width: 100%; white-space: normal; }
+      .sign-card-body, .doc-body, .terms-content { padding: 20px; }
+      table { font-size: 13px; }
+      th, td { padding: 10px 9px; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      body::before, .topbar, .terms-index, .footer, .hero-meta, .callout-band { display: none !important; }
+      .hero { min-height: auto; display: block; padding: 24px 0 10px; }
+      .hero-main { border-left: 0; padding-left: 0; min-height: auto; }
+      .sign-card, .document-shell, .terms-paper { box-shadow: none; border: 1px solid #ccc; }
+      .section { padding: 20px 0; border-top: 0; }
+      .section-inner, .hero { max-width: none; }
+      .terms-layout { display: block; }
+      .term { break-inside: avoid; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="Ember Bots">
+        <img src="../logo-new.svg" alt="Ember Bots" />
+      </a>
+      <nav class="nav" aria-label="Document navigation">
+        <a href="#order-form">Order Form</a>
+        <a href="#workflow">Signing Flow</a>
+        <a href="#terms">Master Terms</a>
+        <button class="print-button" type="button" onclick="window.print()">Print / PDF</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-main">
+        <p class="eyebrow">Customer signature packet</p>
+        <h1 id="title">Order Form & Master Services Agreement</h1>
+        <p class="hero-copy">A polished post-quote signing packet for Ember Bots customers: concise commercial terms up front, reusable protective master terms behind it, and a clean structure for PDF/e-signature workflows now and CRM-native signing later.</p>
+        <div class="hero-meta" aria-label="Key deal terms">
+          <div class="meta-tile"><strong>B2B</strong><span>Customer type</span></div>
+          <div class="meta-tile"><strong>3 Months</strong><span>Initial term</span></div>
+          <div class="meta-tile"><strong>Texas</strong><span>Governing law</span></div>
+        </div>
+      </div>
+
+      <aside class="sign-card" aria-label="Order form preview">
+        <div class="sign-card-header">
+          <h2>Order Form</h2>
+          <span class="draft-badge">Attorney Review Draft</span>
+        </div>
+        <div class="sign-card-body">
+          <div class="field-grid">
+            <div class="field full"><span class="label">Customer legal name</span><span class="blank">[Customer legal name]</span></div>
+            <div class="field"><span class="label">Effective date</span><span class="blank">[Date signed]</span></div>
+            <div class="field"><span class="label">Quote reference</span><span class="blank">[Quote / CRM deal ID]</span></div>
+            <div class="field"><span class="label">Setup fee</span><span class="blank">$[amount]</span></div>
+            <div class="field"><span class="label">Monthly subscription</span><span class="blank">$[amount] / month</span></div>
+            <div class="field full"><span class="label">Activation trigger</span><span class="blank">First automation or agent is live</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="order-form">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Order Form</h2>
+          <p>The customer-specific document for each deal. It captures scope, pricing, activation, support, pass-through costs, and signature authority while incorporating the master terms by reference.</p>
+        </div>
+
+        <article class="document-shell">
+          <div class="doc-toolbar">
+            <div>
+              <h3>Ember Bots Order Form</h3>
+              <span>Use after quote acceptance. Attach Exhibit A: Master Services Agreement.</span>
+            </div>
+            <span>Draft v1 - 2026-04-25</span>
+          </div>
+          <div class="doc-body">
+            <div class="doc-grid">
+              <div class="doc-block full">
+                <h4>1. Parties</h4>
+                <div class="field-grid">
+                  <div class="field"><span class="label">Ember Bots</span><span class="blank">Ember Bots, [legal entity type and state]</span></div>
+                  <div class="field"><span class="label">Customer</span><span class="blank">[Customer legal name]</span></div>
+                  <div class="field"><span class="label">Effective Date</span><span class="blank">[date signed by last party]</span></div>
+                  <div class="field"><span class="label">Quote Reference</span><span class="blank">[quote number / CRM deal ID]</span></div>
+                </div>
+              </div>
+
+              <div class="doc-block full">
+                <h4>2. Agreement Structure</h4>
+                <p>By signing this Order Form, Customer accepts the quoted services and agrees that this Order Form, together with the Ember Bots Master Services Agreement attached or linked as Exhibit A, governs the services. If there is a conflict, this Order Form controls for the specific project and services ordered.</p>
+              </div>
+
+              <div class="doc-block full">
+                <h4>3. Services Ordered</h4>
+                <table>
+                  <thead><tr><th>Service Category</th><th>Included?</th><th>Description</th></tr></thead>
+                  <tbody>
+                    <tr><td>Custom AI chatbot / agent setup</td><td>[Yes/No]</td><td>[description]</td></tr>
+                    <tr><td>Ongoing AI automation services</td><td>[Yes/No]</td><td>[description]</td></tr>
+                    <tr><td>Integrations / workflow automation</td><td>[Yes/No]</td><td>[description]</td></tr>
+                    <tr><td>Monitoring and support</td><td>[Yes/No]</td><td>[description]</td></tr>
+                    <tr><td>Other</td><td>[Yes/No]</td><td>[description]</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="doc-block">
+                <h4>4. Scope of Work</h4>
+                <p>Ember Bots will provide the following initial setup work:</p>
+                <ul>
+                  <li>[Deliverable 1]</li>
+                  <li>[Deliverable 2]</li>
+                  <li>[Deliverable 3]</li>
+                </ul>
+                <p><strong>First live automation or agent:</strong> [target date or timeline]</p>
+              </div>
+
+              <div class="doc-block">
+                <h4>5. Customer Responsibilities</h4>
+                <p>Customer will provide content, approvals, credentials, access, data, business rules, and cooperation reasonably needed for Ember Bots to deliver the services. Delays in required materials may delay delivery, activation, support, or service availability.</p>
+              </div>
+
+              <div class="doc-block full">
+                <h4>6. Fees</h4>
+                <table>
+                  <thead><tr><th>Fee Type</th><th>Amount</th><th>Due Date / Billing Trigger</th></tr></thead>
+                  <tbody>
+                    <tr><td>Setup fee</td><td>$[amount]</td><td>Due upon signing</td></tr>
+                    <tr><td>Monthly subscription</td><td>$[amount] / month</td><td>First payment due at Activation; recurring monthly thereafter</td></tr>
+                    <tr><td>Included support</td><td>[hours/requests/SLA tier]</td><td>Included in monthly subscription</td></tr>
+                    <tr><td>Additional support</td><td>$[rate]</td><td>Billed for support above included amount</td></tr>
+                    <tr><td>Third-party tools / pass-through costs</td><td>$[amount or variable]</td><td>Billed through to Customer unless otherwise stated</td></tr>
+                    <tr><td>Other</td><td>$[amount]</td><td>[terms]</td></tr>
+                  </tbody>
+                </table>
+                <p>All fees are non-refundable except for service credits expressly provided under the SLA or as otherwise required by law.</p>
+              </div>
+
+              <div class="doc-block">
+                <h4>7. Payment Terms</h4>
+                <p>The setup fee is due upfront when this Order Form is signed. The first monthly subscription payment is due at Activation. If an invoice is more than seven days overdue, Ember Bots may suspend services until overdue amounts are paid.</p>
+              </div>
+
+              <div class="doc-block">
+                <h4>8. Initial Term and Renewal</h4>
+                <p>Monthly services have a three-month minimum Initial Term beginning at Activation. After the Initial Term, monthly services renew month-to-month unless either party cancels with at least 30 days' written notice.</p>
+              </div>
+
+              <div class="doc-block">
+                <h4>9. Service Level Credit</h4>
+                <p>Customer may be eligible for a partial monthly fee credit if Ember Bots-controlled systems cause a material outage of a covered live agent or automation, subject to the SLA terms in the Master Services Agreement.</p>
+              </div>
+
+              <div class="doc-block">
+                <h4>10. Exclusions</h4>
+                <ul>
+                  <li>Legal, medical, financial, insurance, tax, or other regulated professional advice.</li>
+                  <li>Guaranteed revenue, lead volume, conversion rate, ranking, ad performance, or business result.</li>
+                  <li>Customer-side sales execution, marketing performance, staffing, operations, or policy compliance.</li>
+                  <li>Third-party subscription fees except listed pass-through costs.</li>
+                </ul>
+              </div>
+
+              <div class="doc-block full">
+                <h4>11. Signatures</h4>
+                <p>The parties agree that this Order Form may be signed electronically. Electronic signatures, PDF signatures, click-to-sign workflows, and similar methods are intended to be treated as signed writings to the fullest extent permitted by applicable law.</p>
+                <div class="signature-grid">
+                  <div class="signature-box">
+                    <strong>Ember Bots</strong>
+                    <div class="sig-line"></div><span class="label">Authorized signature</span>
+                    <div class="sig-row"><div><div class="small-line"></div><span class="label">Name</span></div><div><div class="small-line"></div><span class="label">Date</span></div></div>
+                  </div>
+                  <div class="signature-box">
+                    <strong>Customer</strong>
+                    <div class="sig-line"></div><span class="label">Authorized signature</span>
+                    <div class="sig-row"><div><div class="small-line"></div><span class="label">Name</span></div><div><div class="small-line"></div><span class="label">Date</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Signing Flow</h2>
+          <p>Designed for today’s PDF/e-signature workflow, without painting Ember Bots into a corner when the CRM later owns the signing experience.</p>
+        </div>
+        <div class="timeline">
+          <div class="step"><div class="step-num">Step 01</div><h3>Quote Accepted</h3><p>Sales marks the quote accepted and generates the order form from the same deal economics.</p></div>
+          <div class="step"><div class="step-num">Step 02</div><h3>Packet Prepared</h3><p>The order form fills customer-specific scope, fees, support amount, and pass-through costs.</p></div>
+          <div class="step"><div class="step-num">Step 03</div><h3>Customer Signs</h3><p>Customer signs the order form electronically, incorporating the master services agreement.</p></div>
+          <div class="step"><div class="step-num">Step 04</div><h3>Activation Starts</h3><p>Setup fee is collected upfront. First monthly subscription is due when the first automation or agent is live.</p></div>
+        </div>
+        <div class="callout-band">
+          <div class="callout"><strong>Clear commercial terms</strong><p>Sales-critical fields are visible before the legal terms.</p></div>
+          <div class="callout"><strong>Reusable master agreement</strong><p>The legal foundation stays stable across deals.</p></div>
+          <div class="callout"><strong>CRM-ready later</strong><p>The structure maps cleanly into deal records, templates, and e-sign fields.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="terms">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Exhibit A: Master Terms</h2>
+          <p>The reusable protective terms for Ember Bots' B2B AI agent, chatbot, automation, monitoring, integration, and support services.</p>
+        </div>
+
+        <div class="terms-layout">
+          <aside class="terms-index" aria-label="Master terms index">
+            <h3>Sections</h3>
+            <a href="#term-1">1. Agreement</a>
+            <a href="#term-4">4. Fees</a>
+            <a href="#term-5">5. Term</a>
+            <a href="#term-9">9. SLA Credits</a>
+            <a href="#term-10">10. Ownership</a>
+            <a href="#term-12">12. AI Limits</a>
+            <a href="#term-17">17. Liability</a>
+            <a href="#term-21">21. Texas Law</a>
+          </aside>
+
+          <article class="terms-paper">
+            <div class="terms-title">
+              <h3>Ember Bots Master Services Agreement</h3>
+              <p>Draft for attorney review. Incorporated into each signed Order Form.</p>
+            </div>
+            <div class="terms-content">
+              <section class="term" id="term-1"><h4>1. Agreement</h4><p>This Master Services Agreement governs services provided by Ember Bots, [legal entity type and state] to the customer identified in an order form. Each signed order form, statement of work, quote accepted by signature, or similar written ordering document is an Order Form.</p><p>This Agreement and the applicable Order Form together form the complete agreement for the services ordered. If an Order Form conflicts with this Agreement, the Order Form controls for that specific order.</p></section>
+              <section class="term"><h4>2. Services</h4><p>Ember Bots provides custom AI chatbot setup, AI agent setup, automation services, workflow integrations, monitoring, and related support services as described in the applicable Order Form. Ember Bots may determine technical methods, tools, architecture, models, vendors, hosting approach, workflows, and implementation details unless the Order Form states otherwise.</p></section>
+              <section class="term"><h4>3. Activation</h4><p>Activation means the first customer-facing or operational automation, chatbot, or AI agent under the applicable Order Form is live and available for Customer's use. Activation may occur when Ember Bots determines that the delivered service materially meets the agreed scope, even if Customer later requests changes, refinements, or enhancements.</p></section>
+              <section class="term" id="term-4"><h4>4. Fees and Payment</h4><ul><li>Setup fees are due upon signing.</li><li>The first monthly subscription payment is due at Activation.</li><li>Monthly fees recur monthly after Activation.</li><li>Third-party tools, software, model usage, telephony, messaging, hosting, API, advertising, and similar charges may be billed through to Customer if listed in the Order Form or reasonably required for the services.</li><li>Fees already paid are non-refundable, except for SLA credits expressly provided in this Agreement or as required by law.</li></ul><p>Ember Bots may suspend services if any invoice is more than seven days overdue. Customer remains responsible for unpaid fees during suspension.</p></section>
+              <section class="term" id="term-5"><h4>5. Initial Term, Renewal, and Cancellation</h4><p>Monthly services have a three-month minimum initial term beginning at Activation unless the Order Form states a different term. After the initial term, monthly services renew month-to-month unless either party gives at least 30 days' written notice of cancellation.</p><p>Cancellation does not relieve Customer of payment obligations for fees already incurred, the remaining minimum initial term, pass-through third-party costs, or approved additional work.</p></section>
+              <section class="term"><h4>6. Customer Responsibilities</h4><p>Customer will provide timely access to systems, accounts, tools, data, contacts, business rules, credentials, content, approvals, and other materials reasonably needed for Ember Bots to perform the services.</p><ul><li>Customer is responsible for the accuracy and legality of Customer-provided content, data, prompts, offers, claims, instructions, workflows, business rules, and policies.</li><li>Customer is responsible for reviewing outputs and workflows before relying on them in regulated, high-risk, or customer-facing contexts.</li><li>Customer must maintain any licenses, consents, notices, permissions, and legal authority required for Customer's business, customer communications, data use, and third-party tools.</li></ul></section>
+              <section class="term"><h4>7. Change Requests</h4><p>Minor changes consistent with the agreed scope may be included at Ember Bots' discretion. Material changes, new workflows, new integrations, revised business logic, expanded use cases, additional support above the included support amount, and work outside the agreed scope may require written approval and may affect price, timeline, or subscription fees.</p></section>
+              <section class="term"><h4>8. Support</h4><p>The monthly subscription includes the fixed support amount stated in the Order Form. Support may include monitoring, troubleshooting, reasonable adjustments, operational questions, and maintenance of covered live automations or agents. Support above the included amount may be billed at the rate stated in the Order Form or at Ember Bots' then-current support rate.</p></section>
+              <section class="term" id="term-9"><h4>9. Service Level Credits</h4><p>Customer may request a partial monthly service credit if a covered live agent or automation is materially unavailable due to an Ember Bots-controlled system failure.</p><p>SLA credits do not apply to planned maintenance, third-party outages, Customer-caused issues, development or non-production systems, force majeure events, circumstances outside Ember Bots' reasonable control, or periods when Customer is overdue on payment.</p><table><thead><tr><th>Qualifying monthly availability</th><th>Credit</th></tr></thead><tbody><tr><td>99.0% or higher</td><td>No credit</td></tr><tr><td>95.0% to 98.99%</td><td>5%</td></tr><tr><td>90.0% to 94.99%</td><td>10%</td></tr><tr><td>Below 90.0%</td><td>20%</td></tr></tbody></table><p>Credits apply only to the monthly fee for the affected covered service, must be requested within 15 days after the outage month, and are Customer's exclusive remedy for service availability failures.</p></section>
+              <section class="term" id="term-10"><h4>10. Ownership</h4><p>Customer owns Customer's business data, customer data, content, brand assets, and materials Customer provides. Subject to full payment, Customer receives the right to use configured live deliverables for Customer's internal business operations.</p><p>Ember Bots retains ownership of its pre-existing materials, platform components, templates, prompts, workflows, agent frameworks, automation libraries, scripts, know-how, methodologies, reusable components, internal tools, configuration patterns, and independently developed improvements.</p></section>
+              <section class="term"><h4>11. Third-Party Tools</h4><p>The services may depend on third-party tools, software, APIs, models, hosting providers, messaging services, telephony providers, CRM systems, calendar systems, email services, payment processors, and other vendors. Ember Bots may bill third-party costs through to Customer unless the Order Form states otherwise.</p></section>
+              <section class="term" id="term-12"><h4>12. AI and Automation Limitations</h4><p>AI agents, chatbots, language models, and automations may produce inaccurate, incomplete, unexpected, delayed, or unsuitable outputs. Customer is responsible for supervising use of the services and deciding when human review is required.</p><p>The services are not a substitute for legal, medical, financial, insurance, tax, compliance, or other regulated professional advice. Ember Bots does not guarantee revenue, profits, sales, leads, appointments, conversion rates, search rankings, advertising results, operational savings, or any other business outcome.</p></section>
+              <section class="term"><h4>13. Confidentiality</h4><p>Each party may receive non-public business, technical, financial, customer, operational, or strategic information from the other. Each party will use the other's Confidential Information only to perform or receive the services, will protect it using reasonable care, and will not disclose it except to those who need to know for the services and are bound by confidentiality obligations or professional duties.</p></section>
+              <section class="term"><h4>14. Data</h4><p>Customer authorizes Ember Bots to access, process, transmit, and store Customer data as reasonably needed to provide, secure, maintain, improve, troubleshoot, and support the services. Customer is responsible for required consents, permissions, notices, and legal rights.</p></section>
+              <section class="term"><h4>15. Compliance and Prohibited Uses</h4><p>Customer will not use the services to violate law, infringe rights, mislead people, send unlawful communications, transmit harmful code, bypass platform rules, make prohibited regulated decisions, or engage in deceptive, abusive, or unauthorized activity.</p></section>
+              <section class="term"><h4>16. Disclaimers</h4><p>Except as expressly stated in this Agreement or an Order Form, the services are provided "as is" and "as available." Ember Bots disclaims implied warranties to the fullest extent permitted by law and does not warrant uninterrupted, error-free, secure, or universally compatible services.</p></section>
+              <section class="term" id="term-17"><h4>17. Limitation of Liability</h4><p>To the fullest extent permitted by law, Ember Bots will not be liable for indirect, incidental, special, consequential, exemplary, punitive, or lost-profit damages, or for loss of revenue, goodwill, data, business opportunity, or business interruption.</p><p>Ember Bots' total aggregate liability will not exceed the fees paid by Customer for the affected services during the three months before the event giving rise to the claim.</p></section>
+              <section class="term"><h4>18. Indemnity</h4><p>Customer will defend, indemnify, and hold harmless Ember Bots from claims, damages, liabilities, losses, costs, and expenses arising from Customer's content, data, instructions, misuse of the services, violation of law, violation of third-party rights, or breach of this Agreement.</p></section>
+              <section class="term"><h4>19. Suspension and Termination</h4><p>Ember Bots may suspend or terminate services if Customer fails to pay, materially breaches this Agreement, creates legal or security risk, misuses the services, violates third-party platform rules, or asks Ember Bots to perform unlawful or prohibited work.</p></section>
+              <section class="term"><h4>20. Electronic Signatures</h4><p>The parties agree to conduct transactions electronically. Electronic signatures, PDF signatures, click-to-sign workflows, and electronic records are intended to have the same legal effect as handwritten signatures and paper records to the fullest extent permitted by applicable law, including the Texas Uniform Electronic Transactions Act where applicable.</p></section>
+              <section class="term" id="term-21"><h4>21. Governing Law and Venue</h4><p>This Agreement and all Order Forms are governed by Texas law, without regard to conflict of law rules. The parties consent to exclusive jurisdiction and venue in the state or federal courts located in Texas unless they agree in writing to another dispute resolution process.</p></section>
+              <section class="term"><h4>22. Notices</h4><p>Notices may be sent by email, certified mail, courier, or other written method stated in the Order Form. Notices to Customer may be sent to the billing, business, or project contact listed in the Order Form. Notices to Ember Bots may be sent to [legal notice email] and [business address].</p></section>
+              <section class="term"><h4>23. General Terms</h4><p>Neither party may assign this Agreement without the other party's written consent, except to an affiliate or successor in connection with a merger, acquisition, reorganization, or sale of substantially all assets. Neither party is liable for delay or failure caused by events outside its reasonable control. If any provision is unenforceable, the remaining provisions remain in effect.</p></section>
+              <section class="term"><h4>24. Signatures</h4><p>This Agreement may be accepted by signing an Order Form that incorporates it, signing this Agreement directly, or another written acceptance method agreed by the parties.</p></section>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Ember Bots - Order Form & Master Services Agreement</span>
+      <span>Draft v1 - Attorney review recommended before customer use</span>
+    </div>
+  </footer>
+</body>
+</html>
