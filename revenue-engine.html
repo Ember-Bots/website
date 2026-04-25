@@ -309,6 +309,59 @@
       padding: 20px;
     }
     .cta-box p { color: var(--text-muted); }
+    .form-card {
+      padding: 30px;
+    }
+    .qual-form {
+      display: grid;
+      gap: 16px;
+    }
+    .qual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+    .qual-form input,
+    .qual-form select,
+    .qual-form textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .qual-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .qual-form input:focus,
+    .qual-form select:focus,
+    .qual-form textarea:focus {
+      border-color: var(--ember);
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .form-success.show { display: block; }
     footer {
       max-width: 1200px;
       margin: 0 auto;
@@ -323,7 +376,7 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; }
 
     @media (max-width: 1080px) {
-      .hero, .grid-2, .grid-3, .pricing-grid, .fit-grid, .cta-band, .stats, .process { grid-template-columns: 1fr; }
+      .hero, .grid-2, .grid-3, .pricing-grid, .fit-grid, .cta-band, .stats, .process, .qual-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       nav, .hero, section, footer { padding-left: 24px; padding-right: 24px; }
@@ -507,8 +560,112 @@
       <div class="cta-box">
         <h3 style="margin-bottom:8px;">Primary CTA</h3>
         <p style="margin-bottom:16px;">Start with a short qualification conversation and map the first campaign system.</p>
-        <a href="index.html#contact" class="btn-primary" style="width:100%;">Book a Demo</a>
+        <a href="#qualify" class="btn-primary" style="width:100%;">Get My Revenue Engine Plan</a>
       </div>
+    </div>
+  </section>
+
+  <section id="qualify">
+    <p class="section-label">Qualification Form</p>
+    <h2>Tell us where your outbound or follow-up system is leaking.</h2>
+    <p class="section-sub">We’ll use this to make the demo specific to your market, current motion, and biggest bottlenecks.</p>
+    <div class="panel form-card">
+      <form class="qual-form" id="revenueEngineForm">
+        <div class="qual-grid">
+          <div class="form-group">
+            <label for="re_name">Full name</label>
+            <input type="text" id="re_name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="re_email">Work email</label>
+            <input type="email" id="re_email" name="email" placeholder="you@company.com" required />
+          </div>
+        </div>
+        <div class="qual-grid">
+          <div class="form-group">
+            <label for="re_company">Company</label>
+            <input type="text" id="re_company" name="company" placeholder="Company name" required />
+          </div>
+          <div class="form-group">
+            <label for="re_phone">Phone</label>
+            <input type="tel" id="re_phone" name="phone" placeholder="(555) 555-5555" />
+          </div>
+        </div>
+        <div class="qual-grid">
+          <div class="form-group">
+            <label for="re_website">Website</label>
+            <input type="url" id="re_website" name="website" placeholder="https://yourcompany.com" />
+          </div>
+          <div class="form-group">
+            <label for="re_industry">Industry</label>
+            <select id="re_industry" name="industry">
+              <option value="">Select one</option>
+              <option>Home services</option>
+              <option>Professional services</option>
+              <option>Agency</option>
+              <option>IT / MSP</option>
+              <option>Recruiting</option>
+              <option>Local service business</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="qual-grid">
+          <div class="form-group">
+            <label for="re_motion">Current sales motion</label>
+            <select id="re_motion" name="motion">
+              <option value="">Select one</option>
+              <option>Mostly referrals</option>
+              <option>Mostly inbound leads</option>
+              <option>Some cold email</option>
+              <option>Some LinkedIn outreach</option>
+              <option>Outbound calling</option>
+              <option>No consistent outbound system yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="re_bottleneck">Biggest bottleneck</label>
+            <select id="re_bottleneck" name="bottleneck">
+              <option value="">Select one</option>
+              <option>Finding the right prospects</option>
+              <option>Personalizing outreach at scale</option>
+              <option>Getting replies</option>
+              <option>Following up consistently</option>
+              <option>Booking meetings</option>
+              <option>Managing handoff into CRM / pipeline</option>
+              <option>We need the whole system</option>
+            </select>
+          </div>
+        </div>
+        <div class="qual-grid">
+          <div class="form-group">
+            <label for="re_timeline">Timeline</label>
+            <select id="re_timeline" name="timeline">
+              <option value="">Select one</option>
+              <option>ASAP</option>
+              <option>Within 30 days</option>
+              <option>Within 90 days</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="re_budget">Budget posture</label>
+            <select id="re_budget" name="budget">
+              <option value="">Select one</option>
+              <option>Looking for guided entry-level support</option>
+              <option>Open to operator-assisted support</option>
+              <option>Looking for a managed / VIP solution</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="re_message">Anything we should know?</label>
+          <textarea id="re_message" name="message" placeholder="What happens when a prospect replies today? Where are things getting dropped?"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="border:none; width:100%; cursor:pointer;">Get My Revenue Engine Plan</button>
+      </form>
+      <div class="form-success" id="revenueEngineFormSuccess">✓ Thanks — we’ve got what we need. We’ll use this to make the demo specific and useful.</div>
     </div>
   </section>
 
@@ -520,5 +677,51 @@
       <a href="presentations/revenue-engine-one-pager.html">One-Pager</a>
     </div>
   </footer>
+  <script>
+    const revenueEngineForm = document.getElementById('revenueEngineForm');
+    if (revenueEngineForm) {
+      revenueEngineForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = revenueEngineForm.querySelector('button');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        const detailMessage = [
+          'Revenue Engine qualification form',
+          `Website: ${revenueEngineForm.website.value || 'n/a'}`,
+          `Industry: ${revenueEngineForm.industry.value || 'n/a'}`,
+          `Current sales motion: ${revenueEngineForm.motion.value || 'n/a'}`,
+          `Biggest bottleneck: ${revenueEngineForm.bottleneck.value || 'n/a'}`,
+          `Timeline: ${revenueEngineForm.timeline.value || 'n/a'}`,
+          `Budget posture: ${revenueEngineForm.budget.value || 'n/a'}`,
+          '',
+          revenueEngineForm.message.value || ''
+        ].join('\n');
+        try {
+          const resp = await fetch('https://crm.emberbots.ai/api/leads/public', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: revenueEngineForm.name.value,
+              email: revenueEngineForm.email.value,
+              phone: revenueEngineForm.phone.value || undefined,
+              company: revenueEngineForm.company.value || undefined,
+              message: detailMessage,
+            }),
+          });
+          const data = await resp.json();
+          if (data.ok) {
+            revenueEngineForm.style.display = 'none';
+            document.getElementById('revenueEngineFormSuccess').classList.add('show');
+          } else {
+            btn.textContent = data.error || 'Something went wrong — try again';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Something went wrong — try again';
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
 </body>
 </html>
