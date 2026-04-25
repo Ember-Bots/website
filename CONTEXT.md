@@ -56,7 +56,9 @@ _Last updated: 2026-04-03_
 | File | Purpose |
 |------|---------|
 | `index.html` | Entire website (single page) |
-| `logo.png` | Transparent PNG logo (robot mascot + "Ember Bots" text) |
+| `logo.svg` | Canonical Ember Bots logo from emberbots.ai; use this for new materials |
+| `favicon.svg` | Canonical Ember Bots mark |
+| `logo.png` | Deprecated old PNG logo; do not use for new materials |
 | `amber.jpg` | Amber Rice founder photo |
 | `steve.jpg` | Steve Ward founder photo |
 | `CNAME` | Contains `emberbots.ai` — tells GitHub Pages the custom domain |
