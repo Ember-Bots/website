@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots Revenue Engine — One-Page Sales Sheet</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: rgba(18, 24, 44, 0.92);
+      --surface-2: rgba(14, 19, 36, 0.98);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --green: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.42);
+      --radius: 28px;
+      --page-w: 11in;
+      --page-h: 8.5in;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+    }
+    .sheet {
+      width: var(--page-w);
+      min-height: var(--page-h);
+      margin: 0 auto;
+      padding: 0.4in;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 0.22in;
+      background: transparent;
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(18,24,44,0.94), rgba(12,16,30,0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+    .hero {
+      padding: 0.32in;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0.22in;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand img { width: 240px; height: auto; display: block; }
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 700;
+      font-size: 11px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    h1,h2,h3,p { margin: 0; position: relative; z-index: 1; }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+      max-width: 11ch;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    h3 { font-size: 16px; margin-bottom: 10px; }
+    .gradient {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead { color: #dbe6fb; font-size: 17px; line-height: 1.5; max-width: 56ch; }
+    .hero-card {
+      background: linear-gradient(180deg, rgba(20,26,46,0.96), rgba(12,17,30,0.98));
+      border: 1px solid rgba(255,184,77,0.18);
+      border-radius: 22px;
+      padding: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-card ul, .block ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.22in; }
+    .block { padding: 0.24in; }
+    .block p, .block li { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .value-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .value {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .value::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,184,77,0.10), transparent 45%, rgba(122,60,255,0.08));
+      pointer-events: none;
+    }
+    .value .label {
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .value .copy {
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+    .cta {
+      padding: 0.24in 0.28in;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 0.2in;
+      align-items: center;
+    }
+    .cta p { color: var(--muted); font-size: 15px; }
+    .cta-box {
+      background: radial-gradient(circle at top, rgba(255,184,77,0.14), transparent 40%), linear-gradient(180deg, rgba(20,26,46,0.96), rgba(12,17,30,0.98));
+      border: 1px solid rgba(255,184,77,0.24);
+      border-radius: 22px;
+      padding: 18px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-chip {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(125,211,166,0.12);
+      border: 1px solid rgba(125,211,166,0.22);
+      color: #c6f5de;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .price-card {
+      background: linear-gradient(180deg, rgba(18,24,44,0.88), rgba(10,14,26,0.96));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .price-card.featured { border-color: rgba(255,184,77,0.28); box-shadow: inset 0 0 0 1px rgba(255,184,77,0.10); }
+    .price-card .tier { font-weight: 700; margin-bottom: 6px; }
+    .price-card .price { font-family: 'Space Grotesk', sans-serif; font-size: 26px; margin-bottom: 8px; }
+    .footer { text-align: center; color: var(--muted); font-size: 12px; }
+    @media print {
+      @page { size: 11in 8.5in; margin: 0; }
+      html, body { width: 11in; height: 8.5in; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .sheet { width: 11in; min-height: 8.5in; padding: 0.4in; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="panel hero">
+      <div>
+        <div class="brand"><img src="../logo.svg" alt="Ember Bots" /></div>
+        <div class="eyebrow">Revenue Engine</div>
+        <h1>Turn outbound and follow-up into a <span class="gradient">revenue engine</span>.</h1>
+        <p class="lead">Ember Bots helps service businesses and B2B teams find the right prospects, launch personalized outreach, manage replies, and book more qualified conversations.</p>
+      </div>
+      <div class="hero-card">
+        <h3>What’s included</h3>
+        <ul>
+          <li>prospect targeting and enrichment</li>
+          <li>AI-assisted email and follow-up workflows</li>
+          <li>reply triage, scheduling, and CRM handoff</li>
+          <li>optional managed VIP execution</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid2">
+      <div class="panel block">
+        <h2>The problem</h2>
+        <p>Most teams do not have a lead problem. They have a follow-up problem: weak targeting, inconsistent outreach, slow reply handling, and messy handoff from interest to meeting.</p>
+      </div>
+      <div class="panel block">
+        <h2>The fix</h2>
+        <p>Ember Bots packages prospecting, outreach, reply management, booking, and CRM routing into one operating system so qualified conversations happen more consistently.</p>
+      </div>
+    </section>
+
+    <section class="panel block">
+      <h2>Why buyers care</h2>
+      <div class="value-grid">
+        <div class="value"><div class="label">Targeting</div><div class="copy">Better-fit prospects</div></div>
+        <div class="value"><div class="label">Messaging</div><div class="copy">Stronger personalization</div></div>
+        <div class="value"><div class="label">Speed</div><div class="copy">Faster reply handling</div></div>
+        <div class="value"><div class="label">Handoff</div><div class="copy">Cleaner booking and CRM flow</div></div>
+      </div>
+      <div class="grid2" style="margin-top:14px;">
+        <div>
+          <h3>Best fit</h3>
+          <p>Owner-led service businesses, agencies, IT/MSP firms, recruiting firms, and B2B teams with real outreach or follow-up revenue leakage.</p>
+        </div>
+        <div>
+          <h3>Best sales motion</h3>
+          <p>Show lighter guided tiers publicly. Sell the managed VIP offer on the demo.</p>
+        </div>
+      </div>
+      <div class="price-grid" style="margin-top:16px;">
+        <div class="price-card"><div class="tier">Launch</div><div class="price">From $750/mo</div><p>Guided core system for smaller teams.</p></div>
+        <div class="price-card featured"><div class="tier">Scale</div><div class="price">From $1,500/mo</div><p>More channels, deeper workflows, operator support.</p></div>
+        <div class="price-card"><div class="tier">VIP</div><div class="price">Custom</div><p>$3k–$7.5k setup + $4k–$8.5k/mo target range.</p></div>
+      </div>
+    </section>
+
+    <section class="panel cta">
+      <div>
+        <h2>Primary CTA</h2>
+        <p>Book a demo and get a tailored Revenue Engine plan for your market, targeting, and first campaign scope.</p>
+      </div>
+      <div class="cta-box">
+        <div class="cta-chip">Ember Bots Revenue Engine</div>
+        <p>AI-powered outbound and follow-up systems for teams that need more qualified conversations.</p>
+      </div>
+    </section>
+
+    <div class="footer">Ember Bots Revenue Engine · one-page sales sheet · April 2026</div>
+  </main>
+</body>
+</html>

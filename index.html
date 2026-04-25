@@ -943,6 +943,90 @@
 
     .form-success.show { display: block; }
 
+    /* ─── REVENUE ENGINE SPOTLIGHT ─── */
+    .offer-spotlight {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+
+    .offer-spotlight-card {
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.10), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%),
+        linear-gradient(180deg, rgba(18,24,44,0.94), rgba(10,14,26,0.98));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+      box-shadow: 0 20px 48px rgba(5, 10, 20, 0.28);
+    }
+
+    .offer-spotlight-copy p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 58ch;
+    }
+
+    .offer-spotlight-points {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .offer-spotlight-points li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .offer-spotlight-points li::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .offer-spotlight-side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .offer-mini-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .offer-mini-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .offer-mini-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .offer-spotlight-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -1012,7 +1096,8 @@
       .pain-layout,
       .how-grid,
       .fit-layout,
-      .story-wrap {
+      .story-wrap,
+      .offer-spotlight-card {
         grid-template-columns: 1fr;
         gap: 40px;
       }
@@ -1345,6 +1430,37 @@
         <p>Between them, they bring deep experience in business operations, revenue growth, and customer relationships. They've seen firsthand how much time gets consumed by tasks that do not require human judgment: follow-up emails, data entry, scheduling, and report generation. Work that compounds quietly into competitive disadvantage.</p>
         <p>The tools to fix this already exist. Large companies have teams of engineers deploying them. Small businesses do not. That is the gap Ember Bots was built to close, not with bespoke custom builds for every client, but with proven automation systems that handle the most common operational bottlenecks faster and more consistently than manual processes ever could.</p>
         <p>We're based in Dallas, TX and work with service-based SMBs who are serious about removing operational drag and building a business that doesn't require the owner to be the last line of defense on every routine task.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVENUE ENGINE SPOTLIGHT -->
+  <section class="offer-spotlight" id="revenue-engine">
+    <div class="offer-spotlight-card">
+      <div class="offer-spotlight-copy">
+        <p class="section-label">Revenue Engine</p>
+        <h2>Need more qualified conversations, not more manual follow-up?</h2>
+        <p>Ember Bots Revenue Engine is our AI-powered outbound and follow-up offer for teams that need better prospecting, faster response, cleaner handoff, and more booked sales conversations without building a full SDR operation internally.</p>
+        <ul class="offer-spotlight-points">
+          <li>Prospect targeting, enrichment, and list building</li>
+          <li>Personalized outbound across email, LinkedIn, and follow-up workflows</li>
+          <li>Reply triage, meeting booking, and CRM handoff</li>
+          <li>Optional done-for-you campaign build and management</li>
+        </ul>
+        <div class="offer-spotlight-actions">
+          <a href="revenue-engine.html" class="btn-primary">Explore Revenue Engine</a>
+          <a href="#contact" class="btn-ghost">Talk to Ember Bots</a>
+        </div>
+      </div>
+      <div class="offer-spotlight-side">
+        <div class="offer-mini-card">
+          <h3>Best fit</h3>
+          <p>Owner-led service businesses and B2B teams that need more consistent outbound activity and faster follow-up without adding internal sales operations overhead.</p>
+        </div>
+        <div class="offer-mini-card">
+          <h3>How it’s sold</h3>
+          <p>Guided tiers for smaller teams, with a higher-ticket managed Revenue Engine VIP offer for clients who want Ember to build and run the system.</p>
+        </div>
       </div>
     </div>
   </section>

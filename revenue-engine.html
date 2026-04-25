@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots Revenue Engine — AI-Powered Outbound & Follow-Up Systems</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1" />
+  <meta name="description" content="Ember Bots Revenue Engine helps service businesses and B2B teams find prospects, launch personalized outbound, manage replies, and book more qualified conversations with AI-powered workflows and done-for-you execution." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg2: rgba(10, 14, 28, 0.88);
+      --bg3: rgba(16, 21, 40, 0.92);
+      --surface: rgba(18, 24, 44, 0.82);
+      --surface-strong: rgba(14, 19, 36, 0.94);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --ember-red: #c93a2f;
+      --ember: #ff6a00;
+      --ember-glow: rgba(255,106,0,0.24);
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --green: #67d39d;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.42);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 14% 12%, rgba(122,60,255,0.16) 0%, transparent 24%),
+        radial-gradient(circle at 84% 10%, rgba(37,99,255,0.14) 0%, transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 20px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(8,10,18,0.84);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img { height: 56px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--ember) 0%, #ff8a1f 100%);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 88px 56px 64px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; color: var(--white); }
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      margin-bottom: 20px;
+      max-width: 10.5ch;
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--gold) 0%, #ff8a1f 32%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 58ch;
+      margin-bottom: 30px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 15px 28px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, #ff9f2f 24%, var(--ember) 62%, #ff5a1f 100%);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(20,24,46,0.30), 0 0 24px rgba(255,106,0,0.20);
+    }
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .btn-primary:hover, .btn-secondary:hover { transform: translateY(-2px); }
+
+    .hero-card, .panel, .pricing-card, .stat, .faq-item, .fit-card {
+      background: linear-gradient(180deg, rgba(18,24,44,0.94), rgba(10,14,26,0.98));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 26px;
+      display: grid;
+      gap: 16px;
+    }
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,184,77,0.10);
+      border: 1px solid rgba(255,184,77,0.22);
+      color: #ffe1a8;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    ul.clean {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      padding: 0;
+    }
+    ul.clean li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #dde8ff;
+    }
+    ul.clean li::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 56px 72px;
+    }
+    .section-label {
+      color: var(--violet);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      max-width: 62ch;
+      font-size: 1.03rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .grid-2, .grid-3, .pricing-grid, .faq-grid, .fit-grid, .stats {
+      display: grid;
+      gap: 20px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3, .pricing-grid, .fit-grid { grid-template-columns: repeat(3, 1fr); }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .panel, .pricing-card, .faq-item, .fit-card, .stat { padding: 24px; }
+    .panel p, .pricing-card p, .faq-item p, .fit-card p, .stat p {
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .stat-value {
+      font-size: 1.65rem;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+    .pricing-card.featured {
+      border-color: rgba(255,184,77,0.34);
+      box-shadow: inset 0 0 0 1px rgba(255,184,77,0.10), 0 0 40px rgba(255,106,0,0.10);
+      transform: translateY(-4px);
+    }
+    .price {
+      font-size: 2.4rem;
+      line-height: 1;
+      margin: 14px 0 8px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .subprice {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    .chip {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(103,211,157,0.10);
+      border: 1px solid rgba(103,211,157,0.22);
+      color: #c6f5de;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .process {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 12px;
+    }
+    .step {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(18,24,44,0.96), rgba(9,12,23,0.98));
+      border: 1px solid rgba(121,138,194,0.22);
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--ember), #ff9d2b);
+      box-shadow: 0 14px 30px rgba(255,106,0,0.18);
+      margin-bottom: 14px;
+    }
+    .cta-band {
+      margin-top: 10px;
+      background:
+        radial-gradient(circle at top, rgba(255,184,77,0.12), transparent 40%),
+        linear-gradient(180deg, rgba(18,24,44,0.94), rgba(10,14,26,0.98));
+      border: 1px solid rgba(255,184,77,0.24);
+      border-radius: 28px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .cta-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    .cta-box p { color: var(--text-muted); }
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 56px 56px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; }
+
+    @media (max-width: 1080px) {
+      .hero, .grid-2, .grid-3, .pricing-grid, .fit-grid, .cta-band, .stats, .process { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      nav, .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+      nav { position: static; }
+      .nav-links li:not(:last-child) { display: none; }
+      h1 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo.svg?v=6" alt="Ember Bots" /></a>
+    <ul class="nav-links">
+      <li><a href="#offer">Offer</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Book a Demo</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Revenue Engine</p>
+      <h1>Turn cold outreach and follow-up into a <span class="gradient">revenue engine</span>.</h1>
+      <p class="lead">Ember Bots helps service businesses and B2B teams find the right prospects, launch personalized outbound campaigns, manage replies, and book more qualified conversations with AI-powered workflows and done-for-you execution.</p>
+      <div class="hero-actions">
+        <a href="index.html#contact" class="btn-primary">Book a Demo</a>
+        <a href="#pricing" class="btn-secondary">See Pricing</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="kicker">What you get</span>
+      <ul class="clean">
+        <li>Prospect targeting, enrichment, and list building</li>
+        <li>Personalized outbound across email, LinkedIn, and follow-up workflows</li>
+        <li>Reply triage, meeting booking, and CRM handoff</li>
+        <li>Optional done-for-you campaign build and management</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">The Problem</p>
+    <h2>Most teams do not have a lead problem. They have a <span class="gradient">follow-up problem</span>.</h2>
+    <p class="section-sub">Prospects go untouched. Outreach is inconsistent. Replies sit too long. Good opportunities disappear because no one owns the system end to end. Ember Bots Revenue Engine fixes that by building and operating the workflows behind prospecting, outreach, reply handling, booking, and handoff.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">Slow</div><p>Qualified prospects cool off before your team engages.</p></div>
+      <div class="stat"><div class="stat-value">Scattered</div><p>Lead sources, inboxes, and handoffs live in too many places.</p></div>
+      <div class="stat"><div class="stat-value">Manual</div><p>Personalization and follow-up break under real operating load.</p></div>
+      <div class="stat"><div class="stat-value">Invisible</div><p>Leadership cannot clearly see what is being worked and what is leaking.</p></div>
+    </div>
+  </section>
+
+  <section id="offer">
+    <p class="section-label">What You Get</p>
+    <h2>Everything you need to run AI-powered outbound in one system.</h2>
+    <p class="section-sub">This is the Ember Bots version of the B2B Rocket commercial model: same broad offer architecture, cleaner positioning, stronger operational credibility.</p>
+    <div class="grid-3">
+      <div class="panel"><h3>Lead Search &amp; Targeting</h3><p>Build lists based on geography, company profile, buyer role, and fit.</p></div>
+      <div class="panel"><h3>Enrichment &amp; Validation</h3><p>Fill in missing contact data, validate emails, and improve deliverability.</p></div>
+      <div class="panel"><h3>Personalized Outreach</h3><p>Launch AI-assisted sequences tailored to audience, offer, and stage.</p></div>
+      <div class="panel"><h3>Reply Management</h3><p>Categorize responses, surface qualified intent, and route next actions.</p></div>
+      <div class="panel"><h3>Meeting Booking</h3><p>Move interested prospects into scheduling flows automatically.</p></div>
+      <div class="panel"><h3>CRM &amp; Handoff</h3><p>Push lead activity, reply context, and status updates into the pipeline.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Managed Option</p>
+    <h2>Want the system without running it yourself?</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Revenue Engine VIP</h3>
+        <p>Our VIP offer gives you the platform plus a managed growth team. We define the targeting, build the campaigns, monitor performance, adjust messaging, and help turn outreach into qualified conversations.</p>
+      </div>
+      <div class="panel">
+        <ul class="clean">
+          <li>ICP and offer strategy</li>
+          <li>campaign buildout and deliverability setup</li>
+          <li>managed outbound execution</li>
+          <li>reply triage and booking workflows</li>
+          <li>weekly optimization and monthly strategy review</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <p class="section-label">How It Works</p>
+    <h2>A clear path from targeting to <span class="gradient">qualified conversations</span>.</h2>
+    <div class="process">
+      <div class="step"><div class="step-num">1</div><h3>Define the target</h3><p class="section-sub" style="font-size:.95rem; margin:0;">Lock in ICP, geography, offer, and qualification rules.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Build the campaign system</h3><p class="section-sub" style="font-size:.95rem; margin:0;">Configure lead sources, outreach logic, inbox flows, scheduling, and CRM handoff.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Launch outreach</h3><p class="section-sub" style="font-size:.95rem; margin:0;">Start campaigns across the selected channels with AI-assisted personalization.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Capture and route replies</h3><p class="section-sub" style="font-size:.95rem; margin:0;">Surface interested responses and move them quickly into the right next step.</p></div>
+      <div class="step"><div class="step-num">5</div><h3>Optimize weekly</h3><p class="section-sub" style="font-size:.95rem; margin:0;">Refine targeting, messaging, send patterns, and booking workflows based on performance.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Best Fit</p>
+    <h2>Built for teams with real revenue leakage in outreach or follow-up.</h2>
+    <div class="fit-grid">
+      <div class="fit-card"><h3>Best for</h3><p>Owner-led service businesses, agencies, IT/MSP firms, recruiting firms, and B2B teams that need more qualified conversations without building a full internal outbound ops layer.</p></div>
+      <div class="fit-card"><h3>Strong signal</h3><p>Good businesses with weak consistency: slow response, scattered inboxes, weak personalization, inconsistent handoff, or pipeline activity that depends too much on one person.</p></div>
+      <div class="fit-card"><h3>Not a fit</h3><p>Companies with no clear offer, no capacity to handle booked opportunities, or expectations of magical fully autonomous sales without real execution discipline.</p></div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <p class="section-label">Pricing</p>
+    <h2>Choose the level of support you need.</h2>
+    <p class="section-sub">Lead with VIP in sales conversations. Keep lighter tiers visible for smaller teams, but position the offer as guided deployment and managed execution, not generic self-serve software.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <span class="chip">Guided</span>
+        <h3>Launch</h3>
+        <div class="price">From $750<span style="font-size:1rem; color:var(--text-muted);">/mo</span></div>
+        <div class="subprice">For smaller teams that want the core system with guided setup.</div>
+        <ul class="clean">
+          <li>lead targeting workspace</li>
+          <li>contact enrichment and validation</li>
+          <li>AI-assisted email sequence setup</li>
+          <li>unified inbox and booking links</li>
+          <li>basic CRM handoff</li>
+          <li>onboarding and optimization support</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <span class="chip">Operator-assisted</span>
+        <h3>Scale</h3>
+        <div class="price">From $1,500<span style="font-size:1rem; color:var(--text-muted);">/mo</span></div>
+        <div class="subprice">For teams that want multi-channel execution and stronger workflow depth.</div>
+        <ul class="clean">
+          <li>everything in Launch</li>
+          <li>higher prospect and export limits</li>
+          <li>LinkedIn and multi-step follow-up workflows</li>
+          <li>reply categorization and routing</li>
+          <li>team access and handoff automation</li>
+          <li>deeper reporting and testing support</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <span class="chip">Managed</span>
+        <h3>VIP</h3>
+        <div class="price">Custom</div>
+        <div class="subprice">Typical range: $3k–$7.5k setup + $4k–$8.5k/mo</div>
+        <ul class="clean">
+          <li>done-for-you ICP and campaign strategy</li>
+          <li>deliverability, mailbox, and sending setup</li>
+          <li>managed outbound execution</li>
+          <li>reply triage and booking flow management</li>
+          <li>weekly optimization</li>
+          <li>monthly strategy review</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <p class="section-label">FAQ</p>
+    <h2>Common questions before the demo.</h2>
+    <div class="faq-grid grid-2">
+      <div class="faq-item"><h3>Is this software or a service?</h3><p>Both. Ember Bots offers a software-backed system, and for VIP clients we also provide hands-on setup, management, and optimization.</p></div>
+      <div class="faq-item"><h3>Does this replace my sales team?</h3><p>No. It gives your team a stronger system for prospecting, outreach, follow-up, and booking. It works best with clear human ownership on qualified opportunities.</p></div>
+      <div class="faq-item"><h3>What channels does it support?</h3><p>Email first, with LinkedIn, scheduling, CRM routing, and additional follow-up channels depending on the plan and use case.</p></div>
+      <div class="faq-item"><h3>Can Ember manage the campaigns for us?</h3><p>Yes. That is the VIP offer and the recommended primary sales motion.</p></div>
+      <div class="faq-item"><h3>Who is this best for?</h3><p>Owner-led service businesses and B2B teams that need more qualified conversations without building a full outbound operations function internally.</p></div>
+      <div class="faq-item"><h3>How fast can this launch?</h3><p>Typically within days for self-serve onboarding and within 1–3 weeks for managed deployments, depending on readiness, domains, offer clarity, and workflow complexity.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-band">
+      <div>
+        <p class="section-label" style="margin-bottom:12px; color:var(--gold);">Next Step</p>
+        <h2>Book a demo and get a Revenue Engine plan.</h2>
+        <p class="section-sub" style="margin-bottom:0;">If you want the closest practical Ember equivalent to the B2B Rocket model, this is it: same offer architecture, same demo-led funnel, better positioning.</p>
+      </div>
+      <div class="cta-box">
+        <h3 style="margin-bottom:8px;">Primary CTA</h3>
+        <p style="margin-bottom:16px;">Start with a short qualification conversation and map the first campaign system.</p>
+        <a href="index.html#contact" class="btn-primary" style="width:100%;">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Ember Bots Revenue Engine · AI-powered outbound and follow-up systems</div>
+    <div class="footer-links">
+      <a href="index.html">Main Site</a>
+      <a href="presentations/revenue-engine-sales-deck.html">Sales Deck</a>
+      <a href="presentations/revenue-engine-one-pager.html">One-Pager</a>
+    </div>
+  </footer>
+</body>
+</html>

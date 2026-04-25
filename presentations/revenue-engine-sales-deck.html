@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots Revenue Engine — Sales Deck</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07090d;
+      --bg-2: #0d1220;
+      --surface: rgba(14, 18, 33, 0.92);
+      --line: rgba(121, 138, 194, 0.22);
+      --text: #eef3ff;
+      --muted: #a7b3cc;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffbd59;
+      --violet: #7a3cff;
+      --blue: #3b82f6;
+      --green: #4dd39d;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --radius: 28px;
+      --slide-w: 1280px;
+      --slide-h: 720px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(122,60,255,0.12), transparent 24%),
+        radial-gradient(circle at 85% 12%, rgba(59,130,246,0.10), transparent 22%),
+        radial-gradient(circle at 50% 90%, rgba(255,106,0,0.10), transparent 28%),
+        linear-gradient(180deg, #05070b, #090d14 45%, #06080c);
+      padding: 24px;
+    }
+    .deck { display: grid; gap: 30px; justify-content: center; }
+    .slide {
+      width: min(calc(100vw - 48px), var(--slide-w));
+      aspect-ratio: 16 / 9;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at top right, rgba(255,189,89,0.12), transparent 26%),
+        radial-gradient(circle at left bottom, rgba(122,60,255,0.14), transparent 28%),
+        linear-gradient(180deg, rgba(18,24,44,0.95), rgba(9,12,22,0.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 42px 46px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.03), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(255,106,0,0.08), transparent 24%);
+      pointer-events: none;
+    }
+    .topbar, .footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; letter-spacing: 0.02em; }
+    .brand img { width: 34px; height: 34px; border-radius: 10px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold), rgba(255,189,89,0.08)); }
+    .content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 22px;
+      align-content: center;
+      flex: 1;
+      padding: 12px 0;
+    }
+    .split { grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 28px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(44px, 5vw, 76px); line-height: 0.98; letter-spacing: -0.05em; max-width: 11ch; }
+    h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(34px, 4vw, 58px); line-height: 1; letter-spacing: -0.045em; max-width: 14ch; }
+    h3 { font-size: 20px; line-height: 1.15; letter-spacing: -0.02em; }
+    .gradient { background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 32%, var(--violet) 68%, var(--blue) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { font-size: 20px; line-height: 1.55; color: #dbe6fb; max-width: 48ch; }
+    .muted { color: var(--muted); }
+    .hero-card, .panel, .quote, .pricing-card, .stat, .mini-card {
+      background: linear-gradient(180deg, rgba(20,26,47,0.94), rgba(12,17,31,0.98));
+      border: 1px solid rgba(121,138,194,0.2);
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .hero-card { display: grid; gap: 16px; min-height: 100%; align-content: center; }
+    .kicker {
+      display: inline-flex; width: fit-content; padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,189,89,0.10); border: 1px solid rgba(255,189,89,0.22); color: #ffe1a8;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    .grid-2, .grid-3 { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    ul.clean li { display: flex; gap: 12px; align-items: flex-start; color: #dde8ff; font-size: 18px; line-height: 1.45; }
+    ul.clean li::before { content: "◆"; color: var(--ember-2); font-size: 14px; line-height: 1.6; margin-top: 2px; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 34px; line-height: 1; margin-bottom: 8px; }
+    .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .step { position: relative; padding: 22px; border-radius: 22px; background: linear-gradient(180deg, rgba(18,24,44,0.96), rgba(9,12,23,0.98)); border: 1px solid rgba(121,138,194,0.22); }
+    .step-num { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; background: linear-gradient(135deg, var(--ember), var(--ember-2)); margin-bottom: 18px; box-shadow: 0 14px 30px rgba(255,106,0,0.22); }
+    .quote { border-color: rgba(255,189,89,0.24); font-size: 24px; line-height: 1.4; color: #fff4da; max-width: 34ch; }
+    .quote strong { color: var(--gold); }
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pricing-card.featured { border-color: rgba(255,189,89,0.34); box-shadow: inset 0 0 0 1px rgba(255,189,89,0.12), 0 0 40px rgba(255,106,0,0.10); transform: translateY(-6px); }
+    .price { font-family: 'Space Grotesk', sans-serif; font-size: 38px; line-height: 1; margin: 12px 0 4px; }
+    .subprice { color: var(--muted); font-size: 15px; margin-bottom: 16px; }
+    .cta-box { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: center; }
+    .cta-chip { display: inline-flex; width: fit-content; align-items: center; padding: 10px 14px; border-radius: 999px; background: rgba(77,211,157,0.10); border: 1px solid rgba(77,211,157,0.24); color: #b8f0d7; font-size: 14px; font-weight: 600; }
+    .slide-no { color: rgba(255,255,255,0.45); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+    @media (max-width: 1100px) {
+      .split, .grid-2, .grid-3, .process, .pricing, .cta-box { grid-template-columns: 1fr; }
+      .slide { min-height: auto; aspect-ratio: auto; }
+      h1, h2 { max-width: none; }
+    }
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html, body { width: 13.333in; height: 7.5in; background: #fff; padding: 0; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .deck { gap: 0; }
+      .slide { width: 13.333in; height: 7.5in; min-height: 7.5in; border-radius: 0; box-shadow: none; margin: 0; padding: 0.35in 0.42in; break-after: page; page-break-after: always; overflow: hidden; }
+      .pricing-card, .step, .panel, .hero-card, .quote, .mini-card, .stat { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">Revenue Engine</div></div>
+      <div class="content split">
+        <div>
+          <span class="kicker">AI-powered outbound and follow-up</span>
+          <h1>Build a <span class="gradient">revenue engine</span>, not just more activity.</h1>
+          <p class="lead">Ember Bots helps service businesses and B2B teams find the right prospects, launch personalized outbound campaigns, manage replies, and book more qualified conversations.</p>
+        </div>
+        <div class="hero-card">
+          <h3>What we sell</h3>
+          <ul class="clean">
+            <li>Prospect targeting and enrichment</li>
+            <li>AI-assisted outbound campaigns</li>
+            <li>Reply triage, scheduling, and CRM handoff</li>
+            <li>Managed VIP execution for teams that want it run for them</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Customer-facing draft · Revenue Engine</div><div class="slide-no">01</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">The Problem</div></div>
+      <div class="content">
+        <h2>Most teams do not have a lead problem. They have a <span class="gradient">follow-up problem</span>.</h2>
+        <div class="grid-2">
+          <div class="panel">
+            <h3 style="margin-bottom:14px;">Revenue leaks when</h3>
+            <ul class="clean">
+              <li>outbound is inconsistent</li>
+              <li>good prospects are poorly targeted</li>
+              <li>replies sit too long without response</li>
+              <li>handoff from interest to meeting is sloppy</li>
+            </ul>
+          </div>
+          <div class="quote">Good businesses spend money to create demand, then lose opportunities in the handoff.</div>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Where pipeline quality breaks down</div><div class="slide-no">02</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">What Changes</div></div>
+      <div class="content split">
+        <div>
+          <h2>Ember installs the system behind <span class="gradient">qualified conversations</span>.</h2>
+          <p class="lead">Instead of selling generic AI promises, we package prospecting, outreach, reply management, booking, and handoff into one operating system.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-value">Targeting</div><div class="muted">Find better-fit prospects</div></div>
+          <div class="stat"><div class="stat-value">Messaging</div><div class="muted">Launch stronger personalized outreach</div></div>
+          <div class="stat"><div class="stat-value">Speed</div><div class="muted">Handle interested replies faster</div></div>
+          <div class="stat"><div class="stat-value">Handoff</div><div class="muted">Move conversations into calendars and CRM cleanly</div></div>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">A revenue operating system, not shelfware</div><div class="slide-no">03</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">Capabilities</div></div>
+      <div class="content">
+        <h2>Everything required to run AI-powered outbound in one system.</h2>
+        <div class="grid-3">
+          <div class="mini-card"><h3>Lead Search &amp; Targeting</h3><p class="muted">Build lists by geography, company profile, role, and fit.</p></div>
+          <div class="mini-card"><h3>Enrichment &amp; Validation</h3><p class="muted">Fill missing contact data and improve deliverability.</p></div>
+          <div class="mini-card"><h3>Personalized Outreach</h3><p class="muted">Launch AI-assisted sequences tailored to audience and offer.</p></div>
+          <div class="mini-card"><h3>Reply Management</h3><p class="muted">Categorize responses and route the next action.</p></div>
+          <div class="mini-card"><h3>Meeting Booking</h3><p class="muted">Move interested prospects into scheduling flows automatically.</p></div>
+          <div class="mini-card"><h3>CRM Handoff</h3><p class="muted">Push activity, context, and status updates into the pipeline.</p></div>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Same commercial skeleton, better Ember positioning</div><div class="slide-no">04</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">How It Works</div></div>
+      <div class="content">
+        <h2>A simple path from targeting to <span class="gradient">booked conversations</span>.</h2>
+        <div class="process">
+          <div class="step"><div class="step-num">1</div><h3>Define the target</h3><p class="muted">Lock in ICP, geography, offer, and qualification rules.</p></div>
+          <div class="step"><div class="step-num">2</div><h3>Build the campaign system</h3><p class="muted">Set up lead sources, outreach logic, inboxes, and handoff.</p></div>
+          <div class="step"><div class="step-num">3</div><h3>Launch outreach</h3><p class="muted">Start campaigns with AI-assisted personalization.</p></div>
+          <div class="step"><div class="step-num">4</div><h3>Capture replies</h3><p class="muted">Surface qualified interest and route it quickly.</p></div>
+          <div class="step"><div class="step-num">5</div><h3>Optimize weekly</h3><p class="muted">Refine targeting, messaging, and booking workflows.</p></div>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Operationally believable and sales-ready</div><div class="slide-no">05</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">Offer Structure</div></div>
+      <div class="content split">
+        <div>
+          <h2>Three tiers, with <span class="gradient">VIP as the main money offer</span>.</h2>
+          <ul class="clean" style="margin-top:18px; max-width: 34ch;">
+            <li>Launch — guided deployment for smaller teams</li>
+            <li>Scale — operator-assisted multi-channel engine</li>
+            <li>VIP — done-for-you managed outbound and follow-up</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <span class="kicker">Recommendation</span>
+          <p class="lead" style="font-size:24px; max-width:none;">Show self-serve plans publicly. <br /><strong class="gradient">Sell VIP on the demo.</strong></p>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Same category logic as B2B Rocket, better market fit</div><div class="slide-no">06</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">Pricing</div></div>
+      <div class="content">
+        <h2>Pricing ladder built for lower-friction entry and higher-value managed deals.</h2>
+        <div class="pricing">
+          <div class="pricing-card">
+            <h3>Launch</h3>
+            <div class="price">From $750</div>
+            <div class="subprice">per month</div>
+            <ul class="clean">
+              <li>lead search workspace</li>
+              <li>contact enrichment</li>
+              <li>email sequence builder</li>
+              <li>unified inbox</li>
+              <li>meeting booking links</li>
+            </ul>
+          </div>
+          <div class="pricing-card featured">
+            <h3>Scale</h3>
+            <div class="price">From $1,500</div>
+            <div class="subprice">per month</div>
+            <ul class="clean">
+              <li>everything in Launch</li>
+              <li>LinkedIn workflows</li>
+              <li>reply categorization</li>
+              <li>team access</li>
+              <li>deeper reporting</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <h3>VIP</h3>
+            <div class="price">Custom</div>
+            <div class="subprice">$3k–$7.5k setup + $4k–$8.5k/mo target range</div>
+            <ul class="clean">
+              <li>managed strategy and campaign setup</li>
+              <li>deliverability support</li>
+              <li>outbound execution</li>
+              <li>reply triage and booking</li>
+              <li>weekly optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">VIP is the commercial wedge</div><div class="slide-no">07</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">Best Fit</div></div>
+      <div class="content split">
+        <div>
+          <h2>Best fit for teams with real outreach or follow-up <span class="gradient">revenue leakage</span>.</h2>
+          <p class="lead">Owner-led service businesses, agencies, IT/MSP firms, recruiting firms, and B2B teams with steady demand but weak consistency are the strongest near-term buyers.</p>
+        </div>
+        <div class="panel">
+          <h3 style="margin-bottom:14px;">Not a fit</h3>
+          <ul class="clean">
+            <li>no clear offer</li>
+            <li>no sales capacity to handle booked opportunities</li>
+            <li>expectations of fully autonomous sales magic</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Start narrower than broad undifferentiated B2B</div><div class="slide-no">08</div></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="brand"><img src="../favicon.svg" alt="Ember Bots mark" /><span>Ember Bots</span></div><div class="eyebrow">CTA</div></div>
+      <div class="content cta-box">
+        <div>
+          <span class="cta-chip">Primary CTA</span>
+          <h2>Book a demo and get a Revenue Engine plan.</h2>
+          <p class="lead">The fastest path is a short qualification conversation, then a tailored recommendation for ICP, channel mix, and first deployment scope.</p>
+        </div>
+        <div class="panel">
+          <h3 style="margin-bottom:12px;">Sales motion</h3>
+          <ul class="clean">
+            <li>landing page → qualification form → demo</li>
+            <li>show Launch and Scale, sell VIP live</li>
+            <li>position Ember as the operator, not a generic AI app</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><div class="muted">Ember Bots Revenue Engine</div><div class="slide-no">09</div></div>
+    </section>
+  </main>
+</body>
+</html>
