@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots Interactive Order Form</title>
+  <meta name="description" content="Interactive Ember Bots order form prototype with configurable services and e-sign handoff." />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050608;
+      --panel: rgba(15,17,21,.88);
+      --panel-2: rgba(20,23,31,.72);
+      --ink: #f1f3f7;
+      --muted: #a2a9b7;
+      --quiet: #6d7484;
+      --line: rgba(255,255,255,.09);
+      --line-strong: rgba(255,255,255,.18);
+      --paper: #ffffff;
+      --paper-ink: #101319;
+      --paper-muted: #697180;
+      --paper-line: #e4e7ee;
+      --paper-bg: #f7f9fc;
+      --ember: #ff5a1f;
+      --gold: #d4af37;
+      --violet: #7a3cff;
+      --success: #16a34a;
+      --radius: 14px;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255,90,31,.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(122,60,255,.1), transparent 40%),
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, auto, 32px 32px, 32px 32px, auto;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(5,6,8,.85);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand img { width: 150px; display: block; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,.3);
+      color: #f5dc84;
+      background: rgba(212,175,55,.08);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .shell {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 38px 22px 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .hero-card,
+    .panel,
+    .summary-card,
+    .terms-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255,90,31,.2), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.04;
+      margin-bottom: 18px;
+      letter-spacing: -.02em;
+      max-width: 760px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .step {
+      padding: 14px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255,90,31,.15);
+      color: #ffb089;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .step span {
+      display: block;
+      color: var(--quiet);
+      font-size: 12px;
+    }
+
+    .panel {
+      padding: 28px;
+      margin-top: 22px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .panel-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 700px;
+    }
+
+    .deal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .field,
+    .service-row,
+    .summary-box,
+    .term-bullet,
+    .ack-row {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .field {
+      padding: 14px 16px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+    .label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--quiet);
+      margin-bottom: 8px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      background: rgba(6,8,12,.55);
+      color: #fff;
+      padding: 12px 13px;
+      font: inherit;
+      outline: none;
+    }
+
+    .field textarea { min-height: 94px; resize: vertical; }
+    .field input::placeholder, .field textarea::placeholder { color: #8490a3; }
+
+    .service-list,
+    .summary-stack,
+    .ack-list,
+    .terms-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .service-row {
+      padding: 18px;
+    }
+
+    .service-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 10px;
+    }
+
+    .service-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .service-copy {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 760px;
+    }
+
+    .service-price {
+      text-align: right;
+      min-width: 180px;
+    }
+
+    .money {
+      display: block;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .money-sub {
+      display: block;
+      color: var(--quiet);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .service-notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--quiet);
+      margin-bottom: 6px;
+    }
+
+    .mini span {
+      display: block;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .summary-card {
+      position: sticky;
+      top: 86px;
+      padding: 24px;
+    }
+
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .summary-copy {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .summary-box {
+      padding: 16px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .summary-row:last-child { margin-bottom: 0; }
+    .summary-row strong, .summary-row span:last-child { color: #fff; }
+    .summary-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0;
+    }
+
+    .cta {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    .cta:hover { transform: translateY(-1px); }
+    .cta-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #ff5a1f, #ff7b2c 55%, #d4af37);
+      box-shadow: 0 12px 30px rgba(255,90,31,.25);
+    }
+
+    .cta-secondary {
+      margin-top: 10px;
+      color: var(--ink);
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+    }
+
+    .fine-print {
+      color: var(--quiet);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    .term-bullet,
+    .ack-row {
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .term-bullet strong,
+    .ack-row strong {
+      color: #fff;
+    }
+
+    .terms-card {
+      margin-top: 22px;
+      padding: 26px;
+    }
+
+    .terms-card details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.02);
+      padding: 16px;
+    }
+
+    .terms-card summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    .terms-card summary::-webkit-details-marker { display: none; }
+
+    .terms-content {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .terms-content h3 {
+      color: #fff;
+      font-size: 15px;
+      margin: 18px 0 8px;
+    }
+
+    .terms-content p,
+    .terms-content li {
+      margin: 0 0 10px;
+    }
+
+    .signature-handoff {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(22,163,74,.25);
+      background: rgba(22,163,74,.08);
+      color: #d5ffe4;
+      font-size: 14px;
+    }
+
+    .success-note {
+      margin-top: 14px;
+      color: var(--quiet);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1080px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+      .summary-card { position: static; }
+      .steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .service-notes { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-card, .panel, .summary-card, .terms-card { padding: 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .service-top { flex-direction: column; }
+      .service-price { text-align: left; min-width: 0; }
+      .topbar-inner { padding-left: 16px; padding-right: 16px; }
+      .shell { padding: 22px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://emberbots.ai/" aria-label="Ember Bots">
+        <img src="../logo.svg" alt="Ember Bots" />
+      </a>
+      <div class="badge">Interactive order flow prototype</div>
+    </div>
+  </div>
+
+  <main class="shell">
+    <section>
+      <div class="hero-card">
+        <p class="eyebrow">Ember Bots service agreement</p>
+        <h1>Guided order form + clear terms + real signature proof.</h1>
+        <p class="hero-copy">
+          This is the prototype direction for Ember Bots’ client signing experience: a cleaner purchase flow than a static PDF,
+          while still preserving proper e-sign evidence, final copies, and versioned legal terms.
+        </p>
+        <div class="deal-meta">
+          <div class="chip">Quote: <strong id="quoteRef">EB-2026-041</strong></div>
+          <div class="chip">Terms version: <strong id="termsVersion">msa-2026-04-27-v1</strong></div>
+          <div class="chip">Initial term: <strong id="initialTerm">3 months</strong></div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-number">1</div><strong>Review</strong><span>Understand the package and price.</span></div>
+          <div class="step"><div class="step-number">2</div><strong>Business Info</strong><span>Fill signer and customer details.</span></div>
+          <div class="step"><div class="step-number">3</div><strong>Services</strong><span>See selected scope and billing structure.</span></div>
+          <div class="step"><div class="step-number">4</div><strong>Terms</strong><span>Review key terms and full agreement.</span></div>
+          <div class="step"><div class="step-number">5</div><strong>Sign</strong><span>Hand off to embedded e-sign provider.</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Business & signer information</div>
+            <div class="panel-subtitle">This section is designed to be filled by the client. In production, these fields can be partially prefilled from a CRM deal record.</div>
+          </div>
+        </div>
+        <div class="grid">
+          <label class="field"><span class="label">Customer legal name</span><input id="legalName" type="text" placeholder="Acme Services LLC" /></label>
+          <label class="field"><span class="label">DBA / operating name</span><input id="dba" type="text" placeholder="Acme Plumbing" /></label>
+          <label class="field"><span class="label">Signer full name</span><input id="signerName" type="text" placeholder="Jane Doe" /></label>
+          <label class="field"><span class="label">Signer title</span><input id="signerTitle" type="text" placeholder="Owner" /></label>
+          <label class="field"><span class="label">Signer email</span><input id="signerEmail" type="email" placeholder="jane@acmeservices.com" /></label>
+          <label class="field"><span class="label">Billing email</span><input id="billingEmail" type="email" placeholder="billing@acmeservices.com" /></label>
+          <label class="field full"><span class="label">Business street address</span><input id="address1" type="text" placeholder="123 Main St, Suite 200" /></label>
+          <label class="field"><span class="label">City</span><input id="city" type="text" placeholder="Dallas" /></label>
+          <label class="field"><span class="label">State</span><input id="state" type="text" placeholder="TX" /></label>
+          <label class="field"><span class="label">ZIP</span><input id="zip" type="text" placeholder="75001" /></label>
+          <label class="field"><span class="label">Primary contact phone</span><input id="phone" type="tel" placeholder="+1 214 555 1212" /></label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Selected services</div>
+            <div class="panel-subtitle">Only selected services should be shown client-side. Sales config comes from a reusable internal service catalog plus deal-specific scope notes.</div>
+          </div>
+        </div>
+        <div id="serviceList" class="service-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Key commercial terms</div>
+            <div class="panel-subtitle">This gives the client a plain-English summary before the full legal text.</div>
+          </div>
+        </div>
+        <div class="terms-stack" id="termBullets"></div>
+      </div>
+
+      <div class="terms-card">
+        <div class="panel-header" style="margin-bottom:16px;">
+          <div>
+            <div class="panel-title">Master terms</div>
+            <div class="panel-subtitle">Versioned legal terms stay easy to update in Git, but every sent agreement must preserve the exact version used at send time.</div>
+          </div>
+        </div>
+        <details open>
+          <summary>View Master Services Agreement excerpt</summary>
+          <div class="terms-content">
+            <h3>Agreement structure</h3>
+            <p>This order form works together with the Ember Bots Master Services Agreement. If there is a conflict, the Order Form controls for the specific services ordered.</p>
+            <h3>Activation and billing</h3>
+            <p>Setup fees are due on signing. The first monthly payment is due at Activation, defined as when the first customer-facing or operational automation, chatbot, or AI agent is live and available for Customer use.</p>
+            <h3>Initial term and cancellation</h3>
+            <p>Monthly services have a three-month minimum initial term. After that, services renew month-to-month unless either party cancels with at least 30 days’ written notice.</p>
+            <h3>Ownership</h3>
+            <p>Customer owns its business data and content. Ember Bots retains ownership of its platform, templates, systems, reusable components, and internal methods. Subject to payment, Customer receives the right to use configured live deliverables for its internal business operations.</p>
+            <h3>Service credits</h3>
+            <p>Credits may apply only for qualifying Ember Bots-controlled outages of covered live services, and do not apply to planned maintenance, third-party outages, customer-caused issues, force majeure, or unpaid accounts.</p>
+            <h3>AI limitations</h3>
+            <p>AI agents and automations may produce inaccurate, incomplete, delayed, or unsuitable outputs. The services are not a substitute for legal, medical, financial, tax, or other regulated professional advice, and Ember Bots does not guarantee business results.</p>
+            <h3>Limitation of liability</h3>
+            <p>Ember Bots’ aggregate liability is limited as described in the governing agreement, and consequential or lost-profit damages are excluded to the fullest extent permitted by law.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Signer acknowledgments</div>
+            <div class="panel-subtitle">These are structured pre-sign confirmations that should exist before handoff to the e-sign provider.</div>
+          </div>
+        </div>
+        <div class="ack-list" id="ackList"></div>
+        <div class="signature-handoff">
+          <strong>Production handoff:</strong> this button would create or open a real Dropbox Sign / DocuSign / SignWell signing session, preserving the exact order snapshot, terms version, and signature evidence.
+        </div>
+        <button class="cta cta-primary" id="signButton" style="margin-top:16px;">Continue to secure e-sign</button>
+        <div class="success-note" id="signNote">Prototype only — no live signature provider is connected yet.</div>
+      </div>
+    </section>
+
+    <aside class="summary-card">
+      <div class="summary-title">Order summary</div>
+      <div class="summary-copy">Simple, high-trust commercial summary with no PDF hunting.</div>
+      <div class="summary-stack">
+        <div class="summary-box">
+          <div class="summary-row"><span>Setup fee</span><span id="setupTotal">$2,500</span></div>
+          <div class="summary-row"><span>Monthly services</span><span id="monthlyTotal">$1,250/mo</span></div>
+          <div class="summary-row"><span>Included support</span><span id="supportSummary">2 hrs/month</span></div>
+          <div class="summary-divider"></div>
+          <div class="summary-row"><strong>Launch target</strong><span id="launchTarget">Within 14 days</span></div>
+          <div class="summary-row"><strong>Activation</strong><span>First live automation/agent</span></div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-row"><span>Client</span><span id="summaryClient">Acme Services LLC</span></div>
+          <div class="summary-row"><span>Signer</span><span id="summarySigner">Jane Doe</span></div>
+          <div class="summary-row"><span>Billing email</span><span id="summaryBilling">billing@acmeservices.com</span></div>
+        </div>
+      </div>
+      <button class="cta cta-primary" onclick="document.getElementById('signButton').scrollIntoView({behavior:'smooth'})">Review and sign</button>
+      <button class="cta cta-secondary" onclick="window.print()">Print / save preview</button>
+      <p class="fine-print">In production, both sides should automatically receive the executed PDF and audit certificate after completion.</p>
+    </aside>
+  </main>
+
+  <script>
+    const deal = {
+      orderMeta: {
+        orderTemplateVersion: 'order-template-2026-04-27-v1',
+        serviceCatalogVersion: 'catalog-2026-04-27-v1',
+        termsVersionId: 'msa-2026-04-27-v1',
+        status: 'draft',
+        clientFacingSlug: 'acme-services-april-2026'
+      },
+      customer: {
+        legalName: 'Acme Services LLC',
+        dba: 'Acme Plumbing',
+        businessAddress: {
+          line1: '123 Main St, Suite 200',
+          city: 'Dallas',
+          state: 'TX',
+          postalCode: '75001'
+        },
+        billingEmail: 'billing@acmeservices.com',
+        primaryContactName: 'Jane Doe',
+        primaryContactEmail: 'jane@acmeservices.com',
+        primaryContactPhone: '+12145551212'
+      },
+      signer: {
+        name: 'Jane Doe',
+        title: 'Owner',
+        email: 'jane@acmeservices.com'
+      },
+      commercial: {
+        quoteReference: 'EB-2026-041',
+        currency: 'USD',
+        setupFeeTotal: 2500,
+        monthlyFeeTotal: 1250,
+        initialTermMonths: 3,
+        noticeDaysAfterInitialTerm: 30,
+        activationDefinition: 'Activation occurs when the first customer-facing or operational automation, chatbot, or AI agent is live and available for Customer\'s use.',
+        launchTarget: 'Within 14 days of receiving required access and content',
+        includedSupportSummary: 'Up to 2 hours of routine support per month',
+        additionalSupportRate: '$175/hour',
+        thirdPartyCostPolicy: 'Approved third-party software, telephony, messaging, hosting, model, or usage costs may be billed through to Customer.'
+      },
+      services: [
+        {
+          serviceId: 'ai-chat-agent-setup',
+          name: 'AI Chat Agent Setup',
+          selected: true,
+          scopeSummary: 'Customer-facing website AI chat agent for lead qualification and FAQ handling.',
+          quantity: 1,
+          unitLabel: 'project',
+          setupFee: 2500,
+          monthlyFee: 0,
+          includedLimit: null,
+          passThrough: false,
+          passThroughNotes: null,
+          specialNotes: 'Phase 1 includes homepage widget and lead capture routing.'
+        },
+        {
+          serviceId: 'managed-ai-agent-operations',
+          name: 'Managed AI Agent Operations',
+          selected: true,
+          scopeSummary: 'Ongoing monitoring, tuning, maintenance, and light monthly adjustments for the live chat agent.',
+          quantity: 1,
+          unitLabel: 'month',
+          setupFee: 0,
+          monthlyFee: 1250,
+          includedLimit: 'Up to 2 hours routine support/month',
+          passThrough: false,
+          passThroughNotes: null,
+          specialNotes: null
+        },
+        {
+          serviceId: 'third-party-software-costs',
+          name: 'Third-Party Software / Subscription Costs',
+          selected: true,
+          scopeSummary: 'Approved messaging and model-provider costs billed through as applicable.',
+          quantity: 1,
+          unitLabel: 'variable',
+          setupFee: 0,
+          monthlyFee: 0,
+          includedLimit: null,
+          passThrough: true,
+          passThroughNotes: 'Variable usage and software costs are billed as incurred or invoiced separately.',
+          specialNotes: null
+        }
+      ],
+      acknowledgments: [
+        {
+          id: 'authority',
+          label: 'I represent that I am authorized to sign this agreement on behalf of the Customer.',
+          required: true
+        },
+        {
+          id: 'terms-review',
+          label: 'I have reviewed the Order Form and Master Services Agreement.',
+          required: true
+        },
+        {
+          id: 'electronic-signature-consent',
+          label: 'I agree to use electronic records and signatures for this transaction.',
+          required: true
+        }
+      ]
+    };
+
+    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+    function money(value, suffix = '') {
+      return `${currency.format(value)}${suffix}`;
+    }
+
+    function renderServices() {
+      const list = document.getElementById('serviceList');
+      list.innerHTML = deal.services.filter(s => s.selected).map(service => `
+        <div class="service-row">
+          <div class="service-top">
+            <div>
+              <div class="service-name">${service.name}</div>
+              <div class="service-copy">${service.scopeSummary}</div>
+            </div>
+            <div class="service-price">
+              <span class="money">${service.setupFee ? money(service.setupFee) : 'No setup fee'}</span>
+              <span class="money-sub">${service.monthlyFee ? money(service.monthlyFee, '/mo') : (service.passThrough ? 'Pass-through / variable' : 'No recurring fee')}</span>
+            </div>
+          </div>
+          <div class="service-notes">
+            <div class="mini"><strong>Quantity</strong><span>${service.quantity} ${service.unitLabel}</span></div>
+            <div class="mini"><strong>Included limit</strong><span>${service.includedLimit || 'N/A'}</span></div>
+            <div class="mini"><strong>Special notes</strong><span>${service.specialNotes || service.passThroughNotes || 'None'}</span></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTerms() {
+      const terms = [
+        `Setup fee of ${money(deal.commercial.setupFeeTotal)} due on signing.`,
+        `First monthly payment of ${money(deal.commercial.monthlyFeeTotal, '/mo')} due at Activation.`,
+        `${deal.commercial.initialTermMonths}-month initial term, then month-to-month with ${deal.commercial.noticeDaysAfterInitialTerm} days' notice.`,
+        `Included support: ${deal.commercial.includedSupportSummary}. Additional support: ${deal.commercial.additionalSupportRate}.`,
+        `No refunds except SLA credits where applicable under the agreement.`,
+        `Texas law governs the agreement.`
+      ];
+      document.getElementById('termBullets').innerHTML = terms.map(t => `<div class="term-bullet"><strong>Key term:</strong> ${t}</div>`).join('');
+    }
+
+    function renderAcks() {
+      document.getElementById('ackList').innerHTML = deal.acknowledgments.map(ack => `
+        <label class="ack-row">
+          <input type="checkbox" data-ack="${ack.id}" style="margin-right:10px; transform: translateY(1px);" />
+          <strong>${ack.required ? 'Required:' : 'Optional:'}</strong> ${ack.label}
+        </label>
+      `).join('');
+    }
+
+    function hydrateFields() {
+      const map = {
+        legalName: deal.customer.legalName,
+        dba: deal.customer.dba || '',
+        signerName: deal.signer.name,
+        signerTitle: deal.signer.title,
+        signerEmail: deal.signer.email,
+        billingEmail: deal.customer.billingEmail,
+        address1: deal.customer.businessAddress.line1,
+        city: deal.customer.businessAddress.city,
+        state: deal.customer.businessAddress.state,
+        zip: deal.customer.businessAddress.postalCode,
+        phone: deal.customer.primaryContactPhone
+      };
+      Object.entries(map).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.value = value;
+      });
+    }
+
+    function bindSummary() {
+      const update = () => {
+        document.getElementById('summaryClient').textContent = document.getElementById('legalName').value || '—';
+        document.getElementById('summarySigner').textContent = document.getElementById('signerName').value || '—';
+        document.getElementById('summaryBilling').textContent = document.getElementById('billingEmail').value || '—';
+      };
+      ['legalName', 'signerName', 'billingEmail'].forEach(id => document.getElementById(id).addEventListener('input', update));
+      update();
+    }
+
+    function renderSummary() {
+      document.getElementById('quoteRef').textContent = deal.commercial.quoteReference;
+      document.getElementById('termsVersion').textContent = deal.orderMeta.termsVersionId;
+      document.getElementById('initialTerm').textContent = `${deal.commercial.initialTermMonths} months`;
+      document.getElementById('setupTotal').textContent = money(deal.commercial.setupFeeTotal);
+      document.getElementById('monthlyTotal').textContent = money(deal.commercial.monthlyFeeTotal, '/mo');
+      document.getElementById('supportSummary').textContent = deal.commercial.includedSupportSummary.replace('Up to ', '');
+      document.getElementById('launchTarget').textContent = deal.commercial.launchTarget;
+    }
+
+    function allRequiredAcksChecked() {
+      return deal.acknowledgments.every(ack => {
+        const box = document.querySelector(`[data-ack="${ack.id}"]`);
+        return !ack.required || (box && box.checked);
+      });
+    }
+
+    document.getElementById('signButton').addEventListener('click', () => {
+      const requiredFields = ['legalName', 'signerName', 'signerTitle', 'signerEmail', 'billingEmail', 'address1', 'city', 'state', 'zip'];
+      const missing = requiredFields.filter(id => !document.getElementById(id).value.trim());
+      if (missing.length) {
+        document.getElementById('signNote').textContent = 'Fill the required customer/signer fields before continuing to e-sign.';
+        document.getElementById('signNote').style.color = '#ffb4b4';
+        return;
+      }
+      if (!allRequiredAcksChecked()) {
+        document.getElementById('signNote').textContent = 'Check the required acknowledgments before continuing.';
+        document.getElementById('signNote').style.color = '#ffb4b4';
+        return;
+      }
+      document.getElementById('signNote').textContent = 'Ready for provider handoff: next step would create the signing package, freeze the deal snapshot, and open the secure e-sign session.';
+      document.getElementById('signNote').style.color = '#a5f3c7';
+    });
+
+    renderServices();
+    renderTerms();
+    renderAcks();
+    hydrateFields();
+    renderSummary();
+    bindSummary();
+  </script>
+</body>
+</html>
