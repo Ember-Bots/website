@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New View Roofing — Missed Revenue Snapshot | Ember Bots</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: rgba(18, 24, 44, 0.92);
+      --surface-2: rgba(14, 19, 36, 0.98);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --green: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.42);
+      --radius: 24px;
+      --page-w: 11in;
+      --page-h: 8.5in;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .sheet {
+      width: var(--page-w);
+      min-height: var(--page-h);
+      margin: 0 auto;
+      padding: 0.24in;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 0.12in;
+      background: transparent;
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(18,24,44,0.94), rgba(12,16,30,0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+    .hero {
+      padding: 0.2in;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 0.12in;
+      align-items: center;
+    }
+    .hero-graphic {
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 220px;
+      height: 220px;
+      background:
+        radial-gradient(circle, rgba(255,106,0,0.22) 0%, rgba(255,106,0,0.05) 42%, transparent 68%),
+        radial-gradient(circle at 30% 70%, rgba(122,60,255,0.24) 0%, transparent 55%),
+        radial-gradient(circle at 65% 30%, rgba(37,99,255,0.18) 0%, transparent 52%);
+      filter: blur(2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .brand img {
+      width: 210px;
+      height: auto;
+      display: block;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 700;
+      font-size: 11px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    h1,h2,h3,p { margin: 0; position: relative; z-index: 1; }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+      max-width: 14ch;
+    }
+    .gradient {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      color: #dbe6fb;
+      font-size: 14px;
+      line-height: 1.42;
+      max-width: 60ch;
+    }
+    .hero-card {
+      background: linear-gradient(180deg, rgba(20,26,46,0.96), rgba(12,17,30,0.98));
+      border: 1px solid rgba(255,184,77,0.18);
+      border-radius: 18px;
+      padding: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-card h3 { font-size: 15px; margin-bottom: 8px; }
+    .hero-card ul, .block ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.12in;
+    }
+    .block { padding: 0.16in; }
+    .block h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .block p, .block li { color: var(--muted); font-size: 12px; line-height: 1.34; }
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .value {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 11px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      min-height: 96px;
+    }
+    .value::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,184,77,0.10), transparent 45%, rgba(122,60,255,0.08));
+      pointer-events: none;
+    }
+    .value .label {
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .value .copy {
+      font-size: 12px;
+      line-height: 1.28;
+      color: var(--text);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .focus {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 10px;
+      background: rgba(255,255,255,0.03);
+    }
+    .focus h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .cta {
+      padding: 0.16in 0.18in;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 0.12in;
+      align-items: center;
+    }
+    .cta h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .cta p { color: var(--muted); font-size: 12px; line-height: 1.34; }
+    .cta-box {
+      background:
+        radial-gradient(circle at top, rgba(255,184,77,0.14), transparent 40%),
+        linear-gradient(180deg, rgba(20,26,46,0.96), rgba(12,17,30,0.98));
+      border: 1px solid rgba(255,184,77,0.24);
+      border-radius: 18px;
+      padding: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-box .label {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .cta-box ul { margin: 0; padding-left: 18px; color: var(--text); }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #95a2c8;
+      font-size: 11px;
+      padding: 0 8px;
+    }
+    @page { size: 11in 8.5in; margin: 0; }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="panel hero">
+      <div class="hero-graphic"></div>
+      <div>
+        <div class="brand">
+          <img src="../logo.svg" alt="Ember Bots" />
+        </div>
+        <div class="eyebrow">Missed Revenue Snapshot</div>
+        <h1>New View Roofing looks like a <span class="gradient">high-fit Ember Bots prospect</span>.</h1>
+        <p class="lead">New View already shows strong trust signals in the Dallas-Fort Worth market. The real opportunity is tightening the hidden revenue leaks around lead response, missed calls, inspection scheduling, estimate follow-up, and insurance coordination.</p>
+      </div>
+      <aside class="hero-card">
+        <h3>Why the fit is strong</h3>
+        <ul>
+          <li>Local, reputation-driven roofing operator</li>
+          <li>Urgent inbound demand from leaks and storm damage</li>
+          <li>Phone-heavy inspection and estimate workflow</li>
+          <li>High-ticket jobs where speed-to-lead matters</li>
+          <li>Insurance-related admin that creates real drag</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="grid2">
+      <article class="panel block">
+        <h2>Where revenue is probably leaking</h2>
+        <div class="value-grid">
+          <div class="value">
+            <div class="label">Lead response</div>
+            <div class="copy">Their site promises follow-up within 24 hours. For roofing, especially urgent jobs, that may already be too slow.</div>
+          </div>
+          <div class="value">
+            <div class="label">Missed calls</div>
+            <div class="copy">After-hours or storm-spike calls can disappear fast if there is no automatic capture and immediate re-engagement.</div>
+          </div>
+          <div class="value">
+            <div class="label">Post-inspection drop-off</div>
+            <div class="copy">A strong inspection does not guarantee a closed job. Manual quote follow-up is a common leak point.</div>
+          </div>
+        </div>
+        <div class="focus-grid">
+          <div class="focus">
+            <h3>Operational friction signals</h3>
+            <ul>
+              <li>Manual scheduling back-and-forth</li>
+              <li>Insurance-claim communication burden</li>
+              <li>Limited visibility into stuck opportunities</li>
+            </ul>
+          </div>
+          <div class="focus">
+            <h3>Why this matters</h3>
+            <ul>
+              <li>Roofing is high-value and timing-sensitive</li>
+              <li>The first credible responder often wins</li>
+              <li>Small response gains can produce meaningful ROI</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel block">
+        <h2>What Ember Bots could implement</h2>
+        <div class="focus-grid" style="grid-template-columns:1fr 1fr; margin-top:0;">
+          <div class="focus">
+            <h3>Customer-facing systems</h3>
+            <ul>
+              <li>Instant lead acknowledgment</li>
+              <li>Missed-call text-back workflows</li>
+              <li>Inspection booking and reminders</li>
+              <li>Estimate follow-up sequences</li>
+            </ul>
+          </div>
+          <div class="focus">
+            <h3>Internal systems</h3>
+            <ul>
+              <li>Lead routing by service type</li>
+              <li>Task orchestration for handoffs</li>
+              <li>Daily pipeline summaries</li>
+              <li>Stalled-opportunity alerts</li>
+            </ul>
+          </div>
+          <div class="focus">
+            <h3>Best first offer</h3>
+            <ul>
+              <li>Missed Revenue Snapshot diagnostic</li>
+              <li>Lead-response and scheduling audit</li>
+              <li>Follow-up gap analysis</li>
+            </ul>
+          </div>
+          <div class="focus">
+            <h3>Expected impact</h3>
+            <ul>
+              <li>More inspections booked</li>
+              <li>Fewer leads lost after hours</li>
+              <li>Less admin drag on project managers</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel cta">
+      <div>
+        <h2>The positioning is simple.</h2>
+        <p>New View Roofing already appears to have the credibility, service quality, and local trust. The question is whether lead response, scheduling, follow-up, and coordination are performing at the same level as the brand.</p>
+      </div>
+      <div class="cta-box">
+        <div class="label">Bottom line</div>
+        <ul>
+          <li>This is a strong-fit Ember Bots target.</li>
+          <li>Lead with revenue leakage, not generic AI.</li>
+          <li>Sell the Snapshot first, then the system.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Prepared by Ember Bots — Business Automation Systems for Small Teams</span>
+      <span>emberbots.ai</span>
+    </footer>
+  </main>
+</body>
+</html>
