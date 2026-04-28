@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — GTM System Architecture</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: rgba(18, 24, 44, 0.84);
+      --surface-strong: rgba(14, 19, 36, 0.98);
+      --border: rgba(91, 105, 164, 0.28);
+      --border-strong: rgba(255, 184, 77, 0.32);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --success: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 9, 13, 0.74);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner,
+    .page {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .nav a { text-decoration: none; color: var(--text-muted); }
+    .nav a:hover { color: var(--text); }
+
+    .page { padding: 28px 0 64px; }
+
+    .hero, .section, .arch-band, .cta-band {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18,24,44,0.92), rgba(12,16,30,0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: 32px;
+      margin-bottom: 24px;
+    }
+
+    .hero::before, .section::before, .arch-band::before, .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero { padding: 42px 40px 38px; }
+    .section, .arch-band, .cta-band { padding: 28px; }
+
+    .hero-grid, .two-up, .three-up, .four-up, .agent-grid, .flow-grid {
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: end; }
+    .two-up { grid-template-columns: repeat(2, 1fr); }
+    .three-up { grid-template-columns: repeat(3, 1fr); }
+    .four-up { grid-template-columns: repeat(4, 1fr); }
+    .agent-grid { grid-template-columns: repeat(2, 1fr); }
+    .flow-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(255,184,77,0.12));
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 4.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p, .section-intro, .body-copy { color: var(--text-muted); }
+    .hero-copy p { max-width: 780px; font-size: 1.08rem; }
+
+    .card, .metric, .arch-card, .agent-card, .flow-card, .note-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(20,26,46,0.95), rgba(12,17,30,0.94));
+      border: 1px solid rgba(255,184,77,0.16);
+      padding: 22px;
+    }
+
+    .metric {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 18px;
+    }
+
+    .metric .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .metric .value {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(122,60,255,0.18);
+      color: #d8cbff;
+      border: 1px solid rgba(122,60,255,0.28);
+      margin-bottom: 12px;
+    }
+
+    .pill.gold {
+      background: rgba(255,184,77,0.14);
+      color: #ffe3af;
+      border-color: rgba(255,184,77,0.34);
+    }
+
+    .hero-list, .card ul, .agent-card ul, .flow-card ul, .note-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+    }
+
+    .architecture {
+      position: relative;
+      z-index: 1;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(15,20,36,0.96), rgba(10,14,26,0.98));
+      padding: 24px;
+      overflow: auto;
+    }
+
+    .architecture pre {
+      margin: 0;
+      color: #dfe8ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    .cta-band {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--ember), var(--ember-2));
+      box-shadow: 0 10px 30px rgba(255,106,43,.28);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    .footer {
+      padding: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .topbar-inner, .page { width: min(calc(100% - 32px), var(--max)); }
+      .hero-grid, .two-up, .three-up, .four-up, .agent-grid, .flow-grid, .cta-band { grid-template-columns: 1fr; }
+      .architecture pre { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="../favicon.svg" alt="Ember Bots mark" />
+        <span>Ember Bots</span>
+      </div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#agents">Agents</a>
+        <a href="#flows">Flows</a>
+        <a href="#phases">Phases</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">GTM System Architecture</div>
+          <h1>Do not build one giant sales bot. Build a <span class="gradient-text">multi-agent GTM machine</span>.</h1>
+          <p>This presentation translates the Ember Bots GTM architecture into a shareable format for review, planning, and execution. The system is designed for home-services first, with Ember CRM as the system of record and human approval at the right external-action edges.</p>
+          <div class="four-up" style="margin-top:18px;">
+            <div class="metric"><div class="label">Market</div><div class="value">Owner-led HVAC and plumbing first</div></div>
+            <div class="metric"><div class="label">Model</div><div class="value">Multi-agent GTM operating system</div></div>
+            <div class="metric"><div class="label">Brain</div><div class="value">Ember CRM as the shared truth layer</div></div>
+            <div class="metric"><div class="label">Control</div><div class="value">Human-approved sends and commitments first</div></div>
+          </div>
+        </div>
+        <aside class="card">
+          <div class="pill gold">Core recommendation</div>
+          <h3>What this system should do</h3>
+          <ul class="hero-list">
+            <li>run lead generation, qualification, outbound, inbound, and pipeline ops</li>
+            <li>keep context shared across agents</li>
+            <li>prevent low-quality outreach</li>
+            <li>keep Steve focused on real conversations and closing</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="arch-band" id="architecture">
+      <div class="pill">Top-level architecture</div>
+      <h2>CRM-centered orchestration with specialized agents and controlled external actions</h2>
+      <p class="section-intro">The architecture works because each agent has a narrow job, shared context flows through CRM, and orchestration prevents premature outreach or sloppy handoffs.</p>
+      <div class="architecture">
+<pre>Lead Sources / Website / Email / Phone
+              |
+              v
+     Intake + Signal Capture Layer
+              |
+              v
+        Agent Orchestration Layer
+   |        |         |         |
+   v        v         v         v
+Sourcing  Qualification Outbound Inbound
+ Agent      Agent       Agent    Agent
+               \         |       /
+                \        |      /
+                 v       v     v
+                 Ember CRM (system of record)
+                        |
+                        v
+                 Sales Operator Agent
+                        |
+                        v
+                 Human Approval Layer
+                        |
+                        v
+                 External Actions
+        (email, phone follow-up, meetings, proposals)</pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="pill gold">Core layers</div>
+      <h2>The system has four critical layers before any “AI sales bot” claim becomes real</h2>
+      <div class="two-up">
+        <div class="arch-card">
+          <h3>1. Signal capture layer</h3>
+          <p class="body-copy">Collect and normalize signals from Maps, website forms, chat, email, phone/Vapi, manual entry, and later SMS/ad channels.</p>
+          <ul>
+            <li>normalized lead payloads</li>
+            <li>source + channel metadata</li>
+            <li>timestamps + evidence fields</li>
+          </ul>
+        </div>
+        <div class="arch-card">
+          <h3>2. Agent orchestration layer</h3>
+          <p class="body-copy">Routes work, enforces progression, prevents premature outreach, and creates approval queues.</p>
+          <ul>
+            <li>task routing</li>
+            <li>state management</li>
+            <li>review queue creation</li>
+          </ul>
+        </div>
+        <div class="arch-card">
+          <h3>3. Ember CRM as system of record</h3>
+          <p class="body-copy">Holds lead truth, preserves cross-agent context, and supports visibility and approval decisions.</p>
+          <ul>
+            <li>use existing <strong>Lead</strong> object first</li>
+            <li>do not split into Prospect in phase 1</li>
+            <li>store evidence, stage, notes, next action</li>
+          </ul>
+        </div>
+        <div class="arch-card">
+          <h3>4. Human approval layer</h3>
+          <p class="body-copy">Keeps external actions controlled early while agents handle research, drafting, scoring, and prioritization.</p>
+          <ul>
+            <li>humans approve sends, calls, proposals</li>
+            <li>autonomy expands later by approved lead class</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="agents">
+      <div class="pill">Specialized agents</div>
+      <h2>Five agents, one shared brain</h2>
+      <p class="section-intro">This system only works if each agent owns a narrow, reliable job instead of trying to be one fuzzy all-purpose “sales AI.”</p>
+      <div class="agent-grid">
+        <article class="agent-card">
+          <h3>Lead Sourcing Agent</h3>
+          <p class="body-copy">Finds and enriches high-quality local operators that match the ICP.</p>
+          <ul>
+            <li>Maps-first sourcing</li>
+            <li>territory and trade filtering</li>
+            <li>owner-led validation</li>
+            <li>weak-follow-up signal detection</li>
+          </ul>
+        </article>
+        <article class="agent-card">
+          <h3>Qualification Agent</h3>
+          <p class="body-copy">Decides whether a lead is real, relevant, and safe for outreach.</p>
+          <ul>
+            <li>fit scoring</li>
+            <li>evidence verification</li>
+            <li>stage assignment</li>
+            <li>reject / park / advance</li>
+          </ul>
+        </article>
+        <article class="agent-card">
+          <h3>Outbound Agent</h3>
+          <p class="body-copy">Prepares personalized first-touch and follow-up logic for human-approved sends.</p>
+          <ul>
+            <li>email drafts</li>
+            <li>call prep briefs</li>
+            <li>cadence logic</li>
+            <li>CTA recommendations</li>
+          </ul>
+        </article>
+        <article class="agent-card">
+          <h3>Inbound Response Agent</h3>
+          <p class="body-copy">Handles website, chat, email, and phone interest fast and consistently.</p>
+          <ul>
+            <li>instant qualification</li>
+            <li>routing to meeting / nurture / escalate</li>
+            <li>CRM record creation or update</li>
+          </ul>
+        </article>
+        <article class="agent-card">
+          <h3>Sales Operator Agent</h3>
+          <p class="body-copy">Acts as the internal sales manager layer on top of the pipeline.</p>
+          <ul>
+            <li>daily priority queue</li>
+            <li>stalled-deal alerts</li>
+            <li>meeting prep</li>
+            <li>proposal draft packages</li>
+          </ul>
+        </article>
+        <article class="agent-card">
+          <h3>Shared design rule</h3>
+          <p class="body-copy">Every agent writes to the same truth layer instead of maintaining separate hidden state.</p>
+          <ul>
+            <li>lead state</li>
+            <li>channel history</li>
+            <li>qualification rationale</li>
+            <li>last action + next action</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="pill gold">CRM field model</div>
+      <h2>The CRM must hold enough structured state for agents to coordinate reliably</h2>
+      <div class="three-up">
+        <div class="note-card">
+          <h3>Identity + fit</h3>
+          <ul>
+            <li>company name</li>
+            <li>contact name</li>
+            <li>trade</li>
+            <li>territory</li>
+            <li>owner-led / local proof</li>
+          </ul>
+        </div>
+        <div class="note-card">
+          <h3>Evidence + workflow</h3>
+          <ul>
+            <li>source + source detail</li>
+            <li>weak-follow-up evidence</li>
+            <li>qualification score</li>
+            <li>stage</li>
+            <li>last touch / next action</li>
+          </ul>
+        </div>
+        <div class="note-card">
+          <h3>Revenue ops state</h3>
+          <ul>
+            <li>meeting booked</li>
+            <li>proposal status</li>
+            <li>suggested package</li>
+            <li>objection notes</li>
+            <li>assigned owner</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flows">
+      <div class="pill">Workflow architecture</div>
+      <h2>Outbound and inbound flows should meet in the same operating system</h2>
+      <div class="flow-grid">
+        <article class="flow-card">
+          <h3>Outbound workflow</h3>
+          <ul>
+            <li>sourcing agent creates candidate lead</li>
+            <li>qualification agent validates and scores it</li>
+            <li>CRM stores evidence and stage</li>
+            <li>outbound agent drafts first touch + follow-up</li>
+            <li>human approves send</li>
+            <li>outcome logs back into CRM</li>
+            <li>sales operator reprioritizes next steps</li>
+          </ul>
+        </article>
+        <article class="flow-card">
+          <h3>Inbound workflow</h3>
+          <ul>
+            <li>website/chat/phone/email event arrives</li>
+            <li>inbound response agent qualifies it</li>
+            <li>CRM creates or updates record</li>
+            <li>route to book / nurture / qualify more / escalate</li>
+            <li>sales operator surfaces highest-value opportunities</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="pill gold">Offer architecture</div>
+      <h2>Sell the business outcome, not generic AI automation</h2>
+      <div class="two-up">
+        <div class="card">
+          <h3>Entry offer</h3>
+          <p class="body-copy"><strong>Missed Revenue Snapshot</strong> is the diagnostic wedge. It creates an evidence-grounded first conversation and lowers the friction of initial outreach.</p>
+        </div>
+        <div class="card">
+          <h3>Core paid offer</h3>
+          <p class="body-copy"><strong>Lead Recovery &amp; Response System</strong> improves response speed, reduces lead leakage, and cleans up estimate follow-up and customer communication flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="phases">
+      <div class="pill">Phase plan</div>
+      <h2>Build usability first, autonomy second</h2>
+      <div class="four-up">
+        <div class="metric"><div class="label">Phase 1</div><div class="value">Sourcing, qualification, inbound intake, outbound drafts, sales operator dashboard</div></div>
+        <div class="metric"><div class="label">Phase 2</div><div class="value">Semi-autonomous follow-up, inbox triage, booking workflow, approved-class outbound</div></div>
+        <div class="metric"><div class="label">Phase 3</div><div class="value">Cross-channel nurture, reactivation, proposal generation, deeper orchestration</div></div>
+        <div class="metric"><div class="label">Phase 4</div><div class="value">Full revenue ops: onboarding, review generation, reactivation, account expansion</div></div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <div class="pill gold">Hard truth</div>
+        <h2>If Ember tries to build one giant “sales bot,” it will be vague, brittle, and hard to trust.</h2>
+        <p class="section-intro">If Ember builds a coordinated GTM system with specialized agents, CRM as the shared brain, human approval at the right edges, and a narrow home-services wedge first, it has a realistic path to becoming a usable sales and marketing operating machine.</p>
+        <div class="button-row">
+          <a class="button" href="emberbots-gtm-system-architecture.html">Refresh presentation</a>
+          <a class="button secondary" href="emberbots-explainer.html">See explainer presentation</a>
+        </div>
+      </div>
+      <div class="note-card">
+        <div class="pill">Recommended next artifact</div>
+        <h3>Build order</h3>
+        <ul>
+          <li>CRM field completeness and workflow states</li>
+          <li>Lead Sourcing Agent</li>
+          <li>Qualification Agent</li>
+          <li>Inbound intake + qualification path</li>
+          <li>Outbound drafting + approval queue</li>
+          <li>Sales operator daily summary</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">Ember Bots · Shareable GTM architecture presentation · website/presentations/emberbots-gtm-system-architecture.html</div>
+  </main>
+</body>
+</html>

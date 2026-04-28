@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — 2-Minute Sales Video Presentation</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: rgba(18, 24, 44, 0.84);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --max: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 9, 13, 0.74);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner,
+    .page {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .nav a { text-decoration: none; color: var(--text-muted); }
+    .nav a:hover { color: var(--text); }
+
+    .page { padding: 28px 0 64px; }
+
+    .hero, .section, .timeline, .cta-band {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18,24,44,0.92), rgba(12,16,30,0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: 32px;
+      margin-bottom: 24px;
+    }
+
+    .hero::before, .section::before, .timeline::before, .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero { padding: 42px 40px 38px; }
+    .section, .timeline, .cta-band { padding: 28px; }
+
+    .hero-grid, .two-up, .three-up, .four-up, .scene-grid {
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: end; }
+    .two-up { grid-template-columns: repeat(2, 1fr); }
+    .three-up { grid-template-columns: repeat(3, 1fr); }
+    .four-up { grid-template-columns: repeat(4, 1fr); }
+    .scene-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(255,184,77,0.12));
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 4.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.04rem;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p, .section-intro, .body-copy { color: var(--text-muted); }
+    .hero-copy p { max-width: 780px; font-size: 1.08rem; }
+
+    .card, .metric, .scene-card, .script-block {
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(20,26,46,0.95), rgba(12,17,30,0.94));
+      border: 1px solid rgba(255,184,77,0.16);
+      padding: 22px;
+    }
+
+    .metric {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 18px;
+    }
+
+    .metric .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .metric .value {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(122,60,255,0.18);
+      color: #d8cbff;
+      border: 1px solid rgba(122,60,255,0.28);
+      margin-bottom: 12px;
+    }
+
+    .pill.gold {
+      background: rgba(255,184,77,0.14);
+      color: #ffe3af;
+      border-color: rgba(255,184,77,0.34);
+    }
+
+    .card ul, .scene-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+    }
+
+    .timeline-steps {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .timeline-step:first-child { border-top: 0; padding-top: 0; }
+
+    .time {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+    }
+
+    .script-block {
+      border-color: rgba(91, 105, 164, 0.26);
+      background: linear-gradient(180deg, rgba(19,24,43,0.96), rgba(11,15,29,0.98));
+    }
+
+    .cta-band {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--ember), var(--ember-2));
+      box-shadow: 0 10px 30px rgba(255,106,43,.28);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    .footer {
+      padding: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .topbar-inner, .page { width: min(calc(100% - 32px), var(--max)); }
+      .hero-grid, .two-up, .three-up, .four-up, .scene-grid, .cta-band, .timeline-step { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="../favicon.svg" alt="Ember Bots mark" />
+        <span>Ember Bots</span>
+      </div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#script">Script</a>
+        <a href="#storyboard">Storyboard</a>
+        <a href="#cta">CTA</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="overview">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">2-Minute Sales Video</div>
+          <h1>Use <span class="gradient-text">EmberBots.ai</span> as the story source, then sell relief from operational drag.</h1>
+          <p>This presentation turns the live Ember Bots website positioning into a 2-minute sales video package. It is built for service-based SMBs, especially home-services owners, and focuses on slow follow-up, missed calls, scattered systems, and the practical automation systems Ember Bots deploys to fix them.</p>
+          <div class="four-up" style="margin-top:18px;">
+            <div class="metric"><div class="label">Audience</div><div class="value">Service-based SMBs and home-services owners</div></div>
+            <div class="metric"><div class="label">Runtime</div><div class="value">105–120 seconds</div></div>
+            <div class="metric"><div class="label">Source</div><div class="value">Live EmberBots.ai positioning</div></div>
+            <div class="metric"><div class="label">Goal</div><div class="value">Explain the offer and drive interest</div></div>
+          </div>
+        </div>
+        <aside class="card">
+          <div class="pill gold">Core message</div>
+          <h3>What the video should sell</h3>
+          <ul>
+            <li>Ember Bots helps small businesses automate lead response, follow-up, scheduling, customer communication, onboarding, and back-office work</li>
+            <li>the value is reduced operational drag and tighter execution</li>
+            <li>the promise is practical: faster response, less manual work, better organization</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="pill">Sales angle</div>
+      <h2>The business is not selling “AI.” It is selling relief from the drag that slows revenue and operations.</h2>
+      <p class="section-intro">The sales story should stay grounded in the live site language: slow follow-up, missed calls, scattered systems, repetitive admin, and systems built around how the business actually runs.</p>
+      <div class="three-up">
+        <div class="card"><h3>Pain</h3><p class="body-copy">Missed calls, slow follow-up, manual scheduling, repeated data entry, and admin sprawl.</p></div>
+        <div class="card"><h3>Shift</h3><p class="body-copy">Ember Bots removes operational drag with automation systems configured to the business.</p></div>
+        <div class="card"><h3>Outcome</h3><p class="body-copy">Faster response, tighter operations, less repetitive work, and more owner clarity.</p></div>
+      </div>
+    </section>
+
+    <section class="timeline" id="script">
+      <div class="pill gold">Voiceover script</div>
+      <h2>2-minute narration structure</h2>
+      <div class="timeline-steps">
+        <div class="timeline-step">
+          <div class="time">0:00–0:12</div>
+          <div class="script-block"><p>Small businesses do not usually lose because they lack hustle. They lose time, money, and momentum to slow follow-up, manual admin, scattered systems, and routine work that should not require owner attention.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:12–0:25</div>
+          <div class="script-block"><p>A lead comes in and sits too long. A missed call turns into missed revenue. Scheduling happens by hand. Customer messages get scattered across channels. Teams re-enter the same information again and again.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:25–0:38</div>
+          <div class="script-block"><p>That operational drag compounds quietly. It slows response, creates inconsistency, drains the team, and holds the business back even when demand is already there.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:38–0:52</div>
+          <div class="script-block"><p>Ember Bots exists to remove that drag. We build automation systems for small businesses that help them respond faster, follow up more consistently, stay organized, and reduce repetitive operational work.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">0:52–1:10</div>
+          <div class="script-block"><p>That includes lead response automation, customer message routing, scheduling and reminder automation, client onboarding automation, internal task orchestration, follow-up automation, back-office admin automation, and executive daily briefings.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:10–1:24</div>
+          <div class="script-block"><p>Instead of forcing a business into generic software workflows, Ember Bots maps each system to the way the company already runs — its team, tools, business hours, escalation rules, and customer flow.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:24–1:39</div>
+          <div class="script-block"><p>The result is practical. Leads get handled faster. Follow-up stops slipping through the cracks. Scheduling gets cleaner. Customer communication becomes easier to manage. Teams spend less time on repetitive admin and more time on conversations, service, and decisions.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:39–1:52</div>
+          <div class="script-block"><p>Ember Bots works best for service-based SMBs with steady inbound leads, real customer communication volume, and repeatable operational bottlenecks that are stealing time from growth.</p></div>
+        </div>
+        <div class="timeline-step">
+          <div class="time">1:52–2:00</div>
+          <div class="script-block"><p>If your business is losing time to slow response, manual follow-up, and operational clutter, Ember Bots can help you fix it. Start at EmberBots.ai.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="storyboard">
+      <div class="pill">Storyboard</div>
+      <h2>Scene-by-scene sales video plan</h2>
+      <div class="scene-grid">
+        <article class="scene-card"><h3>Scene 1 — The drag</h3><p class="body-copy">Owner/operator workflow under strain as leads, tasks, and notifications pile up.</p><ul><li>Text: <strong>Your business deserves intelligent automation</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 2 — Revenue leakage</h3><p class="body-copy">Missed call alert, idle lead form, manual scheduling, fragmented channels.</p><ul><li>Text: <strong>Missed calls. Slow follow-up. Scattered systems.</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 3 — Hidden cost</h3><p class="body-copy">Backlog and duplicate work spread through the system.</p><ul><li>Text: <strong>Operational drag compounds quietly</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 4 — Introduce Ember Bots</h3><p class="body-copy">Chaos reorganizes into a clean Ember-branded operating layer.</p><ul><li>Text: <strong>Ember Bots removes operational drag</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 5 — System stack</h3><p class="body-copy">Feature cards animate in for lead response, routing, scheduling, onboarding, tasks, follow-up, admin, and daily briefings.</p><ul><li>Text: <strong>Automation systems we deploy</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 6 — Tailored to the business</h3><p class="body-copy">The same system flexes to business hours, team roles, routing logic, and workflow rules.</p><ul><li>Text: <strong>Built around how your business actually runs</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 7 — Tangible value</h3><p class="body-copy">Faster lead flow, cleaner task routing, smoother scheduling, clearer owner visibility.</p><ul><li>Text: <strong>Respond faster · Follow up better · Stay organized</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 8 — Best fit</h3><p class="body-copy">Service-based SMB and home-services cues with steady inbound demand.</p><ul><li>Text: <strong>Best fit for service-based SMBs</strong></li></ul></article>
+        <article class="scene-card"><h3>Scene 9 — CTA</h3><p class="body-copy">Premium brand close with ember glow and URL hold.</p><ul><li>Text: <strong>Start at EmberBots.ai</strong></li></ul></article>
+      </div>
+    </section>
+
+    <section class="section" id="cta">
+      <div class="pill gold">Production note</div>
+      <h2>This is the right content package for a 2-minute sales video, even though full render needs scene-by-scene production.</h2>
+      <div class="two-up">
+        <div class="card">
+          <h3>Recommended production path</h3>
+          <ul>
+            <li>render 8–9 scenes individually</li>
+            <li>stitch with voiceover and music</li>
+            <li>keep typography and palette consistent</li>
+            <li>avoid fake metrics or proof claims</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Render style guidance</h3>
+          <p class="body-copy">Premium dark SaaS motion graphics, ember orange, gold, violet, and electric blue accents, elegant dashboard motifs, clean typography, modern and credible, no cheesy stock visuals.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <div class="pill">Repo-ready asset</div>
+        <h2>This is the shareable HTML version of the 2-minute sales video package.</h2>
+        <p class="section-intro">Use it as a planning deck, review artifact, or editor handoff page inside the website repo.</p>
+        <div class="button-row">
+          <a class="button" href="emberbots-sales-video.html">Refresh presentation</a>
+          <a class="button secondary" href="emberbots-explainer.html">See explainer presentation</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="pill gold">Next best step</div>
+        <h3>What to do after this</h3>
+        <ul>
+          <li>commit and publish the page</li>
+          <li>render scenes from the prompt set</li>
+          <li>stitch final video with voiceover</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">Ember Bots · Shareable 2-minute sales video presentation · website/presentations/emberbots-sales-video.html</div>
+  </main>
+</body>
+</html>

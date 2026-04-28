@@ -39,6 +39,15 @@ Quick check for key homepage changes:
 curl -L -A 'Mozilla/5.0' -s https://emberbots.ai | grep -n "Your business deserves\|Lead Response Automation\|Executive Daily Briefing"
 ```
 
+## Presentation standard
+For any shareable HTML deck, one-pager, proposal, or contract packet:
+- publish through GitHub Pages first
+- verify the live URL before handoff
+- run Gemini Pro design review against the published artifact when available
+- generate DOCX/PDF only from the final reviewed HTML
+
+See `docs/shareable-presentations.md` for the full workflow.
+
 ## Rollback
 If a design/content change needs to be reverted fast:
 
@@ -55,6 +64,7 @@ Prefer reverting the specific bad commit instead of force-pushing history.
 - `CNAME` — custom domain binding for GitHub Pages
 - `amber.jpg`, `steve.jpg`, `logo.svg`, `favicon.svg` — current site assets
 - `logo.png` — deprecated old logo; use `logo.svg` for new materials
+- `docs/shareable-presentations.md` — standard workflow for published HTML presentations, review passes, and exports
 - `docs/workflow-systems-brief.md` — older messaging/reference material
 - `CONTEXT.md` — repo-specific handoff and operating context
 

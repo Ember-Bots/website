@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — Lead Recovery & Response System Packages</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --bg2: rgba(10, 14, 28, 0.9);
+      --bg3: rgba(16, 21, 40, 0.94);
+      --surface: rgba(18, 24, 44, 0.82);
+      --surface-strong: rgba(14, 19, 36, 0.96);
+      --border: rgba(91, 105, 164, 0.28);
+      --border-strong: rgba(255, 184, 77, 0.32);
+      --text: #edf2ff;
+      --text-muted: #a6b0c8;
+      --white: #ffffff;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --success: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    .page {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+
+    .hero,
+    .section,
+    .note-band,
+    .matrix-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(18,24,44,0.92), rgba(12,16,30,0.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      border-radius: 32px;
+      padding: 36px 40px 34px;
+      margin-bottom: 26px;
+    }
+
+    .hero::before,
+    .section::before,
+    .note-band::before,
+    .matrix-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(255,184,77,0.1));
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 68%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p {
+      max-width: 760px;
+      margin: 0;
+      font-size: 1.06rem;
+      color: var(--text-muted);
+    }
+
+    .summary-card {
+      border: 1px solid rgba(255,184,77,0.18);
+      border-radius: 22px;
+      padding: 22px 22px 20px;
+      background: linear-gradient(180deg, rgba(20,26,46,0.95), rgba(12,17,30,0.94));
+      align-self: end;
+    }
+
+    .summary-card h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .summary-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-intro {
+      margin: 0 0 22px;
+      color: var(--text-muted);
+      max-width: 860px;
+    }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .package {
+      position: relative;
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(19,24,43,0.96), rgba(11,15,29,0.98));
+      border: 1px solid rgba(91,105,164,0.26);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .package.featured {
+      border-color: var(--border-strong);
+      box-shadow: inset 0 0 0 1px rgba(255,184,77,0.14), 0 0 32px rgba(255,106,0,0.08);
+      transform: translateY(-4px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(122,60,255,0.18);
+      color: #d8cbff;
+      border: 1px solid rgba(122,60,255,0.28);
+    }
+
+    .featured .badge {
+      background: rgba(255,184,77,0.14);
+      color: #ffe3af;
+      border-color: rgba(255,184,77,0.34);
+    }
+
+    .package h3 {
+      margin: 0 0 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+    }
+
+    .package-sub {
+      color: var(--text-muted);
+      margin: 0 0 18px;
+      min-height: 74px;
+    }
+
+    .price-wrap {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 16px 0 18px;
+      border-top: 1px solid rgba(91,105,164,0.18);
+      border-bottom: 1px solid rgba(91,105,164,0.18);
+    }
+
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .price-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.03em;
+    }
+
+    .package ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .package li {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .package li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .package .best-fit {
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .kicker {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .value-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .value-item {
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(91,105,164,0.2);
+    }
+
+    .value-item h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .value-item p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.94rem;
+    }
+
+    .matrix-wrap {
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    th, td {
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(91,105,164,0.18);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      color: var(--white);
+      background: rgba(255,255,255,0.025);
+    }
+
+    td {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+    }
+
+    td strong {
+      color: var(--text);
+    }
+
+    .check {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .muted { color: var(--text-muted); }
+
+    .note-band {
+      border-radius: 24px;
+      padding: 24px 26px;
+      margin-bottom: 24px;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .note-band h2,
+    .note-band h3 {
+      margin-top: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    .note-band p,
+    .note-band li {
+      color: var(--text-muted);
+    }
+
+    .note-band ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-top: 8px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    .brand-mark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .package-grid,
+      .value-band,
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .package.featured {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(calc(100% - 24px), var(--max));
+        padding: 18px 0 32px;
+      }
+
+      .hero,
+      .section,
+      .matrix-wrap,
+      .note-band {
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead { display: none; }
+
+      tr {
+        margin-bottom: 16px;
+        border: 1px solid rgba(91,105,164,0.18);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      td {
+        padding: 12px 14px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 4px;
+        color: var(--white);
+        font-weight: 700;
+      }
+
+      .footer-line {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media print {
+      body { background: #0b0f18; }
+      .page { width: 100%; padding: 0; }
+      .hero, .section, .matrix-wrap, .note-band {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Lead Recovery & Response System</div>
+          <h1>Three clear ways to <span class="gradient-text">recover more revenue</span> without adding office chaos.</h1>
+          <p>
+            Ember Bots helps local service businesses respond faster, follow up more consistently, and keep more leads moving toward booked jobs. Review the packages below to find the right fit for your operation's size, lead volume, and follow-up needs.
+          </p>
+        </div>
+        <aside class="summary-card">
+          <h2>What changes when Ember is in place</h2>
+          <ul>
+            <li>Missed calls and web leads stop sitting untouched.</li>
+            <li>Follow-up becomes consistent instead of owner-dependent.</li>
+            <li>Review, estimate, and response workflows run on a defined rhythm.</li>
+            <li>The customer pays for a managed outcome, not a pile of disconnected tools.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Package overview</h2>
+      <p class="section-intro">Starter covers the core lead-response foundation. Growth is the best fit for most established operators. Managed Growth is for businesses that need deeper support, broader oversight, and more active optimization.</p>
+      <div class="package-grid">
+        <article class="package">
+          <div class="badge">Starter</div>
+          <h3>Starter</h3>
+          <p class="package-sub">For smaller operators who need missed-call and web-lead follow-up cleaned up before adding broader automation.</p>
+          <div class="price-wrap">
+            <div class="price-line"><span class="price-label">Setup</span><span class="price">$1,500</span></div>
+            <div class="price-line"><span class="price-label">Monthly</span><span class="price">$750</span></div>
+          </div>
+          <ul>
+            <li>1 primary lead-response workflow for missed calls and web leads</li>
+            <li>Basic follow-up for new inquiries</li>
+            <li>Review request workflow</li>
+            <li>Monthly activity summary</li>
+            <li>Core setup, routing, and launch support</li>
+          </ul>
+          <div class="best-fit">
+            <span class="kicker">Best fit</span>
+            Owner-led shops that mainly need faster first response and cleaner basic follow-up.
+          </div>
+        </article>
+
+        <article class="package featured">
+          <div class="badge">Recommended</div>
+          <h3>Growth</h3>
+          <p class="package-sub">The best fit for established operators who need stronger speed-to-lead, estimate follow-up, and weekly accountability.</p>
+          <div class="price-wrap">
+            <div class="price-line"><span class="price-label">Setup</span><span class="price">$2,500</span></div>
+            <div class="price-line"><span class="price-label">Monthly</span><span class="price">$1,250</span></div>
+          </div>
+          <ul>
+            <li>Everything in Starter</li>
+            <li>Estimate follow-up workflow</li>
+            <li>Up to 3 active workflows across lead response, estimates, and review requests</li>
+            <li>Weekly reporting with light optimization</li>
+            <li>Best when callbacks, estimates, and follow-up are where revenue is leaking</li>
+          </ul>
+          <div class="best-fit">
+            <span class="kicker">Best fit</span>
+            Local service businesses with enough lead flow that one recovered job can materially outweigh the monthly cost.
+          </div>
+        </article>
+
+        <article class="package">
+          <div class="badge">Advanced</div>
+          <h3>Managed Growth</h3>
+          <p class="package-sub">For businesses that need deeper support across multiple workflows, more active oversight, and ongoing management attention.</p>
+          <div class="price-wrap">
+            <div class="price-line"><span class="price-label">Setup</span><span class="price">$4,000</span></div>
+            <div class="price-line"><span class="price-label">Monthly</span><span class="price">$2,000 + ad spend</span></div>
+          </div>
+          <ul>
+            <li>Everything in Growth</li>
+            <li>Broader implementation support across multiple workflows or locations</li>
+            <li>More active ongoing optimization and management review</li>
+            <li>Higher-touch reporting cadence</li>
+            <li>Paid media budget billed separately when applicable</li>
+          </ul>
+          <div class="best-fit">
+            <span class="kicker">Best fit</span>
+            Operators with higher lead volume, more operational complexity, or multi-location needs.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What the customer is really buying</h2>
+      <p class="section-intro">The customer is buying recovered revenue, cleaner follow-up, and less owner dependence — not a pile of software subscriptions.</p>
+      <div class="value-band">
+        <div class="value-item">
+          <h3>Faster response</h3>
+          <p>New leads and missed opportunities get an immediate, defined follow-up path instead of waiting on someone to remember.</p>
+        </div>
+        <div class="value-item">
+          <h3>Cleaner follow-up</h3>
+          <p>Estimate, review, and inquiry workflows stop dying in inboxes, texts, sticky notes, or busy days.</p>
+        </div>
+        <div class="value-item">
+          <h3>More booked jobs</h3>
+          <p>The goal is simple: more of the right leads turn into real booked work.</p>
+        </div>
+        <div class="value-item">
+          <h3>Less admin drag</h3>
+          <p>The owner and office team spend less time manually chasing routine follow-up and more time closing and delivering.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="matrix-wrap">
+      <h2>Side-by-side comparison</h2>
+      <p class="section-intro">Compare the packages side by side to see exactly what is included at each tier.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Included</th>
+            <th>Starter</th>
+            <th>Growth</th>
+            <th>Managed Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Included"><strong>Missed-call + web-lead response workflow</strong></td>
+            <td data-label="Starter"><span class="check">Included</span></td>
+            <td data-label="Growth"><span class="check">Included</span></td>
+            <td data-label="Managed Growth"><span class="check">Included</span></td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Basic lead follow-up sequence</strong></td>
+            <td data-label="Starter"><span class="check">Included</span></td>
+            <td data-label="Growth"><span class="check">Included</span></td>
+            <td data-label="Managed Growth"><span class="check">Included</span></td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Review request workflow</strong></td>
+            <td data-label="Starter"><span class="check">Included</span></td>
+            <td data-label="Growth"><span class="check">Included with stronger cadence</span></td>
+            <td data-label="Managed Growth"><span class="check">Included with active management</span></td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Estimate follow-up</strong></td>
+            <td data-label="Starter"><span class="muted">—</span></td>
+            <td data-label="Growth"><span class="check">Included</span></td>
+            <td data-label="Managed Growth"><span class="check">Included</span></td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Reporting</strong></td>
+            <td data-label="Starter">Monthly activity summary</td>
+            <td data-label="Growth">Weekly reporting + light optimization</td>
+            <td data-label="Managed Growth">Higher-touch reporting + active optimization</td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Implementation depth</strong></td>
+            <td data-label="Starter">Core launch and routing</td>
+            <td data-label="Growth">Broader setup across lead response and estimate follow-up</td>
+            <td data-label="Managed Growth">Broader support across multiple workflows or locations</td>
+          </tr>
+          <tr>
+            <td data-label="Included"><strong>Best fit</strong></td>
+            <td data-label="Starter">Smaller shop, core response problem</td>
+            <td data-label="Growth">Most established operators</td>
+            <td data-label="Managed Growth">Higher volume, higher complexity</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="note-band">
+      <div class="note-grid">
+        <div>
+          <h2>Scope assumptions</h2>
+          <p>
+            Pricing assumes normal usage for one operating business location with typical lead-response and follow-up volume. Unusually high conversation volume, multi-location rollout, heavy custom workflow requests, paid media management, or unusually high third-party model/tool consumption may require a revised scope or additional fees.
+          </p>
+          <p>
+            The service is designed to stay simple and flat-rate for normal operating use while still leaving room to quote larger or more complex environments fairly.
+          </p>
+        </div>
+        <div>
+          <h3>Included scope assumptions</h3>
+          <ul>
+            <li>One primary business/entity unless otherwise quoted</li>
+            <li>Normal monthly usage based on expected service-business lead flow</li>
+            <li>Third-party hard costs, ad spend, premium integrations, and unusual overages excluded unless explicitly included</li>
+            <li>Custom builds outside the agreed workflow scope quoted separately</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Recommended starting path</h2>
+      <p class="section-intro">A simple four-step process to plug the leaks, launch the system, and start recovering revenue.</p>
+      <div class="value-band">
+        <div class="value-item">
+          <h3>1. Confirm the leak</h3>
+          <p>Identify where missed calls, web leads, estimates, or review follow-up are currently slipping through.</p>
+        </div>
+        <div class="value-item">
+          <h3>2. Select the package</h3>
+          <p>Choose Starter, Growth, or Managed Growth based on lead volume, workflow needs, and reporting depth.</p>
+        </div>
+        <div class="value-item">
+          <h3>3. Configure the system</h3>
+          <p>Set up routing, follow-up logic, messaging, and reporting around the business’s actual operating flow.</p>
+        </div>
+        <div class="value-item">
+          <h3>4. Launch and refine</h3>
+          <p>Go live, monitor performance, and tighten the system based on real lead behavior and response gaps.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-line">
+      <div class="brand-mark">Ember Bots</div>
+      <div>Lead Recovery &amp; Response System • customer-facing package overview</div>
+    </div>
+  </main>
+</body>
+</html>

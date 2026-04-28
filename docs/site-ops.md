@@ -7,11 +7,13 @@
 - Repo: `https://github.com/Ember-Bots/website`
 
 ## Safe update workflow
-1. Edit `index.html`
+1. Edit the target file(s)
 2. Preview locally with a static server
 3. Commit the change in an isolated commit when possible
 4. Push `main`
 5. Verify the live site after GitHub Pages rebuilds
+
+For shareable HTML presentations, proposals, one-pagers, and contract packets, follow `docs/shareable-presentations.md` in addition to this base workflow. The key rule is publish first, then verify live, then run Gemini Pro review when available.
 
 ## Local preview
 ```bash
@@ -46,6 +48,9 @@ git push origin main
 - `4ea25d9a` — Match contact CTA to primary gradient button
 
 ## Current brand/design constraints
+- `logo.svg` is the source-of-truth brand logo for new materials.
+- `favicon.svg` is the source-of-truth standalone mark.
+- `logo.png` is deprecated and should not be used for new presentations or exports.
 - Keep the hero wording exactly:
   - `AI AUTOMATION FOR SMALL BUSINESS`
   - `Your business deserves intelligent automation.`
