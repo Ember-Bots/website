@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New View Roofing — Business Case | Ember Bots</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d;
+      --surface: rgba(18, 24, 44, 0.94);
+      --surface-2: rgba(14, 19, 36, 0.98);
+      --border: rgba(91, 105, 164, 0.28);
+      --text: #edf2ff;
+      --muted: #a6b0c8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffb84d;
+      --violet: #7a3cff;
+      --blue: #2563ff;
+      --green: #7dd3a6;
+      --shadow: 0 24px 80px rgba(4, 10, 22, 0.42);
+      --radius: 24px;
+      --page-w: 11in;
+      --page-h: 8.5in;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(122,60,255,0.16) 0%, transparent 26%),
+        radial-gradient(circle at 84% 12%, rgba(37,99,255,0.13) 0%, transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,106,0,0.10) 0%, transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page {
+      width: var(--page-w);
+      height: var(--page-h);
+      min-height: var(--page-h);
+      margin: 0 auto;
+      padding: 0.34in;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 0.18in;
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    .page:last-child { page-break-after: auto; }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(255,184,77,0.10), transparent 26%),
+        radial-gradient(circle at 10% 92%, rgba(122,60,255,0.12), transparent 28%);
+      pointer-events: none;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .logo { width: 220px; height: auto; display: block; }
+    .kicker {
+      color: var(--gold);
+      border: 1px solid rgba(255,184,77,0.26);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      background: rgba(255,255,255,.03);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .panel {
+      background: linear-gradient(180deg, rgba(18,24,44,0.94), rgba(12,16,30,0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,184,77,0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(122,60,255,0.14), transparent 30%);
+      pointer-events: none;
+    }
+    h1,h2,h3,p { margin: 0; position: relative; z-index: 1; }
+    h1,h2,h3 { font-family: 'Space Grotesk', sans-serif; }
+    h1 { font-size: 47px; line-height: .98; letter-spacing: -.055em; max-width: 13ch; }
+    h2 { font-size: 24px; line-height: 1.05; letter-spacing: -.035em; margin-bottom: 10px; }
+    h3 { font-size: 15px; letter-spacing: -.01em; margin-bottom: 7px; }
+    p, li { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    ul { margin: 0; padding-left: 18px; position: relative; z-index: 1; }
+    li { margin-bottom: 5px; }
+    .gradient {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember-2) 34%, var(--violet) 70%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero {
+      padding: .34in;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: .26in;
+      align-items: center;
+    }
+    .hero p { color: #dbe6fb; font-size: 16px; line-height: 1.48; max-width: 58ch; margin-top: 16px; }
+    .hero-card { padding: 22px; border-radius: 22px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.09); position:relative; z-index:1; }
+    .metric-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 18px; position:relative; z-index:1; }
+    .metric { background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 14px; }
+    .metric .num { color: var(--gold); font-size: 22px; font-weight: 800; font-family:'Space Grotesk',sans-serif; line-height:1; margin-bottom:5px; }
+    .metric .label { color: var(--text); font-size: 12px; font-weight: 700; line-height: 1.25; }
+    .content { display:grid; gap:.18in; position: relative; z-index: 1; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:.18in; }
+    .grid3 { display:grid; grid-template-columns: repeat(3,1fr); gap:.14in; }
+    .block { padding: .22in; }
+    .card { background: rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 16px; position:relative; z-index:1; }
+    .label { color: var(--gold); font-size: 10px; font-weight:800; text-transform:uppercase; letter-spacing:.14em; margin-bottom:7px; font-family:'Space Grotesk',sans-serif; }
+    .table { display:grid; gap: 10px; margin-top: 10px; }
+    .row { display:grid; grid-template-columns: .82fr .58fr .72fr; gap: 8px; align-items:stretch; }
+    .cell { border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.035); border-radius: 14px; padding: 11px; color:var(--muted); font-size:12px; line-height:1.35; }
+    .cell strong { display:block; color:var(--text); margin-bottom:3px; font-size:12px; }
+    .row.head .cell { color: var(--gold); font-weight: 800; text-transform: uppercase; letter-spacing:.08em; font-size:10px; font-family:'Space Grotesk',sans-serif; }
+    .quote { padding:.26in; display:grid; grid-template-columns:1.2fr .8fr; gap:.22in; align-items:center; }
+    .quote .big { color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:27px; line-height:1.08; letter-spacing:-.04em; }
+    .footer { display:flex; justify-content:space-between; align-items:center; color:#95a2c8; font-size:11px; padding:0 8px; position:relative; z-index:1; }
+    @page { size: 11in 8.5in; margin: 0; }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <header class="top">
+      <img class="logo" src="../logo.svg" alt="Ember Bots" />
+      <div class="kicker">Business Case</div>
+    </header>
+    <main class="panel hero">
+      <div>
+        <div class="label">New View Roofing + Ember Bots</div>
+        <h1>A practical case for <span class="gradient">recovering missed revenue</span>.</h1>
+        <p>New View Roofing appears to have the market credibility, service quality, and local trust. The business case for Ember Bots is making sure the revenue path behind that brand is just as strong: fast response, clean scheduling, consistent follow-up, and less admin drag.</p>
+        <div class="metric-grid">
+          <div class="metric"><div class="num">2</div><div class="label">extra jobs/month can create meaningful upside</div></div>
+          <div class="metric"><div class="num">24h</div><div class="label">public follow-up window may be too slow for urgent roofing leads</div></div>
+          <div class="metric"><div class="num">5</div><div class="label">core leak points Ember can diagnose and tighten</div></div>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h2>Core thesis</h2>
+        <p style="margin-bottom:12px;">New View may not need more demand as badly as it needs better monetization of demand it already earns.</p>
+        <ul>
+          <li>Roofing jobs are high-value and timing-sensitive.</li>
+          <li>Storm, leak, and insurance inquiries often go to multiple competitors.</li>
+          <li>The first credible responder usually has an advantage.</li>
+          <li>Manual follow-up and coordination quietly leak revenue.</li>
+        </ul>
+      </aside>
+    </main>
+    <footer class="footer"><span>Prepared by Ember Bots</span><span>emberbots.ai</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="top">
+      <img class="logo" src="../logo.svg" alt="Ember Bots" />
+      <div class="kicker">The Revenue Problem</div>
+    </header>
+    <main class="content">
+      <section class="panel block">
+        <h2>Where revenue likely leaks before the job is won</h2>
+        <p>In roofing, revenue leakage usually does not look dramatic. It looks like normal operating friction: a missed call, a delayed form response, a prospect waiting on scheduling, an estimate with no structured follow-up, or a customer stuck in insurance coordination.</p>
+        <div class="grid3" style="margin-top:14px;">
+          <div class="card"><div class="label">Lead response</div><h3>Slow first contact</h3><p>A 24-hour response promise may be operationally reasonable, but it is weak for urgent storm and leak inquiries.</p></div>
+          <div class="card"><div class="label">Call capture</div><h3>After-hours leakage</h3><p>Phone-heavy service categories lose revenue when missed calls are not automatically captured and re-engaged.</p></div>
+          <div class="card"><div class="label">Scheduling</div><h3>Inspection friction</h3><p>Every delay between inquiry and booked inspection increases the risk that another contractor wins the opportunity.</p></div>
+          <div class="card"><div class="label">Follow-up</div><h3>Quote decay</h3><p>Good inspections can still go cold if estimate follow-up depends entirely on rep memory or manual discipline.</p></div>
+          <div class="card"><div class="label">Insurance</div><h3>Admin drag</h3><p>Claims create repetitive communication, document requests, next-step reminders, and internal coordination work.</p></div>
+          <div class="card"><div class="label">Visibility</div><h3>Hidden stalled revenue</h3><p>Without clean daily visibility, stuck opportunities often stay invisible until they are already lost.</p></div>
+        </div>
+      </section>
+      <section class="panel quote">
+        <div class="big">The strongest pitch is not “AI.” It is revenue recovery.</div>
+        <p>Ember Bots should position the opportunity around faster response, better inspection conversion, stronger estimate follow-up, and less operational drag — not generic automation language.</p>
+      </section>
+    </main>
+    <footer class="footer"><span>New View Roofing — Business Case</span><span>Page 2</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="top">
+      <img class="logo" src="../logo.svg" alt="Ember Bots" />
+      <div class="kicker">ROI Logic</div>
+    </header>
+    <main class="content">
+      <section class="panel block">
+        <h2>Simple financial case</h2>
+        <p>The exact numbers should be validated in discovery. But the directional economics are strong because roofing jobs are high-value and response/follow-up improvements do not need to be massive to matter.</p>
+        <div class="table">
+          <div class="row head"><div class="cell">Scenario</div><div class="cell">Monthly lift</div><div class="cell">Annual impact</div></div>
+          <div class="row"><div class="cell"><strong>Conservative</strong>Recover 2 otherwise-lost jobs/month at $12,000 average job value.</div><div class="cell"><strong>$24,000</strong>added monthly revenue</div><div class="cell"><strong>$288,000</strong>potential annual revenue lift</div></div>
+          <div class="row"><div class="cell"><strong>Moderate</strong>Recover 4 otherwise-lost jobs/month through faster response and tighter follow-up.</div><div class="cell"><strong>$48,000</strong>added monthly revenue</div><div class="cell"><strong>$576,000</strong>potential annual revenue lift</div></div>
+          <div class="row"><div class="cell"><strong>Capacity</strong>Reclaim 30 hours/month of admin and coordination work.</div><div class="cell"><strong>$1,050–$1,500</strong>monthly capacity value</div><div class="cell"><strong>$12,600–$18,000</strong>annual operating capacity</div></div>
+        </div>
+      </section>
+      <section class="grid2">
+        <article class="panel block">
+          <h2>What Ember would implement</h2>
+          <ul>
+            <li>Instant SMS/email lead acknowledgment</li>
+            <li>Missed-call text-back and after-hours capture</li>
+            <li>Inspection booking, reminders, and rescheduling flows</li>
+            <li>Estimate follow-up and dormant lead reactivation</li>
+            <li>Insurance-process reminders and task handoffs</li>
+            <li>Daily pipeline summaries and stuck-opportunity alerts</li>
+          </ul>
+        </article>
+        <article class="panel block">
+          <h2>Why it pays back</h2>
+          <ul>
+            <li>Each recovered job has meaningful dollar value.</li>
+            <li>Speed-to-lead improves the chance of booking the inspection.</li>
+            <li>Structured follow-up protects already-earned opportunities.</li>
+            <li>Admin automation gives project managers more time for sales and service.</li>
+            <li>Visibility reduces the chance that good leads quietly die.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <footer class="footer"><span>Prepared by Ember Bots</span><span>Page 3</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="top">
+      <img class="logo" src="../logo.svg" alt="Ember Bots" />
+      <div class="kicker">Recommendation</div>
+    </header>
+    <main class="content">
+      <section class="panel block">
+        <h2>Recommended commercial path</h2>
+        <div class="grid3">
+          <div class="card"><div class="label">Step 1</div><h3>Missed Revenue Snapshot</h3><p>Audit lead response, missed-call handling, inspection scheduling, estimate follow-up, and insurance workflow drag.</p></div>
+          <div class="card"><div class="label">Step 2</div><h3>Lead Recovery + Response System</h3><p>Deploy the highest-ROI fixes first: instant response, routing, missed-call recovery, scheduling, and follow-up.</p></div>
+          <div class="card"><div class="label">Step 3</div><h3>Operational Coordination System</h3><p>Expand into insurance coordination, internal task orchestration, daily summaries, and stalled-opportunity reporting.</p></div>
+        </div>
+      </section>
+      <section class="panel quote">
+        <div>
+          <div class="label">Final positioning</div>
+          <div class="big">New View already appears to have the brand trust. Ember Bots helps make sure the operating system behind it converts.</div>
+        </div>
+        <div class="hero-card">
+          <h2>Best sales line</h2>
+          <p>“You already generate trust and demand. The question is how much revenue is quietly being lost between first contact, inspection booking, estimate follow-up, and claim coordination.”</p>
+        </div>
+      </section>
+      <section class="panel block">
+        <h2>Bottom line</h2>
+        <p>New View Roofing is a strong-fit target because it combines high-ticket local service work, urgent inbound demand, and repeatable operational friction. Ember Bots should lead with a practical business case: recover missed revenue, book more inspections, protect estimate follow-up, and reduce admin drag without replacing the human relationship that wins roofing jobs.</p>
+      </section>
+    </main>
+    <footer class="footer"><span>Business Automation Systems for Small Teams</span><span>emberbots.ai</span></footer>
+  </section>
+</body>
+</html>

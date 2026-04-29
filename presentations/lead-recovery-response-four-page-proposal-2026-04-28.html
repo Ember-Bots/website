@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — Lead Recovery & Response Proposal</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07090d;
+      --panel: rgba(15, 20, 38, 0.92);
+      --panel-2: rgba(20, 27, 50, 0.82);
+      --line: rgba(142, 155, 210, 0.24);
+      --text: #f0f4ff;
+      --muted: #a9b4cc;
+      --dim: #7d8aa8;
+      --ember: #ff6a00;
+      --ember-2: #ff8a1f;
+      --gold: #ffbd59;
+      --violet: #7a3cff;
+      --blue: #3b82f6;
+      --green: #55d69f;
+      --red: #ff7d7d;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #05070b; color: var(--text); font-family: Inter, system-ui, sans-serif; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    @page { size: Letter; margin: 0; }
+
+    .page {
+      width: 8.5in;
+      height: 11in;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+      padding: 0.42in 0.46in 0.36in;
+      background:
+        radial-gradient(circle at 14% 9%, rgba(122,60,255,0.18), transparent 28%),
+        radial-gradient(circle at 84% 13%, rgba(59,130,246,0.14), transparent 25%),
+        radial-gradient(circle at 50% 105%, rgba(255,106,0,0.15), transparent 36%),
+        linear-gradient(180deg, #080b12 0%, #0b1020 48%, #06080d 100%);
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.045), transparent 32%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 72px);
+      opacity: 0.7;
+    }
+
+    .topbar, .footer, .content { position: relative; z-index: 1; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 0.28in; }
+    .brand { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    .brand img { width: 34px; height: 34px; border-radius: 9px; }
+    .brand span { font-size: 17px; }
+    .doc-label { color: var(--gold); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 800; text-align: right; }
+    .footer { position: absolute; left: 0.46in; right: 0.46in; bottom: 0.28in; display: flex; justify-content: space-between; color: var(--dim); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; font-weight: 800; margin-bottom: 12px; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; margin: 0; letter-spacing: -0.04em; }
+    h1 { font-size: 58px; line-height: 0.96; max-width: 650px; }
+    h2 { font-size: 38px; line-height: 1.02; margin-bottom: 14px; }
+    h3 { font-size: 19px; line-height: 1.08; margin-bottom: 8px; }
+    p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.52; }
+    .lead { font-size: 18px; line-height: 1.46; color: #dfe7ff; max-width: 615px; margin-top: 18px; }
+    .gradient { color: var(--ember-2); text-shadow: 0 0 36px rgba(255,106,0,0.22); }
+
+    .hero-card, .panel, .mini, .price, .callout {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(18,24,44,0.91), rgba(10,14,28,0.92));
+      box-shadow: 0 20px 55px rgba(0,0,0,0.28);
+      border-radius: 24px;
+    }
+    .hero-card { padding: 34px 36px; min-height: 7.08in; display: flex; flex-direction: column; justify-content: space-between; }
+    .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .metric { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.035); border-radius: 17px; padding: 15px; }
+    .metric b { display: block; font-size: 22px; color: #fff; font-family: 'Space Grotesk', sans-serif; margin-bottom: 4px; }
+    .metric span { color: var(--muted); font-size: 11px; line-height: 1.35; display: block; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .stack { display: grid; gap: 12px; }
+    .panel { padding: 20px; }
+    .mini { padding: 16px; min-height: 124px; }
+    .mini .num { color: var(--gold); font-family: 'Space Grotesk'; font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+    .bullet { display: grid; gap: 9px; margin-top: 12px; }
+    .bullet div { display: grid; grid-template-columns: 18px 1fr; gap: 8px; color: var(--muted); font-size: 13px; line-height: 1.38; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ember); margin-top: 5px; box-shadow: 0 0 18px rgba(255,106,0,0.55); }
+
+    .section-head { margin-bottom: 18px; }
+    .section-head p { max-width: 650px; }
+    .process { display: grid; gap: 11px; margin-top: 12px; }
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 13px; align-items: start; padding: 14px; border-radius: 17px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); }
+    .step .badge { width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; font-weight: 900; color: #0a0c12; background: linear-gradient(135deg, var(--gold), var(--ember)); }
+
+    .price { padding: 17px; min-height: 207px; display: flex; flex-direction: column; justify-content: space-between; }
+    .price.featured { border-color: rgba(255,189,89,0.56); background: radial-gradient(circle at top right, rgba(255,106,0,0.18), transparent 35%), linear-gradient(180deg, rgba(23,29,53,0.95), rgba(12,16,30,0.95)); }
+    .price-title { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+    .price-title h3 { margin: 0; }
+    .tag { color: #071015; background: var(--gold); border-radius: 999px; padding: 4px 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; }
+    .amount { font-family: 'Space Grotesk'; color: #fff; font-weight: 700; font-size: 22px; line-height: 1.15; }
+    .amount small { display: block; color: var(--muted); font-family: Inter; font-size: 11px; font-weight: 600; margin-top: 3px; }
+    .price ul { margin: 12px 0 0; padding-left: 17px; color: var(--muted); font-size: 12px; line-height: 1.42; }
+
+    .callout { padding: 22px; background: radial-gradient(circle at 100% 0%, rgba(255,189,89,0.13), transparent 30%), rgba(18,24,44,0.9); }
+    .callout strong { color: var(--gold); }
+    .quote { font-family: 'Space Grotesk'; font-size: 25px; line-height: 1.14; color: #fff; letter-spacing: -0.03em; }
+
+    .checklist { display: grid; gap: 9px; margin-top: 12px; }
+    .check { display: grid; grid-template-columns: 20px 1fr; gap: 9px; padding: 10px 11px; border-radius: 13px; background: rgba(255,255,255,0.035); color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+    .check span:first-child { color: var(--green); font-weight: 900; }
+
+    .spacer-sm { height: 12px; }
+    .spacer-md { height: 18px; }
+  </style>
+</head>
+<body>
+
+  <section class="page">
+    <div class="topbar">
+      <div class="brand"><img src="../favicon.svg" alt="Ember Bots logo" /><span>Ember Bots</span></div>
+      <div class="doc-label">Four-page proposal · PDF</div>
+    </div>
+    <div class="content hero-card">
+      <div>
+        <div class="kicker">Lead Recovery & Response System</div>
+        <h1>Turn missed follow-up into <span class="gradient">booked revenue.</span></h1>
+        <p class="lead">Ember Bots builds done-for-you growth systems for service businesses that already have demand, but lose opportunities when calls, forms, estimates, reviews, and after-hours inquiries are not worked consistently.</p>
+      </div>
+      <div>
+        <div class="callout">
+          <div class="quote">Most local service businesses do not have a lead problem. They have a response-execution problem.</div>
+          <div class="spacer-sm"></div>
+          <p>Our front-end offer is the <strong>Missed Revenue Snapshot</strong>: a specific, evidence-grounded look at where public lead paths may be leaking before a prospect books.</p>
+        </div>
+        <div class="hero-meta">
+          <div class="metric"><b>01</b><span>Find visible lead-leak signals in the public customer journey.</span></div>
+          <div class="metric"><b>02</b><span>Implement response, recovery, and follow-up workflows.</span></div>
+          <div class="metric"><b>03</b><span>Operate and optimize the system around booked-job impact.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Ember Bots</span><span>Page 1 / 4</span></div>
+  </section>
+
+  <section class="page">
+    <div class="topbar">
+      <div class="brand"><img src="../favicon.svg" alt="Ember Bots logo" /><span>Ember Bots</span></div>
+      <div class="doc-label">Missed Revenue Snapshot</div>
+    </div>
+    <div class="content">
+      <div class="section-head">
+        <div class="kicker">The diagnostic</div>
+        <h2>Start with proof, not generic AI promises.</h2>
+        <p>The snapshot gives Steve a specific reason to call: Ember reviewed the public buying path and found places where good leads may be slowing down before they book.</p>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>What we look for</h3>
+          <div class="bullet">
+            <div><span class="dot"></span><span>Unclear phone, booking, or contact path that creates friction for urgent buyers.</span></div>
+            <div><span class="dot"></span><span>Web forms or estimate requests with no clear follow-up expectation.</span></div>
+            <div><span class="dot"></span><span>No obvious after-hours capture or missed-call recovery path.</span></div>
+            <div><span class="dot"></span><span>Review themes suggesting callback, scheduling, estimate, or communication friction.</span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Who fits first</h3>
+          <div class="bullet">
+            <div><span class="dot"></span><span>Owner-led HVAC, plumbing, and home-service operators.</span></div>
+            <div><span class="dot"></span><span>Strong local footprint with enough demand to make follow-up valuable.</span></div>
+            <div><span class="dot"></span><span>Visible public evidence that the customer journey can be tightened.</span></div>
+            <div><span class="dot"></span><span>Teams great at service delivery, but inconsistent in front-office execution.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="grid-3">
+        <div class="mini"><div class="num">Snapshot output</div><h3>Company fit</h3><p>Local proof, reputation signal, territory fit, and why the account deserves a human call.</p></div>
+        <div class="mini"><div class="num">Evidence</div><h3>Lead-leak signals</h3><p>Two to four specific observations pulled from public pages, reviews, forms, and contact paths.</p></div>
+        <div class="mini"><div class="num">Action</div><h3>First fix</h3><p>Missed-call text-back, web-lead response, estimate follow-up, after-hours capture, or review workflow.</p></div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="callout">
+        <p><strong>Important standard:</strong> We do not invent missed calls, revenue numbers, or private operating details. The snapshot uses specific public evidence and careful language so the outreach stays credible.</p>
+      </div>
+    </div>
+    <div class="footer"><span>Lead Recovery & Response Proposal</span><span>Page 2 / 4</span></div>
+  </section>
+
+  <section class="page">
+    <div class="topbar">
+      <div class="brand"><img src="../favicon.svg" alt="Ember Bots logo" /><span>Ember Bots</span></div>
+      <div class="doc-label">System & Packages</div>
+    </div>
+    <div class="content">
+      <div class="section-head">
+        <div class="kicker">The paid offer behind the snapshot</div>
+        <h2>We build the operating system that closes the gaps.</h2>
+        <p>The Lead Recovery & Response System converts the snapshot into deployed workflows, cleaner customer communication, and ongoing optimization.</p>
+      </div>
+      <div class="process">
+        <div class="step"><div class="badge">1</div><div><h3>Diagnose</h3><p>Review the public buying path, CRM context, response expectations, reviews, and contact-flow friction.</p></div></div>
+        <div class="step"><div class="badge">2</div><div><h3>Implement</h3><p>Install the highest-leverage workflows: missed-call recovery, web-lead response, estimate follow-up, review requests, and after-hours capture.</p></div></div>
+        <div class="step"><div class="badge">3</div><div><h3>Operate</h3><p>Monitor performance, refine messaging, tighten handoffs, and keep the business focused on booked revenue rather than tool management.</p></div></div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="grid-3">
+        <div class="price">
+          <div>
+            <div class="price-title"><h3>Starter</h3></div>
+            <div class="amount">$1,500 setup<small>$750 / month</small></div>
+            <ul><li>Basic lead follow-up</li><li>Review workflow support</li><li>Good fit for simple operations</li></ul>
+          </div>
+        </div>
+        <div class="price featured">
+          <div>
+            <div class="price-title"><h3>Growth</h3><span class="tag">Default</span></div>
+            <div class="amount">$2,500 setup<small>$1,250 / month</small></div>
+            <ul><li>Response and follow-up workflows</li><li>Best fit for HVAC/plumbing wedge</li><li>Designed around revenue capture</li></ul>
+          </div>
+        </div>
+        <div class="price">
+          <div>
+            <div class="price-title"><h3>Managed Growth</h3></div>
+            <div class="amount">$4,000 setup<small>$2,000 / month + ad spend</small></div>
+            <ul><li>Higher-touch growth system</li><li>More hands-on optimization</li><li>For higher-volume teams</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Lead Recovery & Response Proposal</span><span>Page 3 / 4</span></div>
+  </section>
+
+  <section class="page">
+    <div class="topbar">
+      <div class="brand"><img src="../favicon.svg" alt="Ember Bots logo" /><span>Ember Bots</span></div>
+      <div class="doc-label">Execution Plan</div>
+    </div>
+    <div class="content">
+      <div class="section-head">
+        <div class="kicker">How Steve uses it</div>
+        <h2>A cleaner sales motion: specific account, specific evidence, specific next step.</h2>
+        <p>This package gives the outreach a sharper reason to exist and a practical conversion path into the Growth package.</p>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Call angle</h3>
+          <div class="spacer-sm"></div>
+          <div class="quote">“I had Ember look at your public lead path and it found a couple of places where good leads may be slowing down before they book.”</div>
+          <div class="spacer-sm"></div>
+          <p>That opens the door without overclaiming, then points the owner to a short walkthrough of the snapshot.</p>
+        </div>
+        <div class="panel">
+          <h3>Next actions</h3>
+          <div class="checklist">
+            <div class="check"><span>✓</span><span>Pick 10–15 high-quality local operators instead of junk-volume lists.</span></div>
+            <div class="check"><span>✓</span><span>Build one snapshot per account using public, provable evidence.</span></div>
+            <div class="check"><span>✓</span><span>Stage first-touch email and call notes for Steve.</span></div>
+            <div class="check"><span>✓</span><span>Convert qualified interest into the Growth package by default.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="panel">
+        <h3>Why this is stronger than a generic AI pitch</h3>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="mini"><div class="num">Outcome</div><p>Sell booked revenue and cleaner follow-up, not software complexity.</p></div>
+          <div class="mini"><div class="num">Trust</div><p>Use evidence the owner can verify instead of broad automation claims.</p></div>
+          <div class="mini"><div class="num">Close path</div><p>Make the first fix obvious, then offer implementation and ongoing management.</p></div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="callout">
+        <p><strong>Recommended default:</strong> Lead with the Missed Revenue Snapshot, sell the Growth package when the pain is real, and reserve Managed Growth for higher-volume operators who need a hands-on growth system.</p>
+      </div>
+    </div>
+    <div class="footer"><span>Ember Bots · Built for local service revenue capture</span><span>Page 4 / 4</span></div>
+  </section>
+
+</body>
+</html>
