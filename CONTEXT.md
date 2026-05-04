@@ -17,7 +17,6 @@ _Last updated: 2026-04-03_
 | Name | Role | Ownership |
 |------|------|-----------|
 | Amber Rice | CEO & Co-Founder | Majority (exact % TBD in Company Agreement) |
-| Steve Ward | CRO & Co-Founder | Minority (exact % TBD) |
 | Evan Rice | Co-Founder / Advisor | Minority (exact % TBD) |
 
 **Note:** Ownership percentages and control rights are NOT in the state filing — they live in the Company Agreement (Operating Agreement), which has not yet been drafted. Amber has majority control per Evan's direction.
@@ -60,7 +59,6 @@ _Last updated: 2026-04-03_
 | `favicon.svg` | Canonical Ember Bots mark |
 | `logo.png` | Deprecated old PNG logo; do not use for new materials |
 | `amber.jpg` | Amber Rice founder photo |
-| `steve.jpg` | Steve Ward founder photo |
 | `CNAME` | Contains `emberbots.ai` — tells GitHub Pages the custom domain |
 
 ### To update the site
@@ -80,7 +78,7 @@ git push
 3. **Automation Systems** — current homepage offer stack focused on non-conflicting automation services
 4. **How Ember Bots Works** — 4-step process + premium flow visual
 5. **Best Fit** — who the service is for and operational pain signals
-6. **Our Story** — Amber Rice + Steve Ward founder cards + narrative copy
+6. **Our Story** — Amber Rice founder card + narrative copy
 7. **Contact** — contact form CTA, email, phone, Dallas TX
 
 ### Current homepage positioning constraints

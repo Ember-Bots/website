@@ -62,7 +62,7 @@ Prefer reverting the specific bad commit instead of force-pushing history.
 ## Important files
 - `index.html` — main site markup, styling, and client-side behavior
 - `CNAME` — custom domain binding for GitHub Pages
-- `amber.jpg`, `steve.jpg`, `logo.svg`, `favicon.svg` — current site assets
+- `amber.jpg`, `logo.svg`, `favicon.svg` — current site assets
 - `logo.png` — deprecated old logo; use `logo.svg` for new materials
 - `docs/shareable-presentations.md` — standard workflow for published HTML presentations, review passes, and exports
 - `docs/workflow-systems-brief.md` — older messaging/reference material
