@@ -332,12 +332,12 @@
         <div class="hero-copy">
           <div class="eyebrow">GTM System Architecture</div>
           <h1>Do not build one giant sales bot. Build a <span class="gradient-text">multi-agent GTM machine</span>.</h1>
-          <p>This presentation translates the Ember Bots GTM architecture into a shareable format for review, planning, and execution. The system is designed for home-services first, with Ember CRM as the system of record and human approval at the right external-action edges.</p>
+          <p>This presentation translates the Ember Bots GTM architecture into a shareable format for review, planning, and execution. The system is designed for home-services first, with agents as the human UI and Ember CRM as the structured operating substrate those agents use almost exclusively.</p>
           <div class="four-up" style="margin-top:18px;">
             <div class="metric"><div class="label">Market</div><div class="value">Owner-led HVAC and plumbing first</div></div>
-            <div class="metric"><div class="label">Model</div><div class="value">Multi-agent GTM operating system</div></div>
-            <div class="metric"><div class="label">Brain</div><div class="value">Ember CRM as the shared truth layer</div></div>
-            <div class="metric"><div class="label">Control</div><div class="value">Human-approved sends and commitments first</div></div>
+            <div class="metric"><div class="label">Model</div><div class="value">Agents as the UI</div></div>
+            <div class="metric"><div class="label">Substrate</div><div class="value">Ember CRM as agent truth + workflow layer</div></div>
+            <div class="metric"><div class="label">Control</div><div class="value">Human approvals through agents first</div></div>
           </div>
         </div>
         <aside class="card">
@@ -346,6 +346,7 @@
           <ul class="hero-list">
             <li>run lead generation, qualification, outbound, inbound, and pipeline ops</li>
             <li>keep context shared across agents</li>
+            <li>make the CRM usable through agent conversations, not human data entry</li>
             <li>prevent low-quality outreach</li>
             <li>keep the sales operator focused on real conversations and closing</li>
           </ul>
@@ -355,8 +356,8 @@
 
     <section class="arch-band" id="architecture">
       <div class="pill">Top-level architecture</div>
-      <h2>CRM-centered orchestration with specialized agents and controlled external actions</h2>
-      <p class="section-intro">The architecture works because each agent has a narrow job, shared context flows through CRM, and orchestration prevents premature outreach or sloppy handoffs.</p>
+      <h2>Agent-led orchestration on top of a CRM operating substrate</h2>
+      <p class="section-intro">The architecture works because each agent has a narrow job, shared context flows through CRM, and humans steer through agents instead of living inside CRM screens.</p>
       <div class="architecture">
 <pre>Lead Sources / Website / Email / Phone
               |
@@ -372,13 +373,13 @@ Sourcing  Qualification Outbound Inbound
                \         |       /
                 \        |      /
                  v       v     v
-                 Ember CRM (system of record)
+                 Ember CRM (agent operating substrate)
                         |
                         v
                  Sales Operator Agent
                         |
                         v
-                 Human Approval Layer
+          Agent-mediated Human Approval Layer
                         |
                         v
                  External Actions
@@ -409,20 +410,20 @@ Sourcing  Qualification Outbound Inbound
           </ul>
         </div>
         <div class="arch-card">
-          <h3>3. Ember CRM as system of record</h3>
-          <p class="body-copy">Holds lead truth, preserves cross-agent context, and supports visibility and approval decisions.</p>
+          <h3>3. Ember CRM as agent substrate</h3>
+          <p class="body-copy">Holds lead truth, workflow state, evidence, authority, and approvals so agents can operate from one shared layer.</p>
           <ul>
+            <li>agents read/write CRM almost exclusively</li>
             <li>use existing <strong>Lead</strong> object first</li>
-            <li>do not split into Prospect in phase 1</li>
             <li>store evidence, stage, notes, next action</li>
           </ul>
         </div>
         <div class="arch-card">
-          <h3>4. Human approval layer</h3>
-          <p class="body-copy">Keeps external actions controlled early while agents handle research, drafting, scoring, and prioritization.</p>
+          <h3>4. Agent-as-UI approval layer</h3>
+          <p class="body-copy">Keeps external actions controlled while humans inspect, approve, correct, and steer mostly through agent conversations.</p>
           <ul>
-            <li>humans approve sends, calls, proposals</li>
-            <li>autonomy expands later by approved lead class</li>
+            <li>humans approve sends, calls, proposals through agents first</li>
+            <li>CRM screens are secondary admin/review surfaces</li>
           </ul>
         </div>
       </div>
@@ -430,8 +431,8 @@ Sourcing  Qualification Outbound Inbound
 
     <section class="section" id="agents">
       <div class="pill">Specialized agents</div>
-      <h2>Five agents, one shared brain</h2>
-      <p class="section-intro">This system only works if each agent owns a narrow, reliable job instead of trying to be one fuzzy all-purpose “sales AI.”</p>
+      <h2>Five agents, one shared substrate</h2>
+      <p class="section-intro">This system only works if each agent owns a narrow, reliable job and uses the CRM as shared operational memory, while humans use the agents as the practical UI.</p>
       <div class="agent-grid">
         <article class="agent-card">
           <h3>Lead Sourcing Agent</h3>
@@ -484,7 +485,7 @@ Sourcing  Qualification Outbound Inbound
         </article>
         <article class="agent-card">
           <h3>Shared design rule</h3>
-          <p class="body-copy">Every agent writes to the same truth layer instead of maintaining separate hidden state.</p>
+          <p class="body-copy">Every agent writes to the same truth layer instead of maintaining separate hidden state. Humans should not have to manually reconcile CRM screens to understand what happened.</p>
           <ul>
             <li>lead state</li>
             <li>channel history</li>
@@ -497,7 +498,7 @@ Sourcing  Qualification Outbound Inbound
 
     <section class="section">
       <div class="pill gold">CRM field model</div>
-      <h2>The CRM must hold enough structured state for agents to coordinate reliably</h2>
+      <h2>The CRM must hold enough structured state for agents to coordinate reliably — not become another human data-entry app</h2>
       <div class="three-up">
         <div class="note-card">
           <h3>Identity + fit</h3>
@@ -543,7 +544,7 @@ Sourcing  Qualification Outbound Inbound
             <li>qualification agent validates and scores it</li>
             <li>CRM stores evidence and stage</li>
             <li>outbound agent drafts first touch + follow-up</li>
-            <li>human approves send</li>
+            <li>agent presents approval request to human</li>
             <li>outcome logs back into CRM</li>
             <li>sales operator reprioritizes next steps</li>
           </ul>
@@ -591,7 +592,7 @@ Sourcing  Qualification Outbound Inbound
       <div>
         <div class="pill gold">Hard truth</div>
         <h2>If Ember tries to build one giant “sales bot,” it will be vague, brittle, and hard to trust.</h2>
-        <p class="section-intro">If Ember builds a coordinated GTM system with specialized agents, CRM as the shared brain, human approval at the right edges, and a narrow home-services wedge first, it has a realistic path to becoming a usable sales and marketing operating machine.</p>
+        <p class="section-intro">If Ember builds a coordinated GTM system with specialized agents, CRM as the agent operating substrate, human approval through agents at the right edges, and a narrow home-services wedge first, it has a realistic path to becoming a usable sales and marketing operating machine.</p>
         <div class="button-row">
           <a class="button" href="emberbots-gtm-system-architecture.html">Refresh presentation</a>
           <a class="button secondary" href="emberbots-explainer.html">See explainer presentation</a>
@@ -601,7 +602,7 @@ Sourcing  Qualification Outbound Inbound
         <div class="pill">Recommended next artifact</div>
         <h3>Build order</h3>
         <ul>
-          <li>CRM field completeness and workflow states</li>
+          <li>CRM field completeness and workflow states for agent operation</li>
           <li>Lead Sourcing Agent</li>
           <li>Qualification Agent</li>
           <li>Inbound intake + qualification path</li>
