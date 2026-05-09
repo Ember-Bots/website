@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ember Bots — Dedicated AI Operators for Small Teams</title>
+  <title>Ember Bots — Dedicated AI Operators for Service Businesses</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=1" />
-  <meta name="description" content="Ember Bots deploys dedicated chat-based AI operators that learn how your business works, capture missed opportunities, follow up automatically, and keep routine work moving." />
+  <meta name="description" content="Ember Bots installs dedicated AI operators for service businesses: faster lead response, cleaner follow-up, practical scheduling support, and routine admin handled with human oversight." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -83,14 +83,17 @@
     }
 
     .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--white);
-      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      text-decoration: none;
+      line-height: 0;
+    }
+
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(255,106,0,0.16));
     }
 
     .nav-logo .ember-dot {
@@ -140,13 +143,13 @@
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 100vh;
+      min-height: 92vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 40px 80px;
+      padding: 104px 40px 64px;
       position: relative;
       overflow: hidden;
     }
@@ -225,10 +228,10 @@
     .hero-sub {
       font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 620px;
-      margin-bottom: 48px;
+      max-width: 680px;
+      margin-bottom: 42px;
       font-weight: 400;
-      line-height: 1.75;
+      line-height: 1.68;
       position: relative;
     }
 
@@ -261,20 +264,22 @@
     }
 
     .btn-ghost {
-      color: var(--text-muted);
+      color: var(--text);
       padding: 16px 28px;
       border-radius: 8px;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      border: 1px solid var(--border);
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      border: 1px solid rgba(166,176,200,0.34);
+      background: rgba(255,255,255,0.035);
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
     }
 
     .btn-ghost:hover {
       color: var(--white);
-      border-color: rgba(122,60,255,0.30);
-      background: linear-gradient(135deg, rgba(122,60,255,0.10), rgba(37,99,255,0.08));
+      border-color: rgba(255,138,31,0.36);
+      background: linear-gradient(135deg, rgba(255,138,31,0.10), rgba(122,60,255,0.10));
+      transform: translateY(-2px);
     }
 
     /* ─── SECTIONS ─── */
@@ -481,13 +486,16 @@
     }
 
     .system-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+      background: linear-gradient(180deg, rgba(16,22,42,0.92), rgba(10,14,27,0.94));
+      border: 1px solid rgba(91,105,164,0.34);
+      border-radius: 18px;
+      padding: 30px;
+      min-height: 245px;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .system-card::before {
@@ -510,24 +518,25 @@
     .system-card:hover::before { opacity: 1; }
 
     .system-icon {
-      width: 52px; height: 52px;
-      background: linear-gradient(180deg, rgba(188,37,53,0.14), rgba(240,90,40,0.1));
-      border: 1px solid rgba(255,184,77,0.14);
+      width: 48px; height: 48px;
+      background: linear-gradient(180deg, rgba(255,138,31,0.16), rgba(122,60,255,0.10));
+      border: 1px solid rgba(255,184,77,0.18);
       border-radius: 14px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 12px 24px rgba(0,0,0,0.16);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       font-size: 1.6rem;
     }
 
     .system-card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1.18rem;
+      font-weight: 650;
       color: var(--white);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
 
     .system-card p {
@@ -1093,14 +1102,17 @@
     }
 
     .footer-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
       display: flex;
       align-items: center;
-      gap: 8px;
       text-decoration: none;
+      line-height: 0;
+    }
+
+    .footer-logo img {
+      height: 44px;
+      width: auto;
+      display: block;
+      opacity: 0.96;
     }
 
     .footer-copy {
@@ -1128,6 +1140,7 @@
       nav { padding: 20px 24px; }
       .nav-links { gap: 20px; }
       .nav-links a { font-size: 0.8rem; white-space: nowrap; }
+      .nav-logo img { height: 48px; }
     }
 
     @media (max-width: 932px) {
@@ -1195,14 +1208,14 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <img src="logo.svg?v=6" alt="Ember Bots" style="height:56px;width:auto;" />
+      <img src="logo.svg?v=7" alt="Ember Bots" />
     </a>
     <ul class="nav-links">
-      <li><a href="#systems">Solutions</a></li>
+      <li><a href="#systems">Operator Modules</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#fit">Best Fit</a></li>
       <li><a href="#story">Our Story</a></li>
-      <li><a href="#contact" class="nav-cta">Get an AI Operator Plan</a></li>
+      <li><a href="#contact" class="nav-cta">Get a plan</a></li>
     </ul>
   </nav>
 
@@ -1210,12 +1223,12 @@
   <div class="hero" id="hero-section">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
-    <p class="hero-eyebrow">AI Automation for Small Business</p>
-    <h1>Your business deserves<br/><span class="highlight">intelligent automation.</span></h1>
-    <p class="hero-sub">Ember Bots gives small businesses a dedicated chat-based AI operator that learns how the business works, captures missed opportunities, follows up automatically, and keeps routine work moving from an experience your team can actually use.</p>
+    <p class="hero-eyebrow">AI Operators for Service Businesses</p>
+    <h1>Put an AI operator<br/><span class="highlight">inside your business.</span></h1>
+    <p class="hero-sub">Ember Bots installs a dedicated, chat-based AI operator that learns your rules, catches missed opportunities, follows up quickly, and keeps routine work moving without forcing your team into another dashboard.</p>
     <div class="hero-actions">
-      <a href="#operator" class="btn-primary">See how the operator works</a>
-      <a href="#contact" class="btn-ghost">Get an AI operator plan</a>
+      <a href="#operator" class="btn-primary">See the operator model</a>
+      <a href="#contact" class="btn-ghost">Find your first workflow</a>
     </div>
   </div>
 
@@ -1223,32 +1236,32 @@
   <div class="pain-bg" id="pain">
     <div class="pain-inner">
       <p class="section-label">The Problem</p>
-      <h2>Where small businesses lose time and momentum.</h2>
+      <h2>Where good businesses quietly lose momentum.</h2>
       <div class="pain-layout">
         <div class="pain-body">
-          <p>Most small businesses are not losing because they lack hustle. They're losing time to slow follow-up, manual admin, scattered systems, and work that should not require owner attention.</p>
-          <p style="margin-top: 20px;">Ember Bots is built to remove that drag with a dedicated AI operator that fronts the workflows, learns your preferences, and handles routine operational work faster and more consistently.</p>
+          <p>Most service businesses are not short on hustle. They lose margin when leads wait, follow-up slips, details live in too many places, and owners stay trapped in work that should already be handled.</p>
+          <p style="margin-top: 20px;">Ember Bots removes that drag with a dedicated operator that learns your preferences, runs approved workflows, and brings humans back in when judgment or approval is needed.</p>
         </div>
         <ul class="pain-bullets">
           <li class="pain-bullet">
             <span class="pain-bullet-icon"></span>
-            Leads sit too long before someone responds
+            New leads wait while the team is busy serving customers
           </li>
           <li class="pain-bullet">
             <span class="pain-bullet-icon"></span>
-            Missed calls turn into missed revenue
+            Missed calls and form fills turn into missed revenue
           </li>
           <li class="pain-bullet">
             <span class="pain-bullet-icon"></span>
-            Scheduling and follow-up happen manually
+            Scheduling, reminders, and follow-up depend on someone remembering
           </li>
           <li class="pain-bullet">
             <span class="pain-bullet-icon"></span>
-            Teams re-enter the same information in multiple places
+            Customer details get copied between tools instead of moving cleanly
           </li>
           <li class="pain-bullet">
             <span class="pain-bullet-icon"></span>
-            Onboarding, routing, and admin work steal time from service and growth
+            Owners stay pulled into routing, updates, and admin instead of growth
           </li>
         </ul>
       </div>
@@ -1258,18 +1271,18 @@
   <!-- AI OPERATOR EXPERIENCE -->
   <section id="operator">
     <p class="section-label">The Experience</p>
-    <h2>The agent is the front door.</h2>
-    <p class="section-sub">Instead of making your team manage another dashboard, Ember Bots gives them a chat-based AI operator they can message, correct, and rely on. The automations still do the heavy lifting — the agent makes them usable in the real world.</p>
+    <h2>Your AI operator becomes the front door for routine work.</h2>
+    <p class="section-sub">Your team should not need to learn another complicated platform before the work improves. Ember Bots gives them a practical operator they can message, correct, and rely on while the automation runs behind the scenes.</p>
     <div class="operator-panel">
       <div class="operator-primary">
         <div class="operator-chip">Chat first · workflow backed</div>
-        <h3>Talk to it like a teammate. It turns the conversation into action.</h3>
-        <p>Your operator can answer questions, capture details from calls or messages, remind the right person, draft follow-up, summarize what changed, and escalate anything that needs human judgment. Over time, it learns your tone, routing rules, business hours, priorities, and preferences.</p>
+        <h3>Message it like a teammate. It turns the conversation into action.</h3>
+        <p>Your operator can capture details from calls and messages, remind the right person, draft follow-up, summarize what changed, and escalate anything that needs judgment. Over time it learns your tone, hours, routing rules, priorities, and approval boundaries.</p>
       </div>
       <div class="operator-cards">
         <div class="operator-card">
           <h3>Learns the business</h3>
-          <p>Preferences, customer context, recurring workflows, and escalation rules become part of how the agent works.</p>
+          <p>Your preferences, customer context, recurring workflows, and escalation rules become part of how the operator works.</p>
         </div>
         <div class="operator-card">
           <h3>Runs approved workflows</h3>
@@ -1277,11 +1290,11 @@
         </div>
         <div class="operator-card">
           <h3>Surfaces decisions</h3>
-          <p>The agent handles routine work and brings owners the items that need approval, judgment, or a real conversation.</p>
+          <p>The operator handles routine work and brings owners the items that need approval, judgment, or a real conversation.</p>
         </div>
         <div class="operator-card">
           <h3>Managed by Ember</h3>
-          <p>We monitor, tune, back up, and improve the agent so it keeps getting more useful instead of becoming shelfware.</p>
+          <p>We monitor, tune, back up, and improve the operator so it keeps getting more useful instead of becoming shelfware.</p>
         </div>
       </div>
     </div>
@@ -1292,14 +1305,14 @@
   <!-- AUTOMATION SYSTEMS -->
   <section id="systems">
     <div class="systems-intro">
-      <p class="section-label">Agent-Run Workflows</p>
-      <h2>Workflows your AI operator can run.</h2>
-      <p class="section-sub">These are the practical systems behind the agent experience: faster lead response, tighter follow-up, cleaner scheduling, better routing, and less routine admin work for the owner to chase.</p>
+      <p class="section-label">Operator Modules</p>
+      <h2>Practical modules your operator can run.</h2>
+      <p class="section-sub">These modules are the first places we usually create lift: capture demand, coordinate next steps, and keep operations moving. Each one is configured around your tools, rules, approval paths, and customer experience.</p>
     </div>
 
     <div class="lifecycle-stage">
       <div class="lifecycle-label">
-        <span class="lifecycle-label-text">Capture</span>
+        <span class="lifecycle-label-text">01 · Capture demand</span>
         <span class="lifecycle-label-line"></span>
       </div>
       <div class="systems-grid">
@@ -1307,22 +1320,22 @@
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
           </div>
-          <h3>Lead Response Automation</h3>
-          <p>Your operator captures inbound leads from forms, calls, chat, and email, responds quickly, asks for missing details, routes hot opportunities, and makes sure nothing sits untouched.</p>
+          <h3>Lead Response</h3>
+          <p>Capture inbound leads from forms, calls, chat, and email. Respond quickly, ask for missing details, route hot opportunities, and keep every lead moving.</p>
         </div>
         <div class="system-card">
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
-          <h3>Customer Message Routing</h3>
-          <p>Your operator reads customer messages across channels, classifies intent and urgency, and routes each conversation to the right person with the context they need.</p>
+          <h3>Message Routing</h3>
+          <p>Classify customer messages by intent and urgency, then route each conversation to the right person with the context needed to act.</p>
         </div>
       </div>
     </div>
 
     <div class="lifecycle-stage">
       <div class="lifecycle-label">
-        <span class="lifecycle-label-text">Coordinate</span>
+        <span class="lifecycle-label-text">02 · Coordinate next steps</span>
         <span class="lifecycle-label-line"></span>
       </div>
       <div class="systems-grid-3">
@@ -1330,29 +1343,29 @@
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           </div>
-          <h3>Scheduling &amp; Reminder Automation</h3>
-          <p>Your operator coordinates appointments, confirmations, reminders, and reschedules so your team is not chasing the calendar by hand.</p>
+          <h3>Scheduling &amp; Reminders</h3>
+          <p>Coordinate appointments, confirmations, reminders, and reschedules so the team is not chasing the calendar by hand.</p>
         </div>
         <div class="system-card">
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
           </div>
-          <h3>Client Onboarding Automation</h3>
-          <p>Your operator collects intake information, asks for missing documents, sends welcome steps, and turns onboarding into a guided conversation.</p>
+          <h3>Client Onboarding</h3>
+          <p>Collect intake details, request missing items, send next steps, and turn onboarding into a guided conversation instead of a loose checklist.</p>
         </div>
         <div class="system-card">
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
-          <h3>Internal Task Orchestration</h3>
-          <p>Your operator turns emails, forms, and operational events into tasks, reminders, and summaries so the team knows what needs attention next.</p>
+          <h3>Internal Task Routing</h3>
+          <p>Turn emails, forms, and operational events into tasks, reminders, and summaries so the team knows what needs attention next.</p>
         </div>
       </div>
     </div>
 
     <div class="lifecycle-stage">
       <div class="lifecycle-label">
-        <span class="lifecycle-label-text">Operate</span>
+        <span class="lifecycle-label-text">03 · Keep work moving</span>
         <span class="lifecycle-label-line"></span>
       </div>
       <div class="systems-grid-3">
@@ -1360,28 +1373,28 @@
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
           </div>
-          <h3>Follow-Up Automation</h3>
-          <p>Your operator keeps prospects, customers, and internal workflows moving with reminders, nudges, draft replies, and escalation rules that run on schedule.</p>
+          <h3>Follow-Up</h3>
+          <p>Keep prospects, customers, and internal workflows moving with reminders, nudges, draft replies, and escalation rules that run on schedule.</p>
         </div>
         <div class="system-card">
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
           </div>
-          <h3>Back Office Admin Automation</h3>
-          <p>Your operator reduces repetitive admin around intake, document collection, task routing, status tracking, and recurring operational work that drains your team.</p>
+          <h3>Back-Office Admin</h3>
+          <p>Reduce repetitive admin around intake, document collection, task routing, status tracking, and recurring operational work that drains the team.</p>
         </div>
         <div class="system-card">
           <div class="system-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
           </div>
-          <h3>Executive Daily Briefing</h3>
-          <p>Your operator pulls together messages, calendar, tasks, leads, and team updates into a clean briefing so owners start the day with clarity.</p>
+          <h3>Owner Daily Briefing</h3>
+          <p>Pull together messages, calendar items, tasks, leads, and team updates into a clean briefing so owners start the day with clarity.</p>
         </div>
       </div>
     </div>
 
     <div class="systems-footer">
-      Each workflow is configured around your business, your team, your tools, and your escalation rules. The goal is not more software to manage — it is a useful AI operator that handles routine work and knows when to bring a person back in.
+      Each module is configured around your business, team, tools, and escalation rules. The goal is not more software to manage — it is a useful AI operator that handles routine work and knows when to bring a person back in.
     </div>
   </section>
 
@@ -1391,21 +1404,21 @@
   <div class="how-bg">
     <div class="how-inner" id="how">
       <p class="section-label">The Process</p>
-      <h2>How Ember Bots deploys your operator.</h2>
+      <h2>How Ember Bots installs your operator.</h2>
       <div class="how-grid">
         <ul class="how-list">
           <li class="how-item">
             <div class="how-num">01</div>
             <div class="how-item-text">
               <h4>Learn your business</h4>
-              <p>Identify where lead handling, communication, scheduling, and admin work are slowing down, then capture the preferences and rules your team already uses.</p>
+              <p>Identify where lead handling, communication, scheduling, and admin work get stuck, then capture the preferences and rules your team already uses.</p>
             </div>
           </li>
           <li class="how-item">
             <div class="how-num">02</div>
             <div class="how-item-text">
               <h4>Deploy your AI operator</h4>
-              <p>Set up a dedicated chat-based assistant with the right workflows, permissions, and escalation boundaries for your business.</p>
+              <p>Set up a dedicated chat-based operator with the right workflows, permissions, and escalation boundaries for your business.</p>
             </div>
           </li>
           <li class="how-item">
@@ -1419,7 +1432,7 @@
             <div class="how-num">04</div>
             <div class="how-item-text">
               <h4>Manage and improve it</h4>
-              <p>Monitor performance, tune behavior, improve workflows, and help the agent learn from real use over time.</p>
+              <p>Monitor performance, tune behavior, improve workflows, and help the operator learn from real use over time.</p>
             </div>
           </li>
         </ul>
@@ -1445,16 +1458,16 @@
   <!-- BEST FIT -->
   <section id="fit">
     <p class="section-label">Who It's For</p>
-    <h2>Best fit for businesses that need follow-through, not another dashboard.</h2>
+    <h2>Best fit for teams that need follow-through, not another dashboard.</h2>
     <div class="fit-layout">
       <div>
-        <p class="fit-body">Ember Bots works best with service-based SMBs that deal with steady lead flow, customer communication, scheduling demands, onboarding steps, and repetitive administrative work — especially when owners want a practical AI teammate instead of another system the team has to manage.</p>
+        <p class="fit-body">Ember Bots works best with service-based SMBs that handle steady lead flow, customer communication, scheduling demands, onboarding steps, and repetitive administrative work — especially when owners want a practical AI teammate instead of another system the team has to manage.</p>
         <div class="fit-tags">
           <span class="fit-tag">Home Services</span>
           <span class="fit-tag">Professional Services</span>
           <span class="fit-tag">Local Service Businesses</span>
           <span class="fit-tag">Small Teams with Inbound Leads</span>
-          <span class="fit-tag">Businesses Losing Leads to Slow Follow-Up</span>
+          <span class="fit-tag">Businesses Losing Leads to Delayed Follow-Up</span>
           <span class="fit-tag">Teams That Prefer Chat Over Dashboards</span>
         </div>
       </div>
@@ -1517,7 +1530,7 @@
         </div>
       </div>
       <div class="story-content">
-        <h2>Built by people who understand operational drag.</h2>
+        <h2>Built by operators who understand operational drag.</h2>
         <p>Ember Bots was founded by Amber Rice after years of watching small businesses bleed time and revenue to the same set of solvable problems.</p>
         <p>Amber brings deep experience in business operations, customer relationships, and the everyday realities of running service-focused teams. She has seen firsthand how much time gets consumed by tasks that do not require human judgment: follow-up emails, data entry, scheduling, and report generation. Work that compounds quietly into competitive disadvantage.</p>
         <p>The tools to fix this already exist. Large companies have teams of engineers deploying them. Small businesses do not. That is the gap Ember Bots was built to close: practical AI operators that meet teams where they already work, learn the way the business actually runs, and coordinate the repetitive work in the background.</p>
@@ -1530,8 +1543,8 @@
   <div class="contact-bg" id="contact">
     <div class="contact-inner">
       <p class="section-label">Get Started</p>
-      <h2>Find the work slowing your business down.</h2>
-      <p class="section-sub">If your team is spending too much time on lead handling, scheduling, customer communication, onboarding, follow-up, or repetitive admin work, we can help you identify the right AI operator and first workflows to deploy.</p>
+      <h2>Find the first workflow your operator should own.</h2>
+      <p class="section-sub">If your team is spending too much time on lead handling, scheduling, customer communication, onboarding, follow-up, or repetitive admin, we can identify the right operator model and the first workflow to deploy.</p>
       <div class="contact-card">
         <form class="contact-form" id="contactForm">
           <div class="form-row">
@@ -1555,8 +1568,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="message">What's slowing you down?</label>
-            <textarea id="message" name="message" placeholder="Tell us where your team is spending the most time on manual or repetitive work..."></textarea>
+            <label for="message">Where is work getting stuck?</label>
+            <textarea id="message" name="message" placeholder="Tell us where leads, follow-up, scheduling, customer communication, or admin work are getting stuck..."></textarea>
           </div>
           <button type="submit">Get an AI Operator Plan</button>
         </form>
@@ -1609,12 +1622,11 @@
   <!-- FOOTER -->
   <footer>
     <a href="#" class="footer-logo">
-      <span style="width:6px;height:6px;background:var(--ember);border-radius:50%;display:inline-block;"></span>
-      Ember Bots
+      <img src="logo.svg?v=7" alt="Ember Bots" />
     </a>
     <p class="footer-copy">© 2026 Ember Bots LLC. All rights reserved.</p>
     <ul class="footer-links">
-      <li><a href="#systems">Solutions</a></li>
+      <li><a href="#systems">Operator Modules</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#story">Our Story</a></li>
       <li><a href="#contact">Contact</a></li>
