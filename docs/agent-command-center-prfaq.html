@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Command Center PRFAQ | Ember Bots</title>
+  <meta name="description" content="Amazon Working Backwards-style PRFAQ for the full Ember Bots Agent Command Center vision." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0c12;--surface:#13161f;--surface2:#1a1e2d;--border:#252a3d;--text:#e8eaf6;--muted:#7b82a8;
+      --accent:#6c63ff;--green:#00d4aa;--yellow:#ffd166;--red:#ef476f;--orange:#ff8a3d;--blue:#58a6ff;--cyan:#00e5ff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:radial-gradient(circle at 20% 0%,rgba(108,99,255,.15),transparent 30%),radial-gradient(circle at 80% 10%,rgba(0,229,255,.1),transparent 26%),var(--bg);color:var(--text);font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+    #starCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.24}
+    .header{padding:28px 40px 26px;border-bottom:1px solid var(--border);position:relative;z-index:1;background:linear-gradient(180deg,rgba(10,12,18,.92),rgba(10,12,18,.64));backdrop-filter:blur(16px)}
+    .header::after{content:'';position:absolute;bottom:-1px;left:0;width:34%;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+    .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}.brand img{display:block;width:180px;max-width:44vw;height:auto}
+    .top-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.top-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-size:13px;border:1px solid transparent}.top-nav a:hover{background:var(--surface2);color:var(--text);border-color:var(--border)}
+    .as-of{color:var(--muted);font-size:12px;background:var(--surface);border:1px solid var(--border);padding:6px 12px;border-radius:6px;white-space:nowrap;line-height:1.5}
+    .eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--green);font-size:11px;font-weight:800;margin-bottom:7px}
+    h1.hero-title{font-size:clamp(42px,6vw,78px);line-height:.92;font-weight:800;letter-spacing:-.06em;font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;background:linear-gradient(180deg,#fff 0%,#cfd3e8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;max-width:980px}
+    .subhead{color:var(--muted);font-size:clamp(15px,1.7vw,20px);line-height:1.55;margin-top:16px;max-width:900px}
+    main{position:relative;z-index:1;padding:24px 40px 58px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+    .hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px;max-width:1050px}
+    .stat-card,.doc-card,.toc{background:linear-gradient(145deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border);border-top:1px solid rgba(255,255,255,.05);border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+    .stat-card{padding:16px}.stat-card.highlight{border:1px solid var(--accent);background:radial-gradient(120% 120% at 50% 0%,rgba(108,99,255,.18) 0%,var(--surface) 100%);box-shadow:0 8px 40px rgba(108,99,255,.22),inset 0 1px 0 rgba(255,255,255,.08)}
+    .stat-card .label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}.stat-card .value{font-size:24px;font-weight:800;letter-spacing:-1px;font-family:'Plus Jakarta Sans',sans-serif}.stat-card p{color:var(--muted);font-size:12px;line-height:1.45;margin-top:4px}
+    .doc-card{padding:26px;overflow:hidden}.doc-card h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:30px;letter-spacing:-.035em;margin:22px 0 12px;padding-top:8px}.doc-card h1:first-child{display:none}.doc-card h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;letter-spacing:-.025em;margin:30px 0 12px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)}.doc-card h3{font-size:17px;margin:22px 0 8px;color:#fff}
+    .doc-card p,.doc-card li{color:#c8cce1;line-height:1.72;font-size:15px}.doc-card p{margin:10px 0}.doc-card ul,.doc-card ol{margin:10px 0 16px 22px}.doc-card li{margin:7px 0;padding-left:2px}.doc-card strong{color:#fff}.doc-card code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0f1320;border:1px solid var(--border);padding:2px 6px;border-radius:6px;color:#c8fff5;font-size:.92em}
+    blockquote{border:1px solid rgba(0,212,170,.28);border-left:3px solid var(--green);background:rgba(0,212,170,.07);padding:14px 16px;border-radius:12px;margin:16px 0}blockquote p{color:#d8fff7!important;font-weight:700}hr{border:0;border-top:1px solid var(--border);margin:24px 0}
+    .checklist{list-style:none!important;margin-left:0!important}.checklist li{display:flex;gap:9px;align-items:flex-start}.box{width:14px;height:14px;border:1px solid var(--border);border-radius:4px;margin-top:6px;flex:0 0 auto;background:#0f1320}
+    .toc{position:sticky;top:18px;padding:16px;max-height:calc(100vh - 36px);overflow:auto}.toc .section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;margin-bottom:10px}.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;line-height:1.35;padding:8px 8px;border-radius:8px;border:1px solid transparent}.toc a:hover{color:var(--text);background:rgba(255,255,255,.035);border-color:var(--border)}
+    .footer-note{color:var(--muted);font-size:12px;margin-top:16px;line-height:1.55}
+    @media(max-width:1000px){main{grid-template-columns:1fr;padding-left:20px;padding-right:20px}.header{padding-left:20px;padding-right:20px}.hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.toc{position:relative;top:0;max-height:none;order:-1}}
+    @media(max-width:620px){.header-top{align-items:flex-start;flex-direction:column}.top-nav{width:100%}.hero-stats{grid-template-columns:1fr}.doc-card{padding:18px}}
+  </style>
+</head>
+<body>
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+  <header class="header">
+    <div class="header-top">
+      <a class="brand" href="/" aria-label="Ember Bots"><img src="/logo.svg" alt="Ember Bots"></a>
+      <nav class="top-nav" aria-label="Document sections">
+        <a href="#press-release">Press Release</a>
+        <a href="#faq">FAQ</a>
+        <a href="#tenets">Tenets</a>
+        <a href="#launch-readiness-checklist">Launch Readiness</a>
+      </nav>
+      <div class="as-of">Working Backwards PRFAQ · Draft v1</div>
+    </div>
+    <p class="eyebrow">Agent Command Center</p>
+    <h1 class="hero-title">Mission Control for managed business agents.</h1>
+    <p class="subhead">An Amazon Working Backwards-style PRFAQ for the complete Ember Bots CRM + Agent Command Center vision: bounded authority, evidence, approvals, QA, fleet monitoring, and managed calibration.</p>
+    <section class="hero-stats" aria-label="Vision pillars">
+      <div class="stat-card highlight"><div class="label">Promise</div><div class="value">Managed</div><p>Agents are bounded, monitored, reviewed, improved, and accountable.</p></div>
+      <div class="stat-card"><div class="label">Substrate</div><div class="value">CRM</div><p>System of record, workflow engine, authority layer, and evidence store.</p></div>
+      <div class="stat-card"><div class="label">Moat</div><div class="value">Calibration</div><p>Real interactions become durable context, policy, runbook, and product improvements.</p></div>
+      <div class="stat-card"><div class="label">Control</div><div class="value">Gated</div><p>Risky actions stop for human approval before customer impact.</p></div>
+    </section>
+  </header>
+  <main>
+    <article class="doc-card">
+      <p>Status: draft full-vision PRFAQ</p>
+<p>Owner: Ember</p>
+<p>Date: 2026-05-17</p>
+<p>Audience: Evan, Amber, Ember Bots leadership, Flint/QA, future product/build agents</p>
+<p>Source context: Ember CRM / Agent Control Center vision, managed-agent-ops PRD, current CRM state, customer-agent fleet ops</p>
+<hr>
+<h1 id="press-release">Press Release</h1>
+<h2 id="ember-bots-launches-agent-command-center-the-mission-control-platform-for-managed-business-agents">Ember Bots Launches Agent Command Center, the Mission Control Platform for Managed Business Agents</h2>
+<p><strong>Dallas, TX — [Future Launch Date]</strong> — Ember Bots today announced the launch of <strong>Agent Command Center</strong>, a managed agent operations platform that lets businesses deploy AI agents with real supervision, bounded authority, evidence, approvals, QA, and continuous calibration.</p>
+<p>Most AI automation products stop at setup: connect tools, write prompts, and hope the agent behaves. Ember Bots takes a different approach. Agent Command Center treats business agents like operational team members that need scopes, work queues, proof, review, escalation paths, and ongoing improvement.</p>
+<p>With Agent Command Center, every customer agent is visible in one place: what it is allowed to do, what it is working on, what it already completed, what evidence supports its claims, what decisions need human approval, what is blocked, what quality issues were found, and what changed as a result. The system gives leaders the benefits of AI labor without forcing them to blindly trust a black box.</p>
+<p>“Businesses don’t just need AI agents. They need agents they can manage,” said Evan Rice, investor and technology consultant for Ember Bots. “Agent Command Center gives us the operating layer to make agents useful in the real world: scoped, monitored, reviewed, improved, and accountable.”</p>
+<p>Agent Command Center is built into Ember CRM, but it is not a traditional CRM dashboard. The CRM acts as the structured operating substrate for agents. Agents use it as their system of record, workflow engine, evidence store, and authority layer. Humans interact primarily through their Ember Bots agents, with the Command Center available for inspection, approval, correction, governance, and audit.</p>
+<p>The first workflows focus on service businesses that miss revenue because calls, messages, leads, estimates, follow-ups, and customer questions fall through the cracks. Agent Command Center powers Missed Revenue Snapshots, lead recovery, customer-agent onboarding, launch QA, reporting, retention checks, and human-gated trial-to-paid workflows.</p>
+<p>The platform is designed around a simple promise:</p>
+<blockquote>
+<p>Your agent is not just installed. It is monitored, bounded, reviewed, improved, and managed.</p>
+</blockquote>
+<p>Agent Command Center includes:</p>
+<ul>
+<li><strong>Agent health and readiness</strong> — see which agents are healthy, degraded, blocked, paused, or customer-ready.</li>
+<li><strong>Scoped authority</strong> — define what each agent may do by customer, workspace, object type, tool, risk level, and approval requirement.</li>
+<li><strong>Work queues and runs</strong> — track agent work from creation to claim, execution, completion, failure, or escalation.</li>
+<li><strong>Evidence artifacts</strong> — require proof for claims, recommendations, snapshots, and completed work.</li>
+<li><strong>Decision gates</strong> — route risky actions to humans before external sends, billing, authority changes, destructive actions, or customer-impacting steps.</li>
+<li><strong>Audit events</strong> — preserve a durable history of who or what did what, why, and under which authority.</li>
+<li><strong>Managed calibration</strong> — turn real interactions into QA findings, policy updates, context improvements, runbook changes, and product learning.</li>
+<li><strong>Operating briefs</strong> — summarize what moved today, what slipped, what is blocked, who owns decisions, and what is safe to demo, use, or expose.</li>
+<li><strong>Fleet monitoring</strong> — watch customer-agent reliability, auth, backups, runtime health, customer-turn pressure, and adoption risks.</li>
+<li><strong>Human command layer</strong> — let leaders inspect outcomes, approve boundaries, pause unsafe behavior, and steer priorities without manually operating every workflow.</li>
+</ul>
+<p>Agent Command Center helps Ember Bots move from one-off automation projects to a durable managed-agent business. It becomes the company’s operating system for delivering, supervising, improving, and proving agent work over time.</p>
+<hr>
+<h1 id="customer-promise">Customer Promise</h1>
+<p><strong>For customers:</strong></p>
+<blockquote>
+<p>Ember Bots gives you an AI agent that is not only capable, but managed. It knows its lane, reports its work, proves its claims, asks before risky actions, and gets better as Ember reviews real performance.</p>
+</blockquote>
+<p><strong>For Ember Bots internally:</strong></p>
+<blockquote>
+<p>Every customer-agent action, failure, approval, evidence artifact, QA finding, and improvement has a durable place to live.</p>
+</blockquote>
+<p><strong>For leadership:</strong></p>
+<blockquote>
+<p>You do not need to manually manage the machine. You need to see outcomes, approve boundaries, and steer priorities.</p>
+</blockquote>
+<hr>
+<h1 id="core-product-thesis">Core Product Thesis</h1>
+<p>Ember Bots is a <strong>managed agent operations company</strong>.</p>
+<p>The moat is not merely “AI agents” or “agent control plane.” Those will become table stakes.</p>
+<p>The moat is <strong>managed calibration</strong>:</p>
+<blockquote>
+<p>turning real customer-agent interactions into structured findings, then into context, policy, runbook, entitlement, workflow, and product improvements — with evidence, approval, and auditability.</p>
+</blockquote>
+<hr>
+<h1 id="what-is-complete-in-the-full-vision">What Is Complete in the Full Vision</h1>
+<p>When Agent Command Center v1 is complete, Ember Bots can reliably run the loop below:</p>
+<ol>
+<li>A customer-agent signal arrives: lead, missed call, conversation, workflow event, health issue, QA issue, customer request, or internal task.</li>
+<li>CRM turns that signal into structured operational truth: work item, run, evidence, decision gate, audit event, quality finding, or readiness state.</li>
+<li>The right agent or operator handles the work inside scoped authority.</li>
+<li>Risky actions are gated before they affect customers, billing, secrets, authority, or production systems.</li>
+<li>Evidence is attached before claims are trusted.</li>
+<li>Flint or Ember reviews quality when needed.</li>
+<li>Learnings become durable improvements to context, policy, runbooks, entitlements, workflows, or product behavior.</li>
+<li>The Command Center shows what moved, what slipped, what is blocked, who owns decisions, and what is safe to expose.</li>
+<li>Customers see outcomes through their agent and concise reports, not by living inside CRM.</li>
+<li>Ember Bots can scale customer-agent operations without losing oversight, safety, or continuity.</li>
+</ol>
+<hr>
+<h1 id="faq">FAQ</h1>
+<h2 id="external-faq">External FAQ</h2>
+<h3 id="what-problem-does-agent-command-center-solve">What problem does Agent Command Center solve?</h3>
+<p>Businesses want AI agents to do real work, but real work requires trust. Today, most agents are hard to supervise: they may not show what they did, why they did it, whether they had permission, what evidence supports the output, or when a human should intervene.</p>
+<p>Agent Command Center solves this by making agents operationally accountable. It gives each agent scoped authority, structured work, evidence requirements, approval gates, health monitoring, QA review, and continuous calibration.</p>
+<h3 id="is-this-just-another-crm">Is this just another CRM?</h3>
+<p>No. Ember CRM is the database and operating substrate, but the product is not a traditional human-first CRM.</p>
+<p>Traditional CRMs ask humans to enter, browse, and update records. Ember CRM asks what operational truth the agent system needs in order to safely create value.</p>
+<p>Humans can inspect the Command Center, but agents do most of the CRM work.</p>
+<h3 id="who-is-this-for-first">Who is this for first?</h3>
+<p>The first market is service businesses where missed calls, slow follow-up, inconsistent intake, and poor lead handling create measurable lost revenue.</p>
+<p>Initial use cases include:</p>
+<ul>
+<li>missed revenue snapshots;</li>
+<li>lead recovery;</li>
+<li>inbound lead intake;</li>
+<li>follow-up drafting;</li>
+<li>customer-agent onboarding;</li>
+<li>launch QA;</li>
+<li>reporting and retention briefs;</li>
+<li>human-gated trial-to-paid workflows.</li>
+</ul>
+<h3 id="what-makes-ember-bots-different-from-generic-ai-agent-builders">What makes Ember Bots different from generic AI agent builders?</h3>
+<p>Generic agent builders help create agents. Ember Bots manages agents after launch.</p>
+<p>The differentiation is not only generation or automation. It is operational trust: boundaries, monitoring, evidence, approval, QA, correction, and improvement over time.</p>
+<h3 id="can-customers-see-what-their-agent-did">Can customers see what their agent did?</h3>
+<p>Yes. Customers can see outcomes, evidence, summaries, and reports through their agent or approved customer-facing views.</p>
+<p>The full internal Command Center remains an Ember/operator surface unless a specific customer-facing view is intentionally exposed.</p>
+<h3 id="can-agents-send-messages-or-take-actions-automatically">Can agents send messages or take actions automatically?</h3>
+<p>Only within approved authority. High-risk actions — external sends, billing, destructive changes, authority expansion, secrets/access changes, and customer-impacting actions — require explicit gates unless a customer has approved a narrower automation policy.</p>
+<p>The default is bounded autonomy, not blind autonomy.</p>
+<h3 id="how-does-ember-prevent-agents-from-crossing-customer-boundaries">How does Ember prevent agents from crossing customer boundaries?</h3>
+<p>The platform uses tenant/account/workspace/environment scope, entitlement policies, object-class data policies, idempotency rules, and audit events. Customer agents do not communicate directly with each other or share tenant context freely.</p>
+<h3 id="what-happens-when-an-agent-makes-a-mistake">What happens when an agent makes a mistake?</h3>
+<p>The mistake becomes structured operational data: a quality finding, audit event, evidence record, work item, or decision gate. Ember/Flint review the issue, identify root cause, and convert the lesson into improved context, policy, runbook, entitlement, workflow, or product behavior.</p>
+<p>The point is not to pretend agents never fail. The point is to make failures visible, recoverable, and useful.</p>
+<h3 id="what-is-managed-calibration">What is managed calibration?</h3>
+<p>Managed calibration is Ember Bots’ ongoing process of improving agents from real-world operation.</p>
+<p>It means reviewing actual interactions and outcomes, finding quality issues or friction, and converting them into durable improvements. This is how agents become more useful after launch instead of slowly drifting or requiring customers to retrain them manually.</p>
+<h3 id="how-does-this-help-customers-financially">How does this help customers financially?</h3>
+<p>The first financial proof point is missed revenue: calls not returned, leads not followed up, quotes not completed, and customers not re-engaged.</p>
+<p>Agent Command Center lets Ember Bots identify those gaps, generate evidence-backed snapshots, create recovery work, draft follow-ups, and track progress through approval-gated workflows.</p>
+<hr>
+<h2 id="internal-faq">Internal FAQ</h2>
+<h3 id="what-is-the-one-line-internal-vision">What is the one-line internal vision?</h3>
+<p><strong>Agent Command Center is the Mission Control system where humans supervise outcomes and decisions while agents execute bounded work, report evidence, request approval, and continuously improve through managed calibration.</strong></p>
+<h3 id="what-are-the-core-primitives">What are the core primitives?</h3>
+<ul>
+<li>Agent</li>
+<li>AgentEnvironment</li>
+<li>MachineToken / scoped identity</li>
+<li>EntitlementManifest / authority stack</li>
+<li>AgentWorkItem</li>
+<li>AgentRun</li>
+<li>EvidenceArtifact</li>
+<li>DecisionGate / ApprovalItem</li>
+<li>AuditEvent</li>
+<li>AgentContextPack</li>
+<li>QualityFinding / InteractionReview</li>
+<li>ExternalSystemReference</li>
+<li>OperatingBrief</li>
+<li>Workstream / Milestone / readiness state</li>
+</ul>
+<h3 id="what-must-be-true-before-we-call-v1-complete">What must be true before we call v1 complete?</h3>
+<ol>
+<li>Agent Command Center shows real live operational state, not static cards.</li>
+<li>Customer-agent fleet signals write into CRM as work/evidence/findings/decisions where appropriate.</li>
+<li>Blaze or another first customer-agent workflow completes a full loop from signal to work to evidence to decision to outcome to audit.</li>
+<li>External sends and risky actions remain human-gated.</li>
+<li>Readiness labels are backed by explicit gates and evidence.</li>
+<li>Tenant/account/workspace scope is enforced and tested.</li>
+<li>QA findings can become durable improvements.</li>
+<li>Operating Brief answers what moved, what slipped, what is blocked, who owns the decision, and what is safe to expose.</li>
+<li>Flint has a defined QA/release role.</li>
+<li>Evan gets summarized executive visibility without needing to manually drive every step.</li>
+</ol>
+<h3 id="what-is-explicitly-not-v1">What is explicitly not v1?</h3>
+<ul>
+<li>Fully autonomous customer communication without approval.</li>
+<li>Fully autonomous billing/legal/trial-to-paid conversion.</li>
+<li>Peer-to-peer customer-agent collaboration.</li>
+<li>Broad customer-agent write authority across systems.</li>
+<li>Customer portal as the primary UI.</li>
+<li>Perfect generalized multi-agent marketplace.</li>
+<li>Replacing human oversight for business-risk decisions.</li>
+</ul>
+<h3 id="what-is-the-first-wow-workflow">What is the first “wow” workflow?</h3>
+<p><strong>Missed Revenue Snapshot v0.</strong></p>
+<p>It exercises the full platform loop while producing obvious business value:</p>
+<ol>
+<li>gather evidence;</li>
+<li>identify missed revenue opportunities;</li>
+<li>create sanitized artifacts;</li>
+<li>generate human-gated customer-facing draft;</li>
+<li>route approval;</li>
+<li>track outcome;</li>
+<li>audit the process;</li>
+<li>feed learnings back into customer context and workflows.</li>
+</ol>
+<h3 id="why-not-build-a-prettier-crm-dashboard-first">Why not build a prettier CRM dashboard first?</h3>
+<p>Because the durable value is not manual dashboard browsing. The durable value is agents safely doing work and making that work inspectable.</p>
+<p>A good Command Center matters, but it should visualize real substrate: work, evidence, decisions, QA, authority, readiness, and audit. Pretty screens without operational truth are drift.</p>
+<h3 id="what-is-the-role-of-ember">What is the role of Ember?</h3>
+<p>Ember is the accountable operator and builder. Ember keeps the system moving, reviews health and blockers, coordinates Flint, improves the platform, and escalates true human decisions.</p>
+<h3 id="what-is-the-role-of-flint">What is the role of Flint?</h3>
+<p>Flint is QA/reviewer/pit-boss. Flint reviews sanitized plans, readiness, QA findings, release packets, and operating gaps. Flint can approve routine CRM releases when true hard gates are not involved.</p>
+<h3 id="what-is-the-role-of-customers">What is the role of customers?</h3>
+<p>Customers steer outcomes, approve risky actions, provide business context, and benefit from agent work. They should not need to become CRM operators.</p>
+<h3 id="what-is-the-role-of-customer-agents">What is the role of customer agents?</h3>
+<p>Customer agents execute bounded work, report health/status, create or claim work items, attach evidence, request decisions, emit telemetry, and stay inside approved scope.</p>
+<h3 id="what-must-never-happen">What must never happen?</h3>
+<ul>
+<li>Raw secrets in CRM artifacts, docs, or customer-visible output.</li>
+<li>Cross-tenant context leakage.</li>
+<li>Customer agents freely chatting with each other.</li>
+<li>External sends without approved authority.</li>
+<li>Billing/legal/destructive actions without human approval.</li>
+<li>Readiness labels without evidence.</li>
+<li>“Customer-ready” claims based only on local demos.</li>
+<li>Silent fallback when a critical provider/auth path fails.</li>
+</ul>
+<h3 id="what-are-the-key-launch-metrics">What are the key launch metrics?</h3>
+<p>Operational metrics:</p>
+<ul>
+<li>percent of agent actions with linked audit event;</li>
+<li>percent of claims with evidence;</li>
+<li>decision-gate approval/denial/timeout rate;</li>
+<li>average time from blocker to owner assignment;</li>
+<li>unresolved red/yellow agent-health count;</li>
+<li>stale backup/auth/runtime alert count;</li>
+<li>tenant-scope denial test pass rate;</li>
+<li>external-send gates created vs approved;</li>
+<li>QA findings converted into improvements.</li>
+</ul>
+<p>Business metrics:</p>
+<ul>
+<li>missed revenue identified;</li>
+<li>missed revenue recovered or advanced;</li>
+<li>lead response-time improvement;</li>
+<li>follow-up completion rate;</li>
+<li>trial onboarding completion rate;</li>
+<li>customer-agent adoption/usage;</li>
+<li>retention/reporting brief delivery;</li>
+<li>manual operator hours avoided.</li>
+</ul>
+<h3 id="what-is-the-v1-maturity-bar">What is the v1 maturity bar?</h3>
+<p>V1 is not “everything automated.”</p>
+<p>V1 is reached when Ember Bots can confidently say:</p>
+<blockquote>
+<p>We can deploy a customer agent, bound its authority, observe its work, verify its evidence, gate risky actions, review quality, improve it from real usage, and show the customer measurable outcomes — without Evan manually managing the process.</p>
+</blockquote>
+<hr>
+<h1 id="tenets">Tenets</h1>
+<ol>
+<li><strong>Agents are workers; CRM is their operating substrate.</strong></li>
+</ol>
+<p>Humans should not be forced to operate the CRM for the product to create value.</p>
+<ol>
+<li><strong>Evidence before confidence.</strong></li>
+</ol>
+<p>Claims, recommendations, and readiness states need proof.</p>
+<ol>
+<li><strong>Bounded autonomy beats blind autonomy.</strong></li>
+</ol>
+<p>Agents should move fast inside safe scope and stop at real gates.</p>
+<ol>
+<li><strong>Managed calibration is the moat.</strong></li>
+</ol>
+<p>Every meaningful interaction can improve context, policy, runbooks, entitlements, workflows, or product behavior.</p>
+<ol>
+<li><strong>No customer-ready label without gates.</strong></li>
+</ol>
+<p>Internal-demo, operator-ready, customer-ready, and gated must mean different things.</p>
+<ol>
+<li><strong>Tenant isolation is sacred.</strong></li>
+</ol>
+<p>No cross-customer leakage, no peer mesh, no casual context sharing.</p>
+<ol>
+<li><strong>The Command Center should explain, not overwhelm.</strong></li>
+</ol>
+<p>Leaders need posture, blockers, evidence, decisions, and next action — not raw logs by default.</p>
+<ol>
+<li><strong>External impact requires authority.</strong></li>
+</ol>
+<p>Sends, billing, destructive changes, secrets/access, runtime authority, and customer-impacting actions need explicit gates.</p>
+<hr>
+<h1 id="narrative-user-experience">Narrative User Experience</h1>
+<h2 id="executive-view">Executive view</h2>
+<p>Evan opens the Agent Command Center and sees a traffic-light posture across customer agents and workflows.</p>
+<p>He can answer in under one minute:</p>
+<ul>
+<li>Are agents healthy?</li>
+<li>What moved today?</li>
+<li>What is blocked?</li>
+<li>Who owns each decision?</li>
+<li>What is safe to demo?</li>
+<li>What requires approval?</li>
+<li>Where is customer value being created?</li>
+</ul>
+<p>He does not need raw audit detail unless something is yellow or red.</p>
+<h2 id="operator-view">Operator view</h2>
+<p>Ember sees work queues, stale decisions, quality findings, evidence gaps, environment health, and next safe actions.</p>
+<p>The system does not wait for Evan to say “keep going” when the next step is safe and already authorized.</p>
+<h2 id="qa-view">QA view</h2>
+<p>Flint sees sanitized evidence, release/readiness packets, QA findings, and proposed improvements.</p>
+<p>Flint can pressure-test whether Ember is stopping unnecessarily or moving without enough proof.</p>
+<h2 id="customer-stakeholder-view">Customer/stakeholder view</h2>
+<p>The customer interacts mostly with their agent and receives concise outcomes:</p>
+<ul>
+<li>what was found;</li>
+<li>what was done;</li>
+<li>what needs approval;</li>
+<li>what value was created;</li>
+<li>what is improving next.</li>
+</ul>
+<hr>
+<h1 id="launch-readiness-checklist">Launch Readiness Checklist</h1>
+<h2 id="product-readiness">Product readiness</h2>
+<ul class="checklist">
+<li><span class="box"></span><code>/agents</code> shows live operational state from CRM primitives.</li>
+<li><span class="box"></span>Operating Brief works for morning/evening cadence.</li>
+<li><span class="box"></span>Workstreams show status, owner, readiness, blockers, decisions, evidence, and target dates.</li>
+<li><span class="box"></span>Readiness decision gates are durable/idempotent records, not only preview data.</li>
+<li><span class="box"></span>Missed Revenue Snapshot v0 completes the full gated loop.</li>
+<li><span class="box"></span>Customer-agent fleet signals can become CRM work/evidence/findings/decisions.</li>
+<li><span class="box"></span>QA findings can generate durable improvement work.</li>
+</ul>
+<h2 id="safety-readiness">Safety readiness</h2>
+<ul class="checklist">
+<li><span class="box"></span>Tenant/account/workspace scope tests pass.</li>
+<li><span class="box"></span>Capability matrix and entitlement rules are machine-checkable.</li>
+<li><span class="box"></span>Raw content/secrets are denied from unsafe artifacts.</li>
+<li><span class="box"></span>External-send gates are enforced.</li>
+<li><span class="box"></span>Billing/legal/destructive/authority actions require approval.</li>
+<li><span class="box"></span>Audit events cover meaningful writes and decisions.</li>
+<li><span class="box"></span>Kill switch / pause semantics exist for risky environments.</li>
+</ul>
+<h2 id="operational-readiness">Operational readiness</h2>
+<ul class="checklist">
+<li><span class="box"></span>Flint QA/release path is documented and active.</li>
+<li><span class="box"></span>Daily/operating briefs avoid noisy details unless attention is needed.</li>
+<li><span class="box"></span>Customer-agent fleet monitor escalates meaningful failures/recoveries only.</li>
+<li><span class="box"></span>Backup/auth/runtime health signals are visible.</li>
+<li><span class="box"></span>Recovery paths exist for failed/stale agents.</li>
+<li><span class="box"></span>Evan is notified for true red states and strategic gates, not routine noise.</li>
+</ul>
+<h2 id="business-readiness">Business readiness</h2>
+<ul class="checklist">
+<li><span class="box"></span>First customer/use case has measurable value proof.</li>
+<li><span class="box"></span>Trial/onboarding workflow is represented in CRM.</li>
+<li><span class="box"></span>Human-gated follow-up draft path exists.</li>
+<li><span class="box"></span>Customer-ready claims have evidence.</li>
+<li><span class="box"></span>Commercial boundaries for trial/calibration/workforce mode are explicit.</li>
+</ul>
+<hr>
+<h1 id="open-questions">Open Questions</h1>
+<ol>
+<li>What exact customer-facing package names should map to Agent Command Center capabilities?</li>
+<li>How much of the Command Center should customers eventually see directly versus through their agent?</li>
+<li>Which metric becomes the primary board-level proof point: missed revenue identified, revenue recovered, response-time improvement, or operator-hours avoided?</li>
+<li>What is the first paid-customer threshold for moving from managed calibration to customer-ready standard operating product?</li>
+<li>How should Workforce Mode be framed commercially so unpaid/reduced-price calibration agents can safely contribute to internal Ember work without confusing customer expectations?</li>
+</ol>
+<hr>
+<h1 id="recommended-next-build-slice">Recommended Next Build Slice</h1>
+<p>Make the Command Center consume and persist real operational signals.</p>
+<p>Specifically:</p>
+<ol>
+<li>Convert Readiness Decision Gate previews into durable, idempotent <code>DecisionGate</code> records.</li>
+<li>Wire customer-agent fleet monitor outputs into CRM as <code>EvidenceArtifact</code>, <code>QualityFinding</code>, <code>AgentWorkItem</code>, or <code>DecisionGate</code> records where appropriate.</li>
+<li>Complete the first narrow GTM loop: interested reply → trial workflow → human-gated draft → evidence → decision → audit.</li>
+<li>Keep external sends, billing, authority changes, and customer-runtime changes gated.</li>
+</ol>
+<p>This is the shortest path from v1 chassis to v1 engine.</p>
+    </article>
+    <aside class="toc" aria-label="Table of contents">
+      <div class="section-title">Contents</div>
+      <a href="#press-release">Press Release</a>
+      <a href="#customer-promise">Customer Promise</a>
+      <a href="#core-product-thesis">Core Product Thesis</a>
+      <a href="#what-is-complete-in-the-full-vision">Full Vision</a>
+      <a href="#faq">FAQ</a>
+      <a href="#external-faq">External FAQ</a>
+      <a href="#internal-faq">Internal FAQ</a>
+      <a href="#tenets">Tenets</a>
+      <a href="#narrative-user-experience">Narrative UX</a>
+      <a href="#launch-readiness-checklist">Launch Readiness</a>
+      <a href="#recommended-next-build-slice">Next Build Slice</a>
+      <p class="footer-note">Styled from the Fitness Tracker visual system: obsidian surfaces, crisp cards, compact status language, and restrained neon accents.</p>
+    </aside>
+  </main>
+  <script>
+    const canvas=document.getElementById('starCanvas'),ctx=canvas.getContext('2d');let stars=[];
+    function size(){canvas.width=innerWidth;canvas.height=innerHeight;stars=Array.from({length:Math.min(130,Math.floor(innerWidth/10))},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.4+.2,a:Math.random()*.5+.15,v:Math.random()*.18+.04}));}
+    function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const s of stars){s.y+=s.v;if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,234,246,${s.a})`;ctx.fill();}requestAnimationFrame(draw)}
+    addEventListener('resize',size);size();draw();
+  </script>
+</body>
+</html>
