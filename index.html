@@ -490,7 +490,7 @@
       background: var(--bg);
     }
 
-    .mockup-label {
+    .visual-label {
       position: absolute;
       top: 28px;
       left: 28px;
@@ -1288,8 +1288,8 @@
 
     @media (max-width: 768px) {
       nav {
-        position: static;
-        backdrop-filter: none;
+        position: fixed;
+        backdrop-filter: blur(20px);
       }
       section { padding: 60px 24px; }
 
@@ -1300,7 +1300,7 @@
       .contact-inner { padding: 60px 24px; }
       .command-centers { padding: 60px 24px; }
       .command-visual { padding: 10px; border-radius: 22px; }
-      .mockup-label { position: static; margin-bottom: 10px; width: fit-content; }
+      .visual-label { position: static; margin-bottom: 10px; width: fit-content; }
 
       .pain-layout,
       .how-grid,
@@ -1456,7 +1456,7 @@
             <div class="command-theme-icon">$</div>
             <div>
               <h3>Missed revenue and lead recovery</h3>
-              <p>Missed calls, stale leads, slow follow-up, and open estimates become a visible recovery queue with example value, next steps, and draft responses.</p>
+              <p>Missed calls, stale leads, slow follow-up, and open estimates become a visible recovery queue with estimated value, next steps, and draft responses.</p>
             </div>
           </div>
           <div class="command-theme">
@@ -1470,15 +1470,15 @@
 
         <div class="command-proof">
           <span>Human approval for customer-facing actions</span>
-          <span>Sample queues and metrics, not guarantees</span>
+          <span>Prioritized queues, metrics, and next actions</span>
           <span>Scheduling/admin work as supporting workflows</span>
         </div>
       </div>
 
       <figure class="command-visual">
-        <span class="mockup-label">Illustrative sample data</span>
-        <img src="assets/mobile-command-center-example.png?v=1" alt="Illustrative mobile missed revenue command center example screen with sample data, recovery queue, and human approval controls." loading="eager" width="720" height="980" />
-        <figcaption class="command-caption">Prototype mockups shown with sample data. Actual workflows, metrics, and approval rules are configured around each business.</figcaption>
+        <span class="visual-label">Command center view</span>
+        <img src="assets/mobile-command-center-example.png?v=2" alt="Mobile missed revenue command center screen with recovery queue and human approval controls." loading="eager" width="720" height="980" />
+        <figcaption class="command-caption">Workflows, metrics, and approval rules are configured around each business.</figcaption>
       </figure>
     </div>
   </section>
