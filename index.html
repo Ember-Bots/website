@@ -366,6 +366,157 @@
       margin-bottom: 18px;
     }
 
+    /* ─── COMMAND CENTERS ─── */
+    .command-centers {
+      max-width: none;
+      padding: 96px 60px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,106,0,0.12), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(122,60,255,0.16), transparent 28%),
+        linear-gradient(180deg, rgba(11,14,26,0.96), rgba(8,9,13,0.98));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .command-centers-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .command-copy h2 {
+      max-width: 540px;
+      margin-bottom: 18px;
+    }
+
+    .command-copy .section-sub {
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .command-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      background: rgba(255,184,77,0.08);
+      border: 1px solid rgba(255,184,77,0.22);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .command-themes {
+      display: grid;
+      gap: 14px;
+      margin: 30px 0;
+    }
+
+    .command-theme {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(14,19,36,0.62);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .command-theme-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--ember), var(--violet));
+      box-shadow: 0 0 24px rgba(255,106,0,0.16);
+      font-weight: 800;
+    }
+
+    .command-theme h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--white);
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+
+    .command-theme p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .command-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .command-proof span {
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .command-visual {
+      position: relative;
+      border: 1px solid rgba(122,60,255,0.28);
+      border-radius: 28px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(22,27,48,0.86), rgba(11,13,22,0.92));
+      box-shadow: 0 28px 80px rgba(0,0,0,0.36), 0 0 70px rgba(122,60,255,0.08);
+    }
+
+    .command-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--bg);
+    }
+
+    .mockup-label {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,184,77,0.30);
+      background: rgba(8,9,13,0.76);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 8px 10px;
+    }
+
+    .command-caption {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
     /* ─── DIVIDER ─── */
     .divider {
       width: 100%;
@@ -1147,13 +1298,17 @@
       .pain-inner,
       .how-inner,
       .contact-inner { padding: 60px 24px; }
+      .command-centers { padding: 60px 24px; }
+      .command-visual { padding: 10px; border-radius: 22px; }
+      .mockup-label { position: static; margin-bottom: 10px; width: fit-content; }
 
       .pain-layout,
       .how-grid,
       .fit-layout,
       .story-wrap,
       .offer-spotlight-card,
-      .operator-panel {
+      .operator-panel,
+      .command-centers-inner {
         grid-template-columns: 1fr;
         gap: 40px;
       }
@@ -1198,7 +1353,7 @@
       <img src="logo.svg?v=6" alt="Ember Bots" style="height:56px;width:auto;" />
     </a>
     <ul class="nav-links">
-      <li><a href="#systems">Solutions</a></li>
+      <li><a href="#command-centers">Command Centers</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#fit">Best Fit</a></li>
       <li><a href="#story">Our Story</a></li>
@@ -1212,9 +1367,9 @@
     <div class="hero-grid"></div>
     <p class="hero-eyebrow">AI Automation for Small Business</p>
     <h1>Your business deserves<br/><span class="highlight">intelligent automation.</span></h1>
-    <p class="hero-sub">Ember Bots gives small businesses a dedicated chat-based AI operator that learns how the business works, captures missed opportunities, follows up automatically, and keeps routine work moving from an experience your team can actually use.</p>
+    <p class="hero-sub">Ember Bots gives small businesses a dedicated AI operator plus a visible command center where missed revenue, follow-up, decisions, and progress stay easy to inspect from an experience your team can actually use.</p>
     <div class="hero-actions">
-      <a href="#operator" class="btn-primary">See how the operator works</a>
+      <a href="#command-centers" class="btn-primary">See the command centers</a>
       <a href="#contact" class="btn-ghost">Get an AI operator plan</a>
     </div>
   </div>
@@ -1284,6 +1439,47 @@
           <p>We monitor, tune, back up, and improve the agent so it keeps getting more useful instead of becoming shelfware.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- MOBILE COMMAND CENTERS -->
+  <section class="command-centers" id="command-centers">
+    <div class="command-centers-inner">
+      <div class="command-copy">
+        <div class="command-pill">AI worker · visual cockpit · human approval</div>
+        <p class="section-label">Command Centers</p>
+        <h2>Your AI operator, visible on your phone.</h2>
+        <p class="section-sub">The strongest automations are not hidden in the background. Ember Bots gives owners a mobile command center where the work, exceptions, approvals, and wins stay visible.</p>
+
+        <div class="command-themes">
+          <div class="command-theme">
+            <div class="command-theme-icon">$</div>
+            <div>
+              <h3>Missed revenue and lead recovery</h3>
+              <p>Missed calls, stale leads, slow follow-up, and open estimates become a visible recovery queue with example value, next steps, and draft responses.</p>
+            </div>
+          </div>
+          <div class="command-theme">
+            <div class="command-theme-icon">✓</div>
+            <div>
+              <h3>AI operator control layer</h3>
+              <p>Handled work, review items, blockers, learned preferences, and customer-impacting approvals stay inspectable instead of turning into a black box.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="command-proof">
+          <span>Human approval for customer-facing actions</span>
+          <span>Sample queues and metrics, not guarantees</span>
+          <span>Scheduling/admin work as supporting workflows</span>
+        </div>
+      </div>
+
+      <figure class="command-visual">
+        <span class="mockup-label">Illustrative sample data</span>
+        <img src="assets/mobile-command-centers-grid.png?v=1" alt="Illustrative mobile command center mockups showing sample missed revenue, lead recovery, AI operator review, and scheduling workflow screens." loading="eager" width="1110" height="1200" />
+        <figcaption class="command-caption">Prototype mockups shown with sample data. Actual workflows, metrics, and approval rules are configured around each business.</figcaption>
+      </figure>
     </div>
   </section>
 
