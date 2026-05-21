@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Bots — Automation Command Center Mockups</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#090b10;
+      --panel:#121721;
+      --panel2:#171d2a;
+      --panel3:#0e131d;
+      --line:#263044;
+      --line2:rgba(255,255,255,.07);
+      --text:#f4f6fb;
+      --muted:#8f98ad;
+      --muted2:#657089;
+      --green:#00d4aa;
+      --green2:#13bfa0;
+      --purple:#7c5cff;
+      --blue:#58a6ff;
+      --cyan:#00e5ff;
+      --yellow:#ffd166;
+      --orange:#ff8a3d;
+      --red:#ef476f;
+      --shadow:0 18px 70px rgba(0,0,0,.34);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      min-height:100vh;
+      color:var(--text);
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      background:
+        radial-gradient(circle at 12% 4%,rgba(0,212,170,.16),transparent 28%),
+        radial-gradient(circle at 86% 8%,rgba(124,92,255,.18),transparent 25%),
+        radial-gradient(circle at 48% 100%,rgba(255,138,61,.10),transparent 28%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    .page-shell{width:min(1220px,100%);margin:0 auto;padding:22px 18px 54px}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      margin:0 -18px 18px;padding:14px max(18px,calc((100vw - 1220px)/2 + 18px));
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      background:rgba(9,11,16,.88);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}.brand img{width:148px;height:auto;display:block}.brand-copy{min-width:0}.eyebrow{font-size:10px;line-height:1.2;color:var(--green);letter-spacing:.14em;text-transform:uppercase;font-weight:900}.brand-copy strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;letter-spacing:-.035em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nav-pills{display:flex;gap:8px;overflow:auto;scrollbar-width:none}.nav-pills::-webkit-scrollbar{display:none}.nav-pills a{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:var(--muted);padding:8px 11px;font-size:12px;font-weight:850}.nav-pills a:hover{border-color:rgba(0,212,170,.42);color:#dffff8;background:rgba(0,212,170,.08)}
+    .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);gap:18px;align-items:stretch;margin:12px 0 18px}.hero-card,.operator-card,.surface,.app-card,.system-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(18,23,33,.96),rgba(14,18,27,.96));box-shadow:var(--shadow);border-radius:22px;overflow:hidden}.hero-card{padding:24px}.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(42px,6vw,76px);line-height:.93;letter-spacing:-.07em;margin:8px 0 13px;background:linear-gradient(180deg,#fff,#cdd5ea);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero p{max-width:690px;color:var(--muted);font-size:15px;line-height:1.65}.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(0,212,170,.32);border-radius:999px;background:rgba(0,212,170,.08);color:#dffff8;padding:8px 11px;font-size:12px;font-weight:850}.pill.purple{border-color:rgba(124,92,255,.36);background:rgba(124,92,255,.10);color:#e4ddff}.pill.orange{border-color:rgba(255,138,61,.35);background:rgba(255,138,61,.10);color:#ffe4d1}.operator-card{padding:18px;display:grid;gap:13px}.operator-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.bot-badge{display:flex;align-items:center;gap:10px}.orb{width:42px;height:42px;border-radius:16px;background:radial-gradient(circle at 35% 24%,#fff,rgba(0,212,170,.95) 20%,rgba(124,92,255,.75) 62%,rgba(9,11,16,.2));box-shadow:0 0 30px rgba(0,212,170,.22)}.bot-badge strong{display:block;font-family:'Plus Jakarta Sans';letter-spacing:-.035em}.bot-badge span,.tiny{display:block;color:var(--muted);font-size:12px}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}.operator-task{border:1px solid var(--line2);border-radius:16px;background:rgba(255,255,255,.025);padding:13px}.operator-task .row{display:flex;align-items:center;justify-content:space-between;gap:12px}.operator-task strong{font-size:13px}.progress{height:7px;border-radius:999px;background:#0b1018;overflow:hidden;margin:12px 0 7px}.progress span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--cyan));width:0}.activity{display:grid;gap:9px}.feed-item{display:grid;grid-template-columns:30px minmax(0,1fr);gap:9px;align-items:start}.feed-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:rgba(0,212,170,.10);color:var(--green);font-size:14px}.feed-item p{font-size:12px;line-height:1.45;color:#dce3f4}.feed-item span{display:block;color:var(--muted2);font-size:11px;margin-top:2px}
+    .section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:30px 0 12px}.section-title h2{font-family:'Plus Jakarta Sans';font-size:24px;letter-spacing:-.045em}.section-title p{color:var(--muted);font-size:13px;max-width:560px;line-height:1.5}.surface{margin-bottom:22px}.surface-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}.surface-kicker{color:var(--green);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.13em}.surface-header h3{font-family:'Plus Jakarta Sans';font-size:28px;letter-spacing:-.035em;margin-top:3px}.surface-header p{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.45}.surface-meta{text-align:right;color:var(--muted);font-size:12px;white-space:nowrap}.surface-body{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;padding:16px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stat{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--panel),var(--panel2));padding:13px;min-width:0}.stat.highlight{border-color:rgba(0,212,170,.52);background:radial-gradient(130% 120% at 50% 0%,rgba(0,212,170,.17),var(--panel) 72%);box-shadow:0 14px 36px rgba(0,212,170,.08)}.stat .label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.stat .value{font-family:'Plus Jakarta Sans';font-size:25px;font-weight:900;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.stat .note{display:block;color:var(--muted);font-size:12px;margin-top:3px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.panel{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.022);overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}.panel-head strong{font-size:14px}.panel-head span{color:var(--muted);font-size:12px}.queue{display:grid}.queue-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 13px;border-top:1px solid rgba(38,48,68,.72)}.queue-row:first-child{border-top:0}.rank{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#0e131d;color:var(--muted);font-weight:900;font-size:12px}.queue-row.hot{box-shadow:inset 3px 0 0 var(--orange)}.queue-row.good{box-shadow:inset 3px 0 0 var(--green)}.queue-row.warn{box-shadow:inset 3px 0 0 var(--yellow)}.queue-main strong{display:block;font-size:13px;line-height:1.25}.queue-main span{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:3px}.tag{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(255,255,255,.045);color:#dfe7f7;padding:5px 8px;font-size:11px;font-weight:850;white-space:nowrap}.tag.green{border-color:rgba(0,212,170,.35);background:rgba(0,212,170,.09);color:#cafff5}.tag.yellow{border-color:rgba(255,209,102,.36);background:rgba(255,209,102,.10);color:#ffe8ad}.tag.red{border-color:rgba(239,71,111,.38);background:rgba(239,71,111,.10);color:#ffc1d0}.tag.blue{border-color:rgba(88,166,255,.36);background:rgba(88,166,255,.10);color:#d7e9ff}.approval-stack{display:grid;gap:10px}.approval-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025);padding:13px}.approval-card strong{font-size:13px}.approval-card p{color:var(--muted);font-size:12px;line-height:1.45;margin:5px 0 10px}.actions{display:flex;gap:7px;flex-wrap:wrap}.btn{border:0;border-radius:999px;background:linear-gradient(135deg,var(--green),var(--green2));color:#06110e;font-size:12px;font-weight:900;padding:8px 10px;cursor:pointer}.btn.secondary{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text)}.btn.danger{border:1px solid rgba(239,71,111,.35);background:rgba(239,71,111,.10);color:#ffc5d3}.chart{height:198px;padding:14px;display:flex;align-items:end;gap:8px}.bar{flex:1;border-radius:12px 12px 4px 4px;background:linear-gradient(180deg,var(--purple),rgba(124,92,255,.18));min-height:18px;position:relative;overflow:hidden}.bar.green{background:linear-gradient(180deg,var(--green),rgba(0,212,170,.16))}.bar.orange{background:linear-gradient(180deg,var(--orange),rgba(255,138,61,.16))}.bar::after{content:attr(data-label);position:absolute;bottom:7px;left:50%;transform:translateX(-50%);transform-origin:center;color:rgba(255,255,255,.82);font-size:9px;font-weight:850;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.45)}.timeline{padding:12px 14px;display:grid;gap:10px}.time-row{display:grid;grid-template-columns:66px minmax(0,1fr) auto;gap:9px;align-items:center}.time-row span:first-child{color:var(--muted);font-size:11px;font-weight:800}.time-row strong{font-size:12px}.mini-map{height:198px;position:relative;background:radial-gradient(circle at 20% 35%,rgba(0,212,170,.17),transparent 20%),radial-gradient(circle at 70% 22%,rgba(88,166,255,.17),transparent 20%),radial-gradient(circle at 56% 72%,rgba(255,138,61,.16),transparent 22%),#0d121b}.mini-map::before{content:'';position:absolute;inset:20px;border:1px dashed rgba(255,255,255,.12);border-radius:22px}.pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 0 8px rgba(0,212,170,.12),0 0 22px rgba(0,212,170,.38)}.pin.p2{background:var(--orange);box-shadow:0 0 0 8px rgba(255,138,61,.12),0 0 22px rgba(255,138,61,.35)}.pin.p3{background:var(--blue);box-shadow:0 0 0 8px rgba(88,166,255,.12),0 0 22px rgba(88,166,255,.35)}
+    .system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.system-card{padding:16px}.system-card h4{font-family:'Plus Jakarta Sans';font-size:18px;letter-spacing:-.035em}.system-card p{color:var(--muted);font-size:13px;line-height:1.55;margin-top:7px}.system-card .pill{margin-top:13px}.footer-note{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+    @media(max-width:1000px){.hero,.surface-body{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.system-grid{grid-template-columns:1fr}.surface-meta{text-align:left}.surface-header{flex-direction:column}.grid-2{grid-template-columns:1fr}}
+    @media(max-width:640px){.page-shell{padding-left:10px;padding-right:10px}.topbar{margin-left:-10px;margin-right:-10px;align-items:flex-start;flex-direction:column}.brand img{width:126px}.hero-card,.operator-card{border-radius:18px}.hero h1{font-size:42px}.surface-header h3{font-size:24px}.surface-body,.hero-card,.operator-card,.surface-header{padding:13px}.stats{grid-template-columns:1fr}.queue-row{grid-template-columns:30px minmax(0,1fr)}.queue-row .tag{grid-column:2}.time-row{grid-template-columns:52px minmax(0,1fr)}.time-row .tag{grid-column:2}.nav-pills{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="../index.html" aria-label="Ember Bots home">
+        <img src="../logo.svg" alt="Ember Bots" />
+        <span class="brand-copy"><span class="eyebrow">Prototype renderings</span><strong>Automation Command Centers</strong></span>
+      </a>
+      <nav class="nav-pills" aria-label="Mockup navigation">
+        <a href="#missed-revenue">Missed Revenue</a>
+        <a href="#lead-recovery">Lead Recovery</a>
+        <a href="#agent-control">Agent Control</a>
+        <a href="#scheduling">Scheduling</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">AI worker + live cockpit + human control</div>
+        <h1>Planned automations should feel like operating systems.</h1>
+        <p>These mockups borrow the dark, tactile tracker language from Grocery and Fitness: stat cards, queues, visible progress, attention badges, and approve/correct controls. The goal is to make AI work legible instead of abstract.</p>
+        <div class="hero-actions">
+          <span class="pill">Visible work queue</span>
+          <span class="pill purple">Outcome dashboard</span>
+          <span class="pill orange">Human approval layer</span>
+        </div>
+      </div>
+      <aside class="operator-card">
+        <div class="operator-head">
+          <div class="bot-badge"><span class="orb"></span><span><strong>Ember Operator</strong><span>Monitoring four command centers</span></span></div>
+          <span class="status-dot" aria-label="online"></span>
+        </div>
+        <div class="operator-task">
+          <div class="row"><strong>Overnight automation run</strong><span class="tag green">On track</span></div>
+          <div class="progress"><span style="width:78%"></span></div>
+          <span class="tiny">23 recovered opportunities · 4 need approval · 0 critical blockers</span>
+        </div>
+        <div class="activity">
+          <div class="feed-item"><span class="feed-icon">✓</span><p>Recovered a stale roofing lead and queued a human-approved follow-up.<span>2 min ago</span></p></div>
+          <div class="feed-item"><span class="feed-icon">!</span><p>Flagged one missed-call transcript for Evan review before outreach.<span>9 min ago</span></p></div>
+          <div class="feed-item"><span class="feed-icon">↗</span><p>Filled tomorrow’s schedule gap with a confirmed estimate window.<span>18 min ago</span></p></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="section-title">
+      <div><div class="eyebrow">Four first surfaces</div><h2>Outcome-specific command centers</h2></div>
+      <p>Each app is intentionally narrow: the customer sees the specific business outcome, the AI’s work, exceptions, and the next decision.</p>
+    </div>
+
+    <section class="surface" id="missed-revenue">
+      <header class="surface-header">
+        <div><div class="surface-kicker">Missed Revenue Snapshot</div><h3>Find what leaked. Recover what can still close.</h3><p>A visual snapshot for missed calls, slow replies, ghosted estimates, and recoverable revenue.</p></div>
+        <div class="surface-meta">Roofing demo · refreshed 6:42 AM<br /><span class="tag yellow">4 approval items</span></div>
+      </header>
+      <div class="surface-body">
+        <div>
+          <div class="stats">
+            <div class="stat highlight"><div class="label">Recoverable value</div><div class="value">$18.4k</div><span class="note">from 9 opportunities</span></div>
+            <div class="stat"><div class="label">Missed calls</div><div class="value">17</div><span class="note">6 high intent</span></div>
+            <div class="stat"><div class="label">Slow replies</div><div class="value">11</div><span class="note">avg 9h 22m</span></div>
+            <div class="stat"><div class="label">Recovered</div><div class="value">23%</div><span class="note">this week</span></div>
+          </div>
+          <div class="grid-2">
+            <div class="panel"><div class="panel-head"><strong>Leak by source</strong><span>last 14 days</span></div><div class="chart"><span class="bar orange" style="height:76%" data-label="Calls"></span><span class="bar" style="height:49%" data-label="Forms"></span><span class="bar green" style="height:63%" data-label="Texts"></span><span class="bar" style="height:33%" data-label="Email"></span><span class="bar orange" style="height:58%" data-label="Estimates"></span></div></div>
+            <div class="panel"><div class="panel-head"><strong>Opportunity queue</strong><span>ranked by value</span></div><div class="queue"><div class="queue-row hot"><span class="rank">1</span><span class="queue-main"><strong>Storm damage voicemail</strong><span>$6.8k potential · no callback yet</span></span><span class="tag red">Review</span></div><div class="queue-row warn"><span class="rank">2</span><span class="queue-main"><strong>Estimate follow-up stalled</strong><span>$4.2k potential · 5 days quiet</span></span><span class="tag yellow">Drafted</span></div><div class="queue-row good"><span class="rank">3</span><span class="queue-main"><strong>Insurance question</strong><span>$2.9k potential · reply ready</span></span><span class="tag green">Send</span></div></div></div>
+          </div>
+        </div>
+        <aside class="approval-stack">
+          <div class="approval-card"><span class="tag red">Human approval</span><p><strong>Send recovery text to Marcus H.?</strong></p><p>Draft references his hail-damage voicemail and offers two estimate windows. AI confidence is high, but tone should be approved before customer contact.</p><div class="actions"><button class="btn">Approve send</button><button class="btn secondary">Edit draft</button><button class="btn danger">Hold</button></div></div>
+          <div class="approval-card"><span class="tag blue">AI work visible</span><p><strong>What Ember already did</strong></p><p>Matched 17 calls to CRM records, grouped duplicates, scored intent, drafted 6 follow-ups, and suppressed 2 risky sends.</p></div>
+          <div class="approval-card"><span class="tag green">Outcome</span><p><strong>Tomorrow’s target</strong></p><p>Recover 3 appointments and close the average response gap under 2 hours.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface" id="lead-recovery">
+      <header class="surface-header">
+        <div><div class="surface-kicker">Lead Recovery / Follow-up</div><h3>Every lead has a lane, timer, and next action.</h3><p>The customer can see stale leads, sequence status, booked work, and which messages need approval.</p></div>
+        <div class="surface-meta">Home services pipeline<br /><span class="tag green">12 active recoveries</span></div>
+      </header>
+      <div class="surface-body">
+        <div>
+          <div class="stats">
+            <div class="stat highlight"><div class="label">Pipeline recovered</div><div class="value">$31.2k</div><span class="note">forecasted value</span></div>
+            <div class="stat"><div class="label">Booked jobs</div><div class="value">7</div><span class="note">from stale leads</span></div>
+            <div class="stat"><div class="label">Needs human</div><div class="value">3</div><span class="note">pricing / tone</span></div>
+            <div class="stat"><div class="label">Autopilot safe</div><div class="value">84%</div><span class="note">of follow-ups</span></div>
+          </div>
+          <div class="panel" style="margin-top:12px"><div class="panel-head"><strong>Lead lanes</strong><span>like grocery tabs, but for money</span></div><div class="queue"><div class="queue-row hot"><span class="rank">Hot</span><span class="queue-main"><strong>Sarah L. · Kitchen remodel</strong><span>Asked for estimate · agent drafted reply · 38m timer</span></span><span class="tag green">Ready</span></div><div class="queue-row warn"><span class="rank">Warm</span><span class="queue-main"><strong>Daniel R. · AC replacement</strong><span>Ghosted after quote · sequence step 2 due today</span></span><span class="tag yellow">Review</span></div><div class="queue-row"><span class="rank">Cold</span><span class="queue-main"><strong>Maria P. · Fence repair</strong><span>Low urgency · check back Friday</span></span><span class="tag blue">Waiting</span></div><div class="queue-row good"><span class="rank">Won</span><span class="queue-main"><strong>Brent K. · Roof patch</strong><span>Booked for Tuesday · confirmation sent</span></span><span class="tag green">Closed</span></div></div></div>
+        </div>
+        <aside class="panel"><div class="panel-head"><strong>Sequence health</strong><span>next 48h</span></div><div class="timeline"><div class="time-row"><span>Now</span><strong>Approve Sarah reply</strong><span class="tag red">Human</span></div><div class="time-row"><span>11:30</span><strong>Auto-send Daniel check-in</strong><span class="tag green">Safe</span></div><div class="time-row"><span>2:00</span><strong>Call attempt: Marcus</strong><span class="tag yellow">Needs script</span></div><div class="time-row"><span>Fri</span><strong>Quiet reactivation batch</strong><span class="tag blue">Queued</span></div></div><div class="approval-card" style="margin:0 12px 12px"><p><strong>Design note</strong></p><p>This should feel like a living tracker, not a CRM table: lanes, timers, and clear next actions.</p></div></aside>
+      </div>
+    </section>
+
+    <section class="surface" id="agent-control">
+      <header class="surface-header">
+        <div><div class="surface-kicker">Customer Agent Command Center</div><h3>Trust grows when the agent’s work is inspectable.</h3><p>A control surface for conversations, task queues, blockers, quality review, and operator handoff.</p></div>
+        <div class="surface-meta">Managed agent ops<br /><span class="tag green">0 critical blockers</span></div>
+      </header>
+      <div class="surface-body">
+        <div>
+          <div class="stats">
+            <div class="stat highlight"><div class="label">Tasks completed</div><div class="value">142</div><span class="note">this week</span></div>
+            <div class="stat"><div class="label">Human reviews</div><div class="value">6</div><span class="note">2 overdue</span></div>
+            <div class="stat"><div class="label">Quality score</div><div class="value">96%</div><span class="note">sampled turns</span></div>
+            <div class="stat"><div class="label">Blocked</div><div class="value">0</div><span class="note">no customer impact</span></div>
+          </div>
+          <div class="grid-2">
+            <div class="panel"><div class="panel-head"><strong>Agent workstream</strong><span>live feed</span></div><div class="queue"><div class="queue-row good"><span class="rank">✓</span><span class="queue-main"><strong>Answered customer billing question</strong><span>Used approved policy · no escalation</span></span><span class="tag green">Done</span></div><div class="queue-row warn"><span class="rank">?</span><span class="queue-main"><strong>New edge-case request</strong><span>Needs operator guidance before reply</span></span><span class="tag yellow">Guide</span></div><div class="queue-row"><span class="rank">↻</span><span class="queue-main"><strong>Preference learned</strong><span>Customer prefers morning summaries</span></span><span class="tag blue">Memory</span></div></div></div>
+            <div class="panel"><div class="panel-head"><strong>Risk posture</strong><span>customer-safe first</span></div><div class="chart"><span class="bar green" style="height:88%" data-label="Safe"></span><span class="bar" style="height:42%" data-label="Review"></span><span class="bar orange" style="height:22%" data-label="Risk"></span><span class="bar" style="height:10%" data-label="Block"></span></div></div>
+          </div>
+        </div>
+        <aside class="approval-stack">
+          <div class="approval-card"><span class="tag yellow">Needs operator</span><p><strong>Approve new standing rule?</strong></p><p>Agent proposes: “If a customer asks for reschedule windows, offer the next two openings and ask for confirmation.”</p><div class="actions"><button class="btn">Approve rule</button><button class="btn secondary">Revise</button><button class="btn danger">Reject</button></div></div>
+          <div class="approval-card"><span class="tag blue">Customer view</span><p><strong>Simple enough for a non-technical owner</strong></p><p>Green means handled, yellow means review, red means stop. The operator can drill in, but the top layer stays calm.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface" id="scheduling">
+      <header class="surface-header">
+        <div><div class="surface-kicker">Scheduling / Admin Automation</div><h3>Turn messy coordination into a visible dispatch board.</h3><p>Availability, confirmations, reschedules, and exceptions become a simple operations cockpit.</p></div>
+        <div class="surface-meta">Service dispatch demo<br /><span class="tag yellow">2 exceptions</span></div>
+      </header>
+      <div class="surface-body">
+        <div>
+          <div class="stats">
+            <div class="stat highlight"><div class="label">Confirmed jobs</div><div class="value">18</div><span class="note">next 7 days</span></div>
+            <div class="stat"><div class="label">Gaps filled</div><div class="value">4</div><span class="note">by AI follow-up</span></div>
+            <div class="stat"><div class="label">At risk</div><div class="value">2</div><span class="note">needs human</span></div>
+            <div class="stat"><div class="label">No-shows avoided</div><div class="value">6</div><span class="note">confirmed twice</span></div>
+          </div>
+          <div class="grid-2">
+            <div class="panel"><div class="panel-head"><strong>Dispatch map</strong><span>today</span></div><div class="mini-map"><span class="pin" style="left:23%;top:36%"></span><span class="pin p2" style="left:61%;top:55%"></span><span class="pin p3" style="left:74%;top:28%"></span><span class="pin" style="left:45%;top:72%"></span></div></div>
+            <div class="panel"><div class="panel-head"><strong>Schedule exceptions</strong><span>needs decision</span></div><div class="queue"><div class="queue-row warn"><span class="rank">1</span><span class="queue-main"><strong>Customer requested earlier window</strong><span>AI found two possible swaps</span></span><span class="tag yellow">Choose</span></div><div class="queue-row hot"><span class="rank">2</span><span class="queue-main"><strong>Tech running 38m late</strong><span>Draft customer update ready</span></span><span class="tag red">Send?</span></div><div class="queue-row good"><span class="rank">3</span><span class="queue-main"><strong>Tomorrow reminder batch</strong><span>All safe, queued for 6 PM</span></span><span class="tag green">Auto</span></div></div></div>
+          </div>
+        </div>
+        <aside class="approval-stack">
+          <div class="approval-card"><span class="tag red">Customer-impacting</span><p><strong>Send delay update?</strong></p><p>“We’re running about 40 minutes behind, but you’re still confirmed for today. Would you prefer to keep this window or move to tomorrow morning?”</p><div class="actions"><button class="btn">Send update</button><button class="btn secondary">Edit</button><button class="btn danger">Call instead</button></div></div>
+          <div class="approval-card"><span class="tag green">Autopilot</span><p><strong>Safe admin work</strong></p><p>Confirmations, reminders, and clean status updates can run automatically until a customer-impacting tradeoff appears.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="system-grid" aria-label="Design principles">
+      <div class="system-card"><h4>Like Grocery</h4><p>Everything has a lane. The customer can see what is active, done, deferred, and requiring review.</p><span class="pill">Lanes + queues</span></div>
+      <div class="system-card"><h4>Like Fitness</h4><p>Progress is tracked over time with stats, charts, deltas, and plain-language interpretation.</p><span class="pill purple">Metrics + momentum</span></div>
+      <div class="system-card"><h4>Like a real operator</h4><p>The AI does the work, but approvals and exceptions stay visible so trust can compound.</p><span class="pill orange">Control + confidence</span></div>
+    </section>
+
+    <p class="footer-note">Prototype only. Static HTML rendering for direction-setting; no customer data, no live integrations, no production deploy implied.</p>
+  </div>
+</body>
+</html>
