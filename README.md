@@ -82,6 +82,8 @@ The live design uses an "ember forge" palette:
 - obsidian / plum backgrounds
 - ember red, orange, solar gold, and purple accents
 - premium, restrained glow and gradient treatment
-- current hero wording:
+- hard rule: the main hero headline must stay exactly:
+  - `Your business deserves intelligent automation.`
+- Do not change that hero headline unless Evan explicitly asks to change the main hero wording.
+- current hero eyebrow:
   - `AI ORCHESTRATION FOR SERVICE BUSINESSES`
-  - `The right AI stack for your specific business.`
