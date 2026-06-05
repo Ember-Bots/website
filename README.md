@@ -69,15 +69,11 @@ Prefer reverting the specific bad commit instead of force-pushing history.
 - `CONTEXT.md` — repo-specific handoff and operating context
 
 ## Current positioning notes
-The homepage is currently positioned around non-conflicting Ember Bots automation offers:
-- Lead Response Automation
-- Customer Message Routing
-- Scheduling and Reminder Automation
-- Client Onboarding Automation
-- Internal Task Orchestration
-- Follow-Up Automation
-- Back Office Admin Automation
-- Executive Daily Briefing
+The homepage is currently positioned around Ember Bots as an AI orchestration partner for service businesses:
+- choose and coordinate the right mix of AI agents, platform tools, CRM/workflow automation, command centers, and human approval gates
+- treat tools like Gemini Spark as part of the toolbox when they fit, not as competitors to fight or as the whole product
+- keep missed revenue, lead recovery, follow-up, scheduling, customer communication, onboarding, and routine admin as the practical front-door workflows
+- lead with managed outcomes and visible command centers, not generic “AI assistant” claims
 
 Avoid drifting into quote, invoice, billing, or payment positioning on the main Ember Bots site unless Evan explicitly changes direction, to avoid overlap with Rev.io.
 
@@ -86,6 +82,6 @@ The live design uses an "ember forge" palette:
 - obsidian / plum backgrounds
 - ember red, orange, solar gold, and purple accents
 - premium, restrained glow and gradient treatment
-- hero wording preserved as:
-  - `AI AUTOMATION FOR SMALL BUSINESS`
-  - `Your business deserves intelligent automation.`
+- current hero wording:
+  - `AI ORCHESTRATION FOR SERVICE BUSINESSES`
+  - `The right AI stack for your specific business.`
