@@ -71,9 +71,9 @@ Prefer reverting the specific bad commit instead of force-pushing history.
 ## Current positioning notes
 The homepage is currently positioned around Ember Bots as an AI orchestration partner for service businesses:
 - choose and coordinate the right mix of AI agents, platform tools, CRM/workflow automation, command centers, and human approval gates
-- treat tools like Gemini Spark as part of the toolbox when they fit, not as competitors to fight or as the whole product
+- do not call out third-party AI platforms or competitive solutions by name in public website copy unless Evan explicitly approves that named reference; Ember Bots is the brand
 - keep missed revenue, lead recovery, follow-up, scheduling, customer communication, onboarding, and routine admin as the practical front-door workflows
-- lead with managed outcomes and visible command centers, not generic “AI assistant” claims
+- lead with managed outcomes, optimal tech selection, and visible command centers, not generic “AI assistant” claims
 
 Avoid drifting into quote, invoice, billing, or payment positioning on the main Ember Bots site unless Evan explicitly changes direction, to avoid overlap with Rev.io.
 
